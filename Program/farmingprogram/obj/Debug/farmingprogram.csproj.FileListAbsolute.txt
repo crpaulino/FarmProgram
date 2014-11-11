@@ -37,3 +37,9 @@ C:\Users\ScyLentShade\Documents\GitHub\farmingprogram\farmingprogram\obj\Debug\f
 C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe.config
 C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
 C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb
+C:\Users\crpaulino\Documents\GitHub\FarmProgram\FarmProgram\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe.config
+C:\Users\crpaulino\Documents\GitHub\FarmProgram\FarmProgram\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
+C:\Users\crpaulino\Documents\GitHub\FarmProgram\FarmProgram\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb
+C:\Users\crpaulino\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe.config
+C:\Users\crpaulino\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
+C:\Users\crpaulino\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb
