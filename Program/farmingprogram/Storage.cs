@@ -6,51 +6,53 @@ using System.Threading.Tasks;
 
 namespace Vehicle_Class
 {
+    //MADE BY 1307211
     class Storage
     {
        //attribute
         private int id, capacity, available;
         private string name, note;
 
-        //contructor
+        //constructor
         public Storage (int id, int capacity, string name, int available, string note)
         {
-            this.id = id;
-            this.name = name;
-            this.capacity = capacity;
-            this.available = available;
-            this.note = note;
+            this.id = id; //id constructor
+            this.name = name; //name constructor
+            this.capacity = capacity; //capacity constructor
+            this.available = available; //availability constructor
+            this.note = note; //note constructor
             
         }
 
-        public int Id
+        //properties
+        public int Id //id property
         {
-            get { return id;}
-            set { id = value; }
+            get { return id;} //gets id
+            set { id = value; } //sets the id value
         }
 
-        public string Name
+        public string Name //Name properties
         {
-            get { return name; }
-            set { name = value; }
+            get { return name; } //gets name 
+            set { name = value; }//sets the value
         }
 
-        public int Capacity
+        public int Capacity //capacity property
         {
-            get { return capacity; }
-            set { capacity = value; }
+            get { return capacity; } //gets the capacity
+            set { capacity = value; }//sets the value
         }
 
-        public int Available
+        public int Available //availablity property
         {
-            get { return available; }
-            set { available = value; }
+            get { return available; }//gets the available
+            set { available = value; }//sets the value
         }
 
-        public string Note
+        public string Note //note property
         {
-            get { return note; }
-            set { note = value; }
+            get { return note; }//gets the note
+            set { note = value; }//sets the value
         }
     }
 }
