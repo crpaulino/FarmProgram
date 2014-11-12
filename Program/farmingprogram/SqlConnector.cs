@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data;
 
+//SP1062
 namespace farmingprogram
 {
     class SqlConnector
@@ -58,6 +59,7 @@ namespace farmingprogram
                     String pass = command.GetString(1).ToLower();
                     if (name.Equals(username.ToLower()) && pass.Equals(PasswordEncryption.Encrypt(password).ToLower()))
                     {
+                        getConnection().Close();
                         return true;
                     }
                 }

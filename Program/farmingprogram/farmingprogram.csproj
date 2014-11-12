@@ -49,6 +49,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,11 +60,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DbFarmProgramDataSet.Designer.cs">
+    <Compile Include="FarmingDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbFarmProgramDataSet.xsd</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>FarmingDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="MainProgram.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainProgram.Designer.cs">
+      <DependentUpon>MainProgram.cs</DependentUpon>
     </Compile>
     <Compile Include="PasswordEncryption.cs" />
     <Compile Include="SqlConnector.cs" />
@@ -85,6 +91,9 @@
     <EmbeddedResource Include="LoginInterface.resx">
       <DependentUpon>LoginInterface.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MainProgram.resx">
+      <DependentUpon>MainProgram.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -98,19 +107,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="DbFarmProgramDataSet.xsc">
-      <DependentUpon>DbFarmProgramDataSet.xsd</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="FarmingDataSet.xsc">
+      <DependentUpon>FarmingDataSet.xsd</DependentUpon>
     </None>
-    <None Include="DbFarmProgramDataSet.xsd">
+    <None Include="FarmingDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DbFarmProgramDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>FarmingDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="DbFarmProgramDataSet.xss">
-      <DependentUpon>DbFarmProgramDataSet.xsd</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Include="FarmingDataSet.xss">
+      <DependentUpon>FarmingDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
