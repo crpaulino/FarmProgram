@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 //SP1062
 namespace farmingprogram
 {
-    class Staff
+    class LogIn
     {
-        private String username, password;
+        private string username, password;
         private int rights;
 
-        public Staff(String username, String password, int rights)
+        public LogIn(string username, string password, int rights)
         {
             this.username = username;
             this.password = password;
@@ -24,12 +24,12 @@ namespace farmingprogram
             return rights;
         }
 
-        public String getUsername()
+        public string getUsername()
         {
             return username;
         }
 
-        public String getPassword()
+        public string getPassword()
         {
             return password;
         }

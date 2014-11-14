@@ -22,14 +22,14 @@ namespace farmingprogram
             Application.Run(new LoginInterface());
         }
 
-        private static Staff staff;
+        private static LogIn staff;
 
-        public static void setStaff(Staff s)
+        public static void setStaff(LogIn s)
         {
             staff = s;
         }
 
-        public static Staff getStaff()
+        public static LogIn getStaff()
         {
             return staff;
         }

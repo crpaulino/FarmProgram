@@ -64,6 +64,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FarmingDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="MainProgram.cs">
       <SubType>Form</SubType>
@@ -87,7 +88,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Staff.cs" />
+    <Compile Include="LogIn.cs" />
     <EmbeddedResource Include="LoginInterface.resx">
       <DependentUpon>LoginInterface.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,14 +110,17 @@
     </Compile>
     <None Include="FarmingDataSet.xsc">
       <DependentUpon>FarmingDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="FarmingDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>FarmingDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="FarmingDataSet.xss">
       <DependentUpon>FarmingDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
