@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-//SP1062
 namespace farmingprogram
 {
+    //CREATED BY: SP1062 pls add SID
     class LogIn
     {
         private string username, password;

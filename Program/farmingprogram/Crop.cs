@@ -11,98 +11,98 @@ namespace farmingprogram
     class Crop
     {
        //attributes         
-        private string cropName, cropNotes, cropStatus, dosedByStaff, cropStorageType, cropMinMax;
-        private DateTime datePlanted, estimatedHarvestDate, lastDose, nextDose;
-        private int fertilizerID, fieldID; 
+        private string CropName, CropNotes, CropStatus, DosedByStaff, CropStorageType, CropMinMax;
+        private DateTime DatePlanted, EstimatedHarvestDate, LastDose, NextDose;
+        private int FertilizerID, FieldID; 
 
         //constructors
         public Crop (string cropName, DateTime datePlanted, DateTime estimatedHarvestDate, string cropNotes, int fertilizerID, string cropStatus, DateTime lastDose, DateTime nextDose, string dosedByStaff, string cropStorageType, string cropMinMax, int fieldID)
         {
-            this.cropName = cropName; 
-            this.datePlanted = datePlanted; 
-			this.estimatedHarvestDate = estimatedHarvestDate; 
-            this.cropNotes = cropNotes; 
-            this.fertilizerID = fertilizerID;
-            this.cropStatus = cropStatus;
-            this.lastDose = lastDose;
-            this.nextDose = nextDose;
-            this.dosedByStaff = dosedByStaff;
-            this.cropStorageType = cropStorageType;
-            this.cropMinMax = cropMinMax;
-            this.fieldID = fieldID;            
+            this.CropName = cropName; 
+            this.DatePlanted = datePlanted; 
+			this.EstimatedHarvestDate = estimatedHarvestDate; 
+            this.CropNotes = cropNotes; 
+            this.FertilizerID = fertilizerID;
+            this.CropStatus = cropStatus;
+            this.LastDose = lastDose;
+            this.NextDose = nextDose;
+            this.DosedByStaff = dosedByStaff;
+            this.CropStorageType = cropStorageType;
+            this.CropMinMax = cropMinMax;
+            this.FieldID = fieldID;            
         }
 
         //properties
-        public string CropName 
+        public string cropName 
         {
-            get { return cropName;} 
-            set { cropName = value; }
+            get { return CropName;} 
+            set { CropName = value; }
         }
 
-        public DateTime DatePlanted
+        public DateTime datePlanted
         {
-            get { return datePlanted; }
-            set { datePlanted = value; }
+            get { return DatePlanted; }
+            set { DatePlanted = value; }
         }
 
-        public DateTime EstimatedHarvestDate
+        public DateTime estimatedHarvestDate
         {
-            get { return estimatedHarvestDate; }
-            set { estimatedHarvestDate = value; }
+            get { return EstimatedHarvestDate; }
+            set { EstimatedHarvestDate = value; }
         }
 
-        public string CropNotes
+        public string cropNotes
         {
-            get { return cropNotes }
-            set { cropNotes = value; }
+            get { return CropNotes; }
+            set { CropNotes = value; }
         }
 
-        public int FertilizerID
+        public int fertilizerID
         {
-            get { return fertilizerID; }
-            set { fertilizerID = value; }
+            get { return FertilizerID; }
+            set { FertilizerID = value; }
         }
 
-        public string CropStatus
+        public string cropStatus
         {
-            get { return cropStatus; }
-            set { cropStatus = value; }
+            get { return CropStatus; }
+            set { CropStatus = value; }
         }
 
-        public DateTime LastDose
+        public DateTime lastDose
         {
-            get { return lastDose; }
-            set { lastDose = value; }
+            get { return LastDose; }
+            set { LastDose = value; }
         }
 
-        public DateTime NextDose
+        public DateTime nextDose
         {
-            get { return nextDose; }
-            set { nextDose = value; }
+            get { return NextDose; }
+            set { NextDose = value; }
         }
 
-        public string DosedByStaff
+        public string dosedByStaff
         {
-            get { return dosedByStaff; }
-            set { dosedByStaff = value; }
+            get { return DosedByStaff; }
+            set { DosedByStaff = value; }
         }
 
-        public string CropStorageType
+        public string cropStorageType
         {
-            get { return cropStorageType; }
-            set { cropStorageType = value; }
+            get { return CropStorageType; }
+            set { CropStorageType = value; }
         }
 
-        public string CropMinMax    //Temperature
+        public string cropMinMax    //Temperature
         {
-            get { return cropMinMax; }
-            set { cropMinMax = value; }
+            get { return CropMinMax; }
+            set { CropMinMax = value; }
         }
 
-        public int FieldID
+        public int fieldID
         {
-            get { return fieldID; }
-            set { fieldID = value; }
+            get { return FieldID; }
+            set { FieldID = value; }
         }
       
     }

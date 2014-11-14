@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Container.cs" />
     <Compile Include="Crop.cs" />
     <Compile Include="FarmingDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -67,6 +68,9 @@
       <DependentUpon>FarmingDataSet.xsd</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Fertilizer.cs" />
+    <Compile Include="Field.cs" />
+    <Compile Include="Harvest.cs" />
     <Compile Include="MainProgram.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +94,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LogIn.cs" />
+    <Compile Include="Staff.cs" />
+    <Compile Include="Storage.cs" />
+    <Compile Include="Vehicle.cs" />
     <EmbeddedResource Include="LoginInterface.resx">
       <DependentUpon>LoginInterface.cs</DependentUpon>
     </EmbeddedResource>

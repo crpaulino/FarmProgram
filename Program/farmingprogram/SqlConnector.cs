@@ -8,9 +8,9 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data;
 
-//SP1062
 namespace farmingprogram
 {
+    //CREATED BY: SP1062 pls add SID
     class SqlConnector
     {
         private static SqlConnection connection = null;
