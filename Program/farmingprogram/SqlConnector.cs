@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using System.IO;
 using System.Data;
+using System.Configuration;
 
 namespace farmingprogram
 {
@@ -18,8 +19,9 @@ namespace farmingprogram
         public static void startConnection()
         {
             string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string path = (System.IO.Path.GetDirectoryName(executable));
-            connection = new SqlConnection(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + path + @"\database\DbFarmProgram.mdf;Integrated Security=True");
+            string connectionString = ConfigurationManager.ConnectionStrings["farmingprogram.Properties.Settings.DbFarmProgramConnectionString"].ConnectionString;
+
+            connection = new SqlConnection(connectionString);
             try
             {
                 connection.Open();

@@ -10,3 +10,4 @@ C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Release\farmi
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Release\farmingprogram.csproj.GenerateResource.Cache
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Release\farmingprogram.exe
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Release\farmingprogram.pdb
+C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Release\farmingprogram.csprojResolveAssemblyReference.cache
