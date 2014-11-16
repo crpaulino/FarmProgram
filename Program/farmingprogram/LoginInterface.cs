@@ -35,8 +35,7 @@ namespace farmingprogram
             String password = passwordBox.Text;
             if (SqlConnector.validPassword(name, password))
             {
-                this.Hide();
-                new MainProgram().Show();
+                this.Close();
             }
         }
     }

@@ -20,6 +20,7 @@ namespace farmingprogram
 
             SqlConnector.startConnection();
             Application.Run(new LoginInterface());
+            Application.Run(new MainProgram());
         }
 
         private static LoginDetail staff;

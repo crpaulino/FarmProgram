@@ -11,12 +11,12 @@ namespace farmingprogram
     class Crop
     {
        //attributes         
-        private string CropName, CropNotes, CropStatus, DosedByStaff, CropStorageType, CropMinMax;
+        private string CropName, CropNotes, CropStatus, CropMinMax;
         private DateTime DatePlanted, EstimatedHarvestDate, LastDose, NextDose;
-        private int FertilizerID, FieldID, CropID; 
+        private int FertilizerID, FieldID, CropID, DosedByStaffID, CropStorageType; 
 
         //constructors
-        public Crop (int cropID, string cropName, DateTime datePlanted, DateTime estimatedHarvestDate, string cropNotes, int fertilizerID, string cropStatus, DateTime lastDose, DateTime nextDose, string dosedByStaff, string cropStorageType, string cropMinMax, int fieldID)
+        public Crop (int cropID, string cropName, DateTime datePlanted, DateTime estimatedHarvestDate, string cropNotes, int fertilizerID, string cropStatus, DateTime lastDose, DateTime nextDose, int dosedByStaff, int cropStorageType, string cropMinMax, int fieldID)
         {
             this.CropName = cropName; 
             this.DatePlanted = datePlanted; 
@@ -26,7 +26,7 @@ namespace farmingprogram
             this.CropStatus = cropStatus;
             this.LastDose = lastDose;
             this.NextDose = nextDose;
-            this.DosedByStaff = dosedByStaff;
+            this.DosedByStaffID = dosedByStaff;
             this.CropStorageType = cropStorageType;
             this.CropMinMax = cropMinMax;
             this.FieldID = fieldID;
@@ -88,13 +88,13 @@ namespace farmingprogram
             set { NextDose = value; }
         }
 
-        public string dosedByStaff
+        public int dosedByStaff
         {
-            get { return DosedByStaff; }
-            set { DosedByStaff = value; }
+            get { return DosedByStaffID; }
+            set { DosedByStaffID = value; }
         }
 
-        public string cropStorageType
+        public int cropStorageType
         {
             get { return CropStorageType; }
             set { CropStorageType = value; }

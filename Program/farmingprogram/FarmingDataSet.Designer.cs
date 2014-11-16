@@ -24,15 +24,23 @@ namespace farmingprogram {
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
     public partial class FarmingDataSet : global::System.Data.DataSet {
         
-        private CropDataTable tableCrop;
-        
         private FertilizerDataTable tableFertilizer;
+        
+        private FieldDataTable tableField;
         
         private StaffDataTable tableStaff;
         
         private ContainerDataTable tableContainer;
         
-        private FieldDataTable tableField;
+        private CropDataTable tableCrop;
+        
+        private global::System.Data.DataRelation relationFK_Crop_To_Container;
+        
+        private global::System.Data.DataRelation relationFK_Crop_To_Fertilizer;
+        
+        private global::System.Data.DataRelation relationFK_Crop_To_Field;
+        
+        private global::System.Data.DataRelation relationFK_Crop_To_Staff;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -62,11 +70,11 @@ namespace farmingprogram {
             if ((this.DetermineSchemaSerializationMode(info, context) == global::System.Data.SchemaSerializationMode.IncludeSchema)) {
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXmlSchema(new global::System.Xml.XmlTextReader(new global::System.IO.StringReader(strSchema)));
-                if ((ds.Tables["Crop"] != null)) {
-                    base.Tables.Add(new CropDataTable(ds.Tables["Crop"]));
-                }
                 if ((ds.Tables["Fertilizer"] != null)) {
                     base.Tables.Add(new FertilizerDataTable(ds.Tables["Fertilizer"]));
+                }
+                if ((ds.Tables["Field"] != null)) {
+                    base.Tables.Add(new FieldDataTable(ds.Tables["Field"]));
                 }
                 if ((ds.Tables["Staff"] != null)) {
                     base.Tables.Add(new StaffDataTable(ds.Tables["Staff"]));
@@ -74,8 +82,8 @@ namespace farmingprogram {
                 if ((ds.Tables["Container"] != null)) {
                     base.Tables.Add(new ContainerDataTable(ds.Tables["Container"]));
                 }
-                if ((ds.Tables["Field"] != null)) {
-                    base.Tables.Add(new FieldDataTable(ds.Tables["Field"]));
+                if ((ds.Tables["Crop"] != null)) {
+                    base.Tables.Add(new CropDataTable(ds.Tables["Crop"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -99,9 +107,9 @@ namespace farmingprogram {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public CropDataTable Crop {
+        public FertilizerDataTable Fertilizer {
             get {
-                return this.tableCrop;
+                return this.tableFertilizer;
             }
         }
         
@@ -109,9 +117,9 @@ namespace farmingprogram {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public FertilizerDataTable Fertilizer {
+        public FieldDataTable Field {
             get {
-                return this.tableFertilizer;
+                return this.tableField;
             }
         }
         
@@ -139,9 +147,9 @@ namespace farmingprogram {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Browsable(false)]
         [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
-        public FieldDataTable Field {
+        public CropDataTable Crop {
             get {
-                return this.tableField;
+                return this.tableCrop;
             }
         }
         
@@ -212,11 +220,11 @@ namespace farmingprogram {
                 this.Reset();
                 global::System.Data.DataSet ds = new global::System.Data.DataSet();
                 ds.ReadXml(reader);
-                if ((ds.Tables["Crop"] != null)) {
-                    base.Tables.Add(new CropDataTable(ds.Tables["Crop"]));
-                }
                 if ((ds.Tables["Fertilizer"] != null)) {
                     base.Tables.Add(new FertilizerDataTable(ds.Tables["Fertilizer"]));
+                }
+                if ((ds.Tables["Field"] != null)) {
+                    base.Tables.Add(new FieldDataTable(ds.Tables["Field"]));
                 }
                 if ((ds.Tables["Staff"] != null)) {
                     base.Tables.Add(new StaffDataTable(ds.Tables["Staff"]));
@@ -224,8 +232,8 @@ namespace farmingprogram {
                 if ((ds.Tables["Container"] != null)) {
                     base.Tables.Add(new ContainerDataTable(ds.Tables["Container"]));
                 }
-                if ((ds.Tables["Field"] != null)) {
-                    base.Tables.Add(new FieldDataTable(ds.Tables["Field"]));
+                if ((ds.Tables["Crop"] != null)) {
+                    base.Tables.Add(new CropDataTable(ds.Tables["Crop"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -260,16 +268,16 @@ namespace farmingprogram {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         internal void InitVars(bool initTable) {
-            this.tableCrop = ((CropDataTable)(base.Tables["Crop"]));
-            if ((initTable == true)) {
-                if ((this.tableCrop != null)) {
-                    this.tableCrop.InitVars();
-                }
-            }
             this.tableFertilizer = ((FertilizerDataTable)(base.Tables["Fertilizer"]));
             if ((initTable == true)) {
                 if ((this.tableFertilizer != null)) {
                     this.tableFertilizer.InitVars();
+                }
+            }
+            this.tableField = ((FieldDataTable)(base.Tables["Field"]));
+            if ((initTable == true)) {
+                if ((this.tableField != null)) {
+                    this.tableField.InitVars();
                 }
             }
             this.tableStaff = ((StaffDataTable)(base.Tables["Staff"]));
@@ -284,12 +292,16 @@ namespace farmingprogram {
                     this.tableContainer.InitVars();
                 }
             }
-            this.tableField = ((FieldDataTable)(base.Tables["Field"]));
+            this.tableCrop = ((CropDataTable)(base.Tables["Crop"]));
             if ((initTable == true)) {
-                if ((this.tableField != null)) {
-                    this.tableField.InitVars();
+                if ((this.tableCrop != null)) {
+                    this.tableCrop.InitVars();
                 }
             }
+            this.relationFK_Crop_To_Container = this.Relations["FK Crop_To_Container"];
+            this.relationFK_Crop_To_Fertilizer = this.Relations["FK_Crop_To_Fertilizer"];
+            this.relationFK_Crop_To_Field = this.Relations["FK_Crop_To_Field"];
+            this.relationFK_Crop_To_Staff = this.Relations["FK_Crop_To_Staff"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -300,27 +312,43 @@ namespace farmingprogram {
             this.Namespace = "http://tempuri.org/FarmingDataSet.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
-            this.tableCrop = new CropDataTable();
-            base.Tables.Add(this.tableCrop);
             this.tableFertilizer = new FertilizerDataTable();
             base.Tables.Add(this.tableFertilizer);
+            this.tableField = new FieldDataTable();
+            base.Tables.Add(this.tableField);
             this.tableStaff = new StaffDataTable();
             base.Tables.Add(this.tableStaff);
             this.tableContainer = new ContainerDataTable();
             base.Tables.Add(this.tableContainer);
-            this.tableField = new FieldDataTable();
-            base.Tables.Add(this.tableField);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeCrop() {
-            return false;
+            this.tableCrop = new CropDataTable();
+            base.Tables.Add(this.tableCrop);
+            this.relationFK_Crop_To_Container = new global::System.Data.DataRelation("FK Crop_To_Container", new global::System.Data.DataColumn[] {
+                        this.tableContainer.ContainerIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCrop.CropStorageTypeColumn}, false);
+            this.Relations.Add(this.relationFK_Crop_To_Container);
+            this.relationFK_Crop_To_Fertilizer = new global::System.Data.DataRelation("FK_Crop_To_Fertilizer", new global::System.Data.DataColumn[] {
+                        this.tableFertilizer.FertilizerIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCrop.FertilizerIDColumn}, false);
+            this.Relations.Add(this.relationFK_Crop_To_Fertilizer);
+            this.relationFK_Crop_To_Field = new global::System.Data.DataRelation("FK_Crop_To_Field", new global::System.Data.DataColumn[] {
+                        this.tableField.FieldIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCrop.FieldIDColumn}, false);
+            this.Relations.Add(this.relationFK_Crop_To_Field);
+            this.relationFK_Crop_To_Staff = new global::System.Data.DataRelation("FK_Crop_To_Staff", new global::System.Data.DataColumn[] {
+                        this.tableStaff.StaffIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCrop.DosedByStaffColumn}, false);
+            this.Relations.Add(this.relationFK_Crop_To_Staff);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private bool ShouldSerializeFertilizer() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private bool ShouldSerializeField() {
             return false;
         }
         
@@ -338,7 +366,7 @@ namespace farmingprogram {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private bool ShouldSerializeField() {
+        private bool ShouldSerializeCrop() {
             return false;
         }
         
@@ -398,10 +426,10 @@ namespace farmingprogram {
         }
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void CropRowChangeEventHandler(object sender, CropRowChangeEvent e);
+        public delegate void FertilizerRowChangeEventHandler(object sender, FertilizerRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void FertilizerRowChangeEventHandler(object sender, FertilizerRowChangeEvent e);
+        public delegate void FieldRowChangeEventHandler(object sender, FieldRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         public delegate void StaffRowChangeEventHandler(object sender, StaffRowChangeEvent e);
@@ -410,450 +438,7 @@ namespace farmingprogram {
         public delegate void ContainerRowChangeEventHandler(object sender, ContainerRowChangeEvent e);
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public delegate void FieldRowChangeEventHandler(object sender, FieldRowChangeEvent e);
-        
-        /// <summary>
-        ///Represents the strongly named DataTable class.
-        ///</summary>
-        [global::System.Serializable()]
-        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class CropDataTable : global::System.Data.TypedTableBase<CropRow> {
-            
-            private global::System.Data.DataColumn columnCropID;
-            
-            private global::System.Data.DataColumn columnCropName;
-            
-            private global::System.Data.DataColumn columnDatePlanted;
-            
-            private global::System.Data.DataColumn columnEstimatedHarvestDate;
-            
-            private global::System.Data.DataColumn columnCropNotes;
-            
-            private global::System.Data.DataColumn columnFertilizerID;
-            
-            private global::System.Data.DataColumn columnCropStatus;
-            
-            private global::System.Data.DataColumn columnLastDose;
-            
-            private global::System.Data.DataColumn columnNextDose;
-            
-            private global::System.Data.DataColumn columnDosedByStaff;
-            
-            private global::System.Data.DataColumn columnCropStorageType;
-            
-            private global::System.Data.DataColumn columnCropMinMax;
-            
-            private global::System.Data.DataColumn columnFieldID;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CropDataTable() {
-                this.TableName = "Crop";
-                this.BeginInit();
-                this.InitClass();
-                this.EndInit();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal CropDataTable(global::System.Data.DataTable table) {
-                this.TableName = table.TableName;
-                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
-                    this.CaseSensitive = table.CaseSensitive;
-                }
-                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
-                    this.Locale = table.Locale;
-                }
-                if ((table.Namespace != table.DataSet.Namespace)) {
-                    this.Namespace = table.Namespace;
-                }
-                this.Prefix = table.Prefix;
-                this.MinimumCapacity = table.MinimumCapacity;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected CropDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
-                    base(info, context) {
-                this.InitVars();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CropIDColumn {
-                get {
-                    return this.columnCropID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CropNameColumn {
-                get {
-                    return this.columnCropName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DatePlantedColumn {
-                get {
-                    return this.columnDatePlanted;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn EstimatedHarvestDateColumn {
-                get {
-                    return this.columnEstimatedHarvestDate;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CropNotesColumn {
-                get {
-                    return this.columnCropNotes;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FertilizerIDColumn {
-                get {
-                    return this.columnFertilizerID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CropStatusColumn {
-                get {
-                    return this.columnCropStatus;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn LastDoseColumn {
-                get {
-                    return this.columnLastDose;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn NextDoseColumn {
-                get {
-                    return this.columnNextDose;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn DosedByStaffColumn {
-                get {
-                    return this.columnDosedByStaff;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CropStorageTypeColumn {
-                get {
-                    return this.columnCropStorageType;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn CropMinMaxColumn {
-                get {
-                    return this.columnCropMinMax;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FieldIDColumn {
-                get {
-                    return this.columnFieldID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            [global::System.ComponentModel.Browsable(false)]
-            public int Count {
-                get {
-                    return this.Rows.Count;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CropRow this[int index] {
-                get {
-                    return ((CropRow)(this.Rows[index]));
-                }
-            }
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event CropRowChangeEventHandler CropRowChanging;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event CropRowChangeEventHandler CropRowChanged;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event CropRowChangeEventHandler CropRowDeleting;
-            
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event CropRowChangeEventHandler CropRowDeleted;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddCropRow(CropRow row) {
-                this.Rows.Add(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CropRow AddCropRow(string CropName, System.DateTime DatePlanted, System.DateTime EstimatedHarvestDate, string CropNotes, int FertilizerID, string CropStatus, System.DateTime LastDose, System.DateTime NextDose, string DosedByStaff, string CropStorageType, string CropMinMax, int FieldID) {
-                CropRow rowCropRow = ((CropRow)(this.NewRow()));
-                object[] columnValuesArray = new object[] {
-                        null,
-                        CropName,
-                        DatePlanted,
-                        EstimatedHarvestDate,
-                        CropNotes,
-                        FertilizerID,
-                        CropStatus,
-                        LastDose,
-                        NextDose,
-                        DosedByStaff,
-                        CropStorageType,
-                        CropMinMax,
-                        FieldID};
-                rowCropRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowCropRow);
-                return rowCropRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CropRow FindByCropID(int CropID) {
-                return ((CropRow)(this.Rows.Find(new object[] {
-                            CropID})));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public override global::System.Data.DataTable Clone() {
-                CropDataTable cln = ((CropDataTable)(base.Clone()));
-                cln.InitVars();
-                return cln;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataTable CreateInstance() {
-                return new CropDataTable();
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal void InitVars() {
-                this.columnCropID = base.Columns["CropID"];
-                this.columnCropName = base.Columns["CropName"];
-                this.columnDatePlanted = base.Columns["DatePlanted"];
-                this.columnEstimatedHarvestDate = base.Columns["EstimatedHarvestDate"];
-                this.columnCropNotes = base.Columns["CropNotes"];
-                this.columnFertilizerID = base.Columns["FertilizerID"];
-                this.columnCropStatus = base.Columns["CropStatus"];
-                this.columnLastDose = base.Columns["LastDose"];
-                this.columnNextDose = base.Columns["NextDose"];
-                this.columnDosedByStaff = base.Columns["DosedByStaff"];
-                this.columnCropStorageType = base.Columns["CropStorageType"];
-                this.columnCropMinMax = base.Columns["CropMinMax"];
-                this.columnFieldID = base.Columns["FieldID"];
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            private void InitClass() {
-                this.columnCropID = new global::System.Data.DataColumn("CropID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCropID);
-                this.columnCropName = new global::System.Data.DataColumn("CropName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCropName);
-                this.columnDatePlanted = new global::System.Data.DataColumn("DatePlanted", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDatePlanted);
-                this.columnEstimatedHarvestDate = new global::System.Data.DataColumn("EstimatedHarvestDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnEstimatedHarvestDate);
-                this.columnCropNotes = new global::System.Data.DataColumn("CropNotes", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCropNotes);
-                this.columnFertilizerID = new global::System.Data.DataColumn("FertilizerID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFertilizerID);
-                this.columnCropStatus = new global::System.Data.DataColumn("CropStatus", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCropStatus);
-                this.columnLastDose = new global::System.Data.DataColumn("LastDose", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnLastDose);
-                this.columnNextDose = new global::System.Data.DataColumn("NextDose", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnNextDose);
-                this.columnDosedByStaff = new global::System.Data.DataColumn("DosedByStaff", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDosedByStaff);
-                this.columnCropStorageType = new global::System.Data.DataColumn("CropStorageType", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCropStorageType);
-                this.columnCropMinMax = new global::System.Data.DataColumn("CropMinMax", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnCropMinMax);
-                this.columnFieldID = new global::System.Data.DataColumn("FieldID", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFieldID);
-                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnCropID}, true));
-                this.columnCropID.AutoIncrement = true;
-                this.columnCropID.AutoIncrementSeed = -1;
-                this.columnCropID.AutoIncrementStep = -1;
-                this.columnCropID.AllowDBNull = false;
-                this.columnCropID.ReadOnly = true;
-                this.columnCropID.Unique = true;
-                this.columnCropName.AllowDBNull = false;
-                this.columnCropName.MaxLength = 50;
-                this.columnDatePlanted.AllowDBNull = false;
-                this.columnEstimatedHarvestDate.AllowDBNull = false;
-                this.columnCropNotes.MaxLength = 50;
-                this.columnCropStatus.AllowDBNull = false;
-                this.columnCropStatus.MaxLength = 50;
-                this.columnDosedByStaff.MaxLength = 50;
-                this.columnCropStorageType.AllowDBNull = false;
-                this.columnCropStorageType.MaxLength = 50;
-                this.columnCropMinMax.AllowDBNull = false;
-                this.columnCropMinMax.MaxLength = 10;
-                this.columnFieldID.AllowDBNull = false;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CropRow NewCropRow() {
-                return ((CropRow)(this.NewRow()));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new CropRow(builder);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override global::System.Type GetRowType() {
-                return typeof(CropRow);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanged(e);
-                if ((this.CropRowChanged != null)) {
-                    this.CropRowChanged(this, new CropRowChangeEvent(((CropRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowChanging(e);
-                if ((this.CropRowChanging != null)) {
-                    this.CropRowChanging(this, new CropRowChangeEvent(((CropRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleted(e);
-                if ((this.CropRowDeleted != null)) {
-                    this.CropRowDeleted(this, new CropRowChangeEvent(((CropRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
-                base.OnRowDeleting(e);
-                if ((this.CropRowDeleting != null)) {
-                    this.CropRowDeleting(this, new CropRowChangeEvent(((CropRow)(e.Row)), e.Action));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveCropRow(CropRow row) {
-                this.Rows.Remove(row);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
-                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                FarmingDataSet ds = new FarmingDataSet();
-                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
-                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
-                any1.MinOccurs = new decimal(0);
-                any1.MaxOccurs = decimal.MaxValue;
-                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any1);
-                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
-                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
-                any2.MinOccurs = new decimal(1);
-                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
-                sequence.Items.Add(any2);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute1.Name = "namespace";
-                attribute1.FixedValue = ds.Namespace;
-                type.Attributes.Add(attribute1);
-                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
-                attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "CropDataTable";
-                type.Attributes.Add(attribute2);
-                type.Particle = sequence;
-                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
-                if (xs.Contains(dsSchema.TargetNamespace)) {
-                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
-                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
-                    try {
-                        global::System.Xml.Schema.XmlSchema schema = null;
-                        dsSchema.Write(s1);
-                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
-                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
-                            s2.SetLength(0);
-                            schema.Write(s2);
-                            if ((s1.Length == s2.Length)) {
-                                s1.Position = 0;
-                                s2.Position = 0;
-                                for (; ((s1.Position != s1.Length) 
-                                            && (s1.ReadByte() == s2.ReadByte())); ) {
-                                    ;
-                                }
-                                if ((s1.Position == s1.Length)) {
-                                    return type;
-                                }
-                            }
-                        }
-                    }
-                    finally {
-                        if ((s1 != null)) {
-                            s1.Close();
-                        }
-                        if ((s2 != null)) {
-                            s2.Close();
-                        }
-                    }
-                }
-                xs.Add(dsSchema);
-                return type;
-            }
-        }
+        public delegate void CropRowChangeEventHandler(object sender, CropRowChangeEvent e);
         
         /// <summary>
         ///Represents the strongly named DataTable class.
@@ -1170,6 +755,315 @@ namespace farmingprogram {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class FieldDataTable : global::System.Data.TypedTableBase<FieldRow> {
+            
+            private global::System.Data.DataColumn columnFieldID;
+            
+            private global::System.Data.DataColumn columnFieldName;
+            
+            private global::System.Data.DataColumn columnFieldStatus;
+            
+            private global::System.Data.DataColumn columnFieldNotes;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FieldDataTable() {
+                this.TableName = "Field";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal FieldDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected FieldDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FieldIDColumn {
+                get {
+                    return this.columnFieldID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FieldNameColumn {
+                get {
+                    return this.columnFieldName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FieldStatusColumn {
+                get {
+                    return this.columnFieldStatus;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FieldNotesColumn {
+                get {
+                    return this.columnFieldNotes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FieldRow this[int index] {
+                get {
+                    return ((FieldRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event FieldRowChangeEventHandler FieldRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event FieldRowChangeEventHandler FieldRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event FieldRowChangeEventHandler FieldRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public event FieldRowChangeEventHandler FieldRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void AddFieldRow(FieldRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FieldRow AddFieldRow(string FieldName, string FieldStatus, string FieldNotes) {
+                FieldRow rowFieldRow = ((FieldRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        FieldName,
+                        FieldStatus,
+                        FieldNotes};
+                rowFieldRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowFieldRow);
+                return rowFieldRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FieldRow FindByFieldID(int FieldID) {
+                return ((FieldRow)(this.Rows.Find(new object[] {
+                            FieldID})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                FieldDataTable cln = ((FieldDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new FieldDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal void InitVars() {
+                this.columnFieldID = base.Columns["FieldID"];
+                this.columnFieldName = base.Columns["FieldName"];
+                this.columnFieldStatus = base.Columns["FieldStatus"];
+                this.columnFieldNotes = base.Columns["FieldNotes"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            private void InitClass() {
+                this.columnFieldID = new global::System.Data.DataColumn("FieldID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFieldID);
+                this.columnFieldName = new global::System.Data.DataColumn("FieldName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFieldName);
+                this.columnFieldStatus = new global::System.Data.DataColumn("FieldStatus", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFieldStatus);
+                this.columnFieldNotes = new global::System.Data.DataColumn("FieldNotes", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFieldNotes);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnFieldID}, true));
+                this.columnFieldID.AutoIncrement = true;
+                this.columnFieldID.AutoIncrementSeed = -1;
+                this.columnFieldID.AutoIncrementStep = -1;
+                this.columnFieldID.AllowDBNull = false;
+                this.columnFieldID.ReadOnly = true;
+                this.columnFieldID.Unique = true;
+                this.columnFieldName.AllowDBNull = false;
+                this.columnFieldName.MaxLength = 50;
+                this.columnFieldStatus.AllowDBNull = false;
+                this.columnFieldStatus.MaxLength = 50;
+                this.columnFieldNotes.MaxLength = 50;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FieldRow NewFieldRow() {
+                return ((FieldRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new FieldRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(FieldRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.FieldRowChanged != null)) {
+                    this.FieldRowChanged(this, new FieldRowChangeEvent(((FieldRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.FieldRowChanging != null)) {
+                    this.FieldRowChanging(this, new FieldRowChangeEvent(((FieldRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.FieldRowDeleted != null)) {
+                    this.FieldRowDeleted(this, new FieldRowChangeEvent(((FieldRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.FieldRowDeleting != null)) {
+                    this.FieldRowDeleting(this, new FieldRowChangeEvent(((FieldRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void RemoveFieldRow(FieldRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                FarmingDataSet ds = new FarmingDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "FieldDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
         public partial class StaffDataTable : global::System.Data.TypedTableBase<StaffRow> {
             
             private global::System.Data.DataColumn columnStaffID;
@@ -1180,7 +1074,7 @@ namespace farmingprogram {
             
             private global::System.Data.DataColumn columnTitle;
             
-            private global::System.Data.DataColumn columnManager;
+            private global::System.Data.DataColumn columnRights;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -1249,9 +1143,9 @@ namespace farmingprogram {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ManagerColumn {
+            public global::System.Data.DataColumn RightsColumn {
                 get {
-                    return this.columnManager;
+                    return this.columnRights;
                 }
             }
             
@@ -1292,14 +1186,14 @@ namespace farmingprogram {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public StaffRow AddStaffRow(string FirstName, string LastName, string Title, bool Manager) {
+            public StaffRow AddStaffRow(string FirstName, string LastName, string Title, int Rights) {
                 StaffRow rowStaffRow = ((StaffRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         FirstName,
                         LastName,
                         Title,
-                        Manager};
+                        Rights};
                 rowStaffRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowStaffRow);
                 return rowStaffRow;
@@ -1333,7 +1227,7 @@ namespace farmingprogram {
                 this.columnFirstName = base.Columns["FirstName"];
                 this.columnLastName = base.Columns["LastName"];
                 this.columnTitle = base.Columns["Title"];
-                this.columnManager = base.Columns["Manager"];
+                this.columnRights = base.Columns["Rights"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1347,8 +1241,8 @@ namespace farmingprogram {
                 base.Columns.Add(this.columnLastName);
                 this.columnTitle = new global::System.Data.DataColumn("Title", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTitle);
-                this.columnManager = new global::System.Data.DataColumn("Manager", typeof(bool), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnManager);
+                this.columnRights = new global::System.Data.DataColumn("Rights", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRights);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnStaffID}, true));
                 this.columnStaffID.AutoIncrement = true;
@@ -1803,20 +1697,38 @@ namespace farmingprogram {
         ///</summary>
         [global::System.Serializable()]
         [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
-        public partial class FieldDataTable : global::System.Data.TypedTableBase<FieldRow> {
+        public partial class CropDataTable : global::System.Data.TypedTableBase<CropRow> {
+            
+            private global::System.Data.DataColumn columnCropID;
+            
+            private global::System.Data.DataColumn columnCropName;
+            
+            private global::System.Data.DataColumn columnDatePlanted;
+            
+            private global::System.Data.DataColumn columnEstimatedHarvestDate;
+            
+            private global::System.Data.DataColumn columnCropNotes;
+            
+            private global::System.Data.DataColumn columnFertilizerID;
+            
+            private global::System.Data.DataColumn columnCropStatus;
+            
+            private global::System.Data.DataColumn columnLastDose;
+            
+            private global::System.Data.DataColumn columnNextDose;
+            
+            private global::System.Data.DataColumn columnDosedByStaff;
+            
+            private global::System.Data.DataColumn columnCropStorageType;
+            
+            private global::System.Data.DataColumn columnCropMinMax;
             
             private global::System.Data.DataColumn columnFieldID;
             
-            private global::System.Data.DataColumn columnFieldName;
-            
-            private global::System.Data.DataColumn columnFieldStatus;
-            
-            private global::System.Data.DataColumn columnFieldNotes;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public FieldDataTable() {
-                this.TableName = "Field";
+            public CropDataTable() {
+                this.TableName = "Crop";
                 this.BeginInit();
                 this.InitClass();
                 this.EndInit();
@@ -1824,7 +1736,7 @@ namespace farmingprogram {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal FieldDataTable(global::System.Data.DataTable table) {
+            internal CropDataTable(global::System.Data.DataTable table) {
                 this.TableName = table.TableName;
                 if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
                     this.CaseSensitive = table.CaseSensitive;
@@ -1841,9 +1753,105 @@ namespace farmingprogram {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            protected FieldDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+            protected CropDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                     base(info, context) {
                 this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CropIDColumn {
+                get {
+                    return this.columnCropID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CropNameColumn {
+                get {
+                    return this.columnCropName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DatePlantedColumn {
+                get {
+                    return this.columnDatePlanted;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn EstimatedHarvestDateColumn {
+                get {
+                    return this.columnEstimatedHarvestDate;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CropNotesColumn {
+                get {
+                    return this.columnCropNotes;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn FertilizerIDColumn {
+                get {
+                    return this.columnFertilizerID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CropStatusColumn {
+                get {
+                    return this.columnCropStatus;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn LastDoseColumn {
+                get {
+                    return this.columnLastDose;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn NextDoseColumn {
+                get {
+                    return this.columnNextDose;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn DosedByStaffColumn {
+                get {
+                    return this.columnDosedByStaff;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CropStorageTypeColumn {
+                get {
+                    return this.columnCropStorageType;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn CropMinMaxColumn {
+                get {
+                    return this.columnCropMinMax;
+                }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1851,30 +1859,6 @@ namespace farmingprogram {
             public global::System.Data.DataColumn FieldIDColumn {
                 get {
                     return this.columnFieldID;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FieldNameColumn {
-                get {
-                    return this.columnFieldName;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FieldStatusColumn {
-                get {
-                    return this.columnFieldStatus;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn FieldNotesColumn {
-                get {
-                    return this.columnFieldNotes;
                 }
             }
             
@@ -1889,55 +1873,76 @@ namespace farmingprogram {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public FieldRow this[int index] {
+            public CropRow this[int index] {
                 get {
-                    return ((FieldRow)(this.Rows[index]));
+                    return ((CropRow)(this.Rows[index]));
                 }
             }
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event FieldRowChangeEventHandler FieldRowChanging;
+            public event CropRowChangeEventHandler CropRowChanging;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event FieldRowChangeEventHandler FieldRowChanged;
+            public event CropRowChangeEventHandler CropRowChanged;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event FieldRowChangeEventHandler FieldRowDeleting;
+            public event CropRowChangeEventHandler CropRowDeleting;
             
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public event FieldRowChangeEventHandler FieldRowDeleted;
+            public event CropRowChangeEventHandler CropRowDeleted;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void AddFieldRow(FieldRow row) {
+            public void AddCropRow(CropRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public FieldRow AddFieldRow(string FieldName, string FieldStatus, string FieldNotes) {
-                FieldRow rowFieldRow = ((FieldRow)(this.NewRow()));
+            public CropRow AddCropRow(string CropName, System.DateTime DatePlanted, System.DateTime EstimatedHarvestDate, string CropNotes, FertilizerRow parentFertilizerRowByFK_Crop_To_Fertilizer, string CropStatus, System.DateTime LastDose, System.DateTime NextDose, StaffRow parentStaffRowByFK_Crop_To_Staff, ContainerRow parentContainerRowByFK_Crop_To_Container, string CropMinMax, FieldRow parentFieldRowByFK_Crop_To_Field) {
+                CropRow rowCropRow = ((CropRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        FieldName,
-                        FieldStatus,
-                        FieldNotes};
-                rowFieldRow.ItemArray = columnValuesArray;
-                this.Rows.Add(rowFieldRow);
-                return rowFieldRow;
+                        CropName,
+                        DatePlanted,
+                        EstimatedHarvestDate,
+                        CropNotes,
+                        null,
+                        CropStatus,
+                        LastDose,
+                        NextDose,
+                        null,
+                        null,
+                        CropMinMax,
+                        null};
+                if ((parentFertilizerRowByFK_Crop_To_Fertilizer != null)) {
+                    columnValuesArray[5] = parentFertilizerRowByFK_Crop_To_Fertilizer[0];
+                }
+                if ((parentStaffRowByFK_Crop_To_Staff != null)) {
+                    columnValuesArray[9] = parentStaffRowByFK_Crop_To_Staff[0];
+                }
+                if ((parentContainerRowByFK_Crop_To_Container != null)) {
+                    columnValuesArray[10] = parentContainerRowByFK_Crop_To_Container[0];
+                }
+                if ((parentFieldRowByFK_Crop_To_Field != null)) {
+                    columnValuesArray[12] = parentFieldRowByFK_Crop_To_Field[0];
+                }
+                rowCropRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowCropRow);
+                return rowCropRow;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public FieldRow FindByFieldID(int FieldID) {
-                return ((FieldRow)(this.Rows.Find(new object[] {
-                            FieldID})));
+            public CropRow FindByCropID(int CropID) {
+                return ((CropRow)(this.Rows.Find(new object[] {
+                            CropID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public override global::System.Data.DataTable Clone() {
-                FieldDataTable cln = ((FieldDataTable)(base.Clone()));
+                CropDataTable cln = ((CropDataTable)(base.Clone()));
                 cln.InitVars();
                 return cln;
             }
@@ -1945,68 +1950,101 @@ namespace farmingprogram {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataTable CreateInstance() {
-                return new FieldDataTable();
+                return new CropDataTable();
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
+                this.columnCropID = base.Columns["CropID"];
+                this.columnCropName = base.Columns["CropName"];
+                this.columnDatePlanted = base.Columns["DatePlanted"];
+                this.columnEstimatedHarvestDate = base.Columns["EstimatedHarvestDate"];
+                this.columnCropNotes = base.Columns["CropNotes"];
+                this.columnFertilizerID = base.Columns["FertilizerID"];
+                this.columnCropStatus = base.Columns["CropStatus"];
+                this.columnLastDose = base.Columns["LastDose"];
+                this.columnNextDose = base.Columns["NextDose"];
+                this.columnDosedByStaff = base.Columns["DosedByStaff"];
+                this.columnCropStorageType = base.Columns["CropStorageType"];
+                this.columnCropMinMax = base.Columns["CropMinMax"];
                 this.columnFieldID = base.Columns["FieldID"];
-                this.columnFieldName = base.Columns["FieldName"];
-                this.columnFieldStatus = base.Columns["FieldStatus"];
-                this.columnFieldNotes = base.Columns["FieldNotes"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             private void InitClass() {
+                this.columnCropID = new global::System.Data.DataColumn("CropID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCropID);
+                this.columnCropName = new global::System.Data.DataColumn("CropName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCropName);
+                this.columnDatePlanted = new global::System.Data.DataColumn("DatePlanted", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDatePlanted);
+                this.columnEstimatedHarvestDate = new global::System.Data.DataColumn("EstimatedHarvestDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEstimatedHarvestDate);
+                this.columnCropNotes = new global::System.Data.DataColumn("CropNotes", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCropNotes);
+                this.columnFertilizerID = new global::System.Data.DataColumn("FertilizerID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnFertilizerID);
+                this.columnCropStatus = new global::System.Data.DataColumn("CropStatus", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCropStatus);
+                this.columnLastDose = new global::System.Data.DataColumn("LastDose", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLastDose);
+                this.columnNextDose = new global::System.Data.DataColumn("NextDose", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnNextDose);
+                this.columnDosedByStaff = new global::System.Data.DataColumn("DosedByStaff", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDosedByStaff);
+                this.columnCropStorageType = new global::System.Data.DataColumn("CropStorageType", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCropStorageType);
+                this.columnCropMinMax = new global::System.Data.DataColumn("CropMinMax", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCropMinMax);
                 this.columnFieldID = new global::System.Data.DataColumn("FieldID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnFieldID);
-                this.columnFieldName = new global::System.Data.DataColumn("FieldName", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFieldName);
-                this.columnFieldStatus = new global::System.Data.DataColumn("FieldStatus", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFieldStatus);
-                this.columnFieldNotes = new global::System.Data.DataColumn("FieldNotes", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnFieldNotes);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnFieldID}, true));
-                this.columnFieldID.AutoIncrement = true;
-                this.columnFieldID.AutoIncrementSeed = -1;
-                this.columnFieldID.AutoIncrementStep = -1;
+                                this.columnCropID}, true));
+                this.columnCropID.AutoIncrement = true;
+                this.columnCropID.AutoIncrementSeed = -1;
+                this.columnCropID.AutoIncrementStep = -1;
+                this.columnCropID.AllowDBNull = false;
+                this.columnCropID.ReadOnly = true;
+                this.columnCropID.Unique = true;
+                this.columnCropName.AllowDBNull = false;
+                this.columnCropName.MaxLength = 50;
+                this.columnDatePlanted.AllowDBNull = false;
+                this.columnEstimatedHarvestDate.AllowDBNull = false;
+                this.columnCropNotes.MaxLength = 50;
+                this.columnCropStatus.AllowDBNull = false;
+                this.columnCropStatus.MaxLength = 50;
+                this.columnCropStorageType.AllowDBNull = false;
+                this.columnCropMinMax.AllowDBNull = false;
+                this.columnCropMinMax.MaxLength = 10;
                 this.columnFieldID.AllowDBNull = false;
-                this.columnFieldID.ReadOnly = true;
-                this.columnFieldID.Unique = true;
-                this.columnFieldName.AllowDBNull = false;
-                this.columnFieldName.MaxLength = 50;
-                this.columnFieldStatus.AllowDBNull = false;
-                this.columnFieldStatus.MaxLength = 50;
-                this.columnFieldNotes.MaxLength = 50;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public FieldRow NewFieldRow() {
-                return ((FieldRow)(this.NewRow()));
+            public CropRow NewCropRow() {
+                return ((CropRow)(this.NewRow()));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
-                return new FieldRow(builder);
+                return new CropRow(builder);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override global::System.Type GetRowType() {
-                return typeof(FieldRow);
+                return typeof(CropRow);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanged(e);
-                if ((this.FieldRowChanged != null)) {
-                    this.FieldRowChanged(this, new FieldRowChangeEvent(((FieldRow)(e.Row)), e.Action));
+                if ((this.CropRowChanged != null)) {
+                    this.CropRowChanged(this, new CropRowChangeEvent(((CropRow)(e.Row)), e.Action));
                 }
             }
             
@@ -2014,8 +2052,8 @@ namespace farmingprogram {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowChanging(e);
-                if ((this.FieldRowChanging != null)) {
-                    this.FieldRowChanging(this, new FieldRowChangeEvent(((FieldRow)(e.Row)), e.Action));
+                if ((this.CropRowChanging != null)) {
+                    this.CropRowChanging(this, new CropRowChangeEvent(((CropRow)(e.Row)), e.Action));
                 }
             }
             
@@ -2023,8 +2061,8 @@ namespace farmingprogram {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleted(e);
-                if ((this.FieldRowDeleted != null)) {
-                    this.FieldRowDeleted(this, new FieldRowChangeEvent(((FieldRow)(e.Row)), e.Action));
+                if ((this.CropRowDeleted != null)) {
+                    this.CropRowDeleted(this, new CropRowChangeEvent(((CropRow)(e.Row)), e.Action));
                 }
             }
             
@@ -2032,14 +2070,14 @@ namespace farmingprogram {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
                 base.OnRowDeleting(e);
-                if ((this.FieldRowDeleting != null)) {
-                    this.FieldRowDeleting(this, new FieldRowChangeEvent(((FieldRow)(e.Row)), e.Action));
+                if ((this.CropRowDeleting != null)) {
+                    this.CropRowDeleting(this, new CropRowChangeEvent(((CropRow)(e.Row)), e.Action));
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void RemoveFieldRow(FieldRow row) {
+            public void RemoveCropRow(CropRow row) {
                 this.Rows.Remove(row);
             }
             
@@ -2066,7 +2104,7 @@ namespace farmingprogram {
                 type.Attributes.Add(attribute1);
                 global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
                 attribute2.Name = "tableTypeName";
-                attribute2.FixedValue = "FieldDataTable";
+                attribute2.FixedValue = "CropDataTable";
                 type.Attributes.Add(attribute2);
                 type.Particle = sequence;
                 global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
@@ -2104,6 +2142,331 @@ namespace farmingprogram {
                 }
                 xs.Add(dsSchema);
                 return type;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class FertilizerRow : global::System.Data.DataRow {
+            
+            private FertilizerDataTable tableFertilizer;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal FertilizerRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableFertilizer = ((FertilizerDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int FertilizerID {
+                get {
+                    return ((int)(this[this.tableFertilizer.FertilizerIDColumn]));
+                }
+                set {
+                    this[this.tableFertilizer.FertilizerIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string fertName {
+                get {
+                    return ((string)(this[this.tableFertilizer.fertNameColumn]));
+                }
+                set {
+                    this[this.tableFertilizer.fertNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string fertDose {
+                get {
+                    return ((string)(this[this.tableFertilizer.fertDoseColumn]));
+                }
+                set {
+                    this[this.tableFertilizer.fertDoseColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string fertNote {
+                get {
+                    return ((string)(this[this.tableFertilizer.fertNoteColumn]));
+                }
+                set {
+                    this[this.tableFertilizer.fertNoteColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public CropRow[] GetCropRows() {
+                if ((this.Table.ChildRelations["FK_Crop_To_Fertilizer"] == null)) {
+                    return new CropRow[0];
+                }
+                else {
+                    return ((CropRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Crop_To_Fertilizer"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class FieldRow : global::System.Data.DataRow {
+            
+            private FieldDataTable tableField;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal FieldRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableField = ((FieldDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int FieldID {
+                get {
+                    return ((int)(this[this.tableField.FieldIDColumn]));
+                }
+                set {
+                    this[this.tableField.FieldIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FieldName {
+                get {
+                    return ((string)(this[this.tableField.FieldNameColumn]));
+                }
+                set {
+                    this[this.tableField.FieldNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FieldStatus {
+                get {
+                    return ((string)(this[this.tableField.FieldStatusColumn]));
+                }
+                set {
+                    this[this.tableField.FieldStatusColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FieldNotes {
+                get {
+                    try {
+                        return ((string)(this[this.tableField.FieldNotesColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'FieldNotes\' in table \'Field\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableField.FieldNotesColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsFieldNotesNull() {
+                return this.IsNull(this.tableField.FieldNotesColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetFieldNotesNull() {
+                this[this.tableField.FieldNotesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public CropRow[] GetCropRows() {
+                if ((this.Table.ChildRelations["FK_Crop_To_Field"] == null)) {
+                    return new CropRow[0];
+                }
+                else {
+                    return ((CropRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Crop_To_Field"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class StaffRow : global::System.Data.DataRow {
+            
+            private StaffDataTable tableStaff;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal StaffRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableStaff = ((StaffDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int StaffID {
+                get {
+                    return ((int)(this[this.tableStaff.StaffIDColumn]));
+                }
+                set {
+                    this[this.tableStaff.StaffIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string FirstName {
+                get {
+                    return ((string)(this[this.tableStaff.FirstNameColumn]));
+                }
+                set {
+                    this[this.tableStaff.FirstNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string LastName {
+                get {
+                    return ((string)(this[this.tableStaff.LastNameColumn]));
+                }
+                set {
+                    this[this.tableStaff.LastNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string Title {
+                get {
+                    return ((string)(this[this.tableStaff.TitleColumn]));
+                }
+                set {
+                    this[this.tableStaff.TitleColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int Rights {
+                get {
+                    try {
+                        return ((int)(this[this.tableStaff.RightsColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Rights\' in table \'Staff\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableStaff.RightsColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsRightsNull() {
+                return this.IsNull(this.tableStaff.RightsColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetRightsNull() {
+                this[this.tableStaff.RightsColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public CropRow[] GetCropRows() {
+                if ((this.Table.ChildRelations["FK_Crop_To_Staff"] == null)) {
+                    return new CropRow[0];
+                }
+                else {
+                    return ((CropRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Crop_To_Staff"])));
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class ContainerRow : global::System.Data.DataRow {
+            
+            private ContainerDataTable tableContainer;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            internal ContainerRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tableContainer = ((ContainerDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int ContainerID {
+                get {
+                    return ((int)(this[this.tableContainer.ContainerIDColumn]));
+                }
+                set {
+                    this[this.tableContainer.ContainerIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string contName {
+                get {
+                    return ((string)(this[this.tableContainer.contNameColumn]));
+                }
+                set {
+                    this[this.tableContainer.contNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string contType {
+                get {
+                    return ((string)(this[this.tableContainer.contTypeColumn]));
+                }
+                set {
+                    this[this.tableContainer.contTypeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int contSize {
+                get {
+                    return ((int)(this[this.tableContainer.contSizeColumn]));
+                }
+                set {
+                    this[this.tableContainer.contSizeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public CropRow[] GetCropRows() {
+                if ((this.Table.ChildRelations["FK Crop_To_Container"] == null)) {
+                    return new CropRow[0];
+                }
+                else {
+                    return ((CropRow[])(base.GetChildRows(this.Table.ChildRelations["FK Crop_To_Container"])));
+                }
             }
         }
         
@@ -2242,10 +2605,10 @@ namespace farmingprogram {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string DosedByStaff {
+            public int DosedByStaff {
                 get {
                     try {
-                        return ((string)(this[this.tableCrop.DosedByStaffColumn]));
+                        return ((int)(this[this.tableCrop.DosedByStaffColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'DosedByStaff\' in table \'Crop\' is DBNull.", e);
@@ -2258,9 +2621,9 @@ namespace farmingprogram {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CropStorageType {
+            public int CropStorageType {
                 get {
-                    return ((string)(this[this.tableCrop.CropStorageTypeColumn]));
+                    return ((int)(this[this.tableCrop.CropStorageTypeColumn]));
                 }
                 set {
                     this[this.tableCrop.CropStorageTypeColumn] = value;
@@ -2286,6 +2649,50 @@ namespace farmingprogram {
                 }
                 set {
                     this[this.tableCrop.FieldIDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ContainerRow ContainerRow {
+                get {
+                    return ((ContainerRow)(this.GetParentRow(this.Table.ParentRelations["FK Crop_To_Container"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK Crop_To_Container"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FertilizerRow FertilizerRow {
+                get {
+                    return ((FertilizerRow)(this.GetParentRow(this.Table.ParentRelations["FK_Crop_To_Fertilizer"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Crop_To_Fertilizer"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FieldRow FieldRow {
+                get {
+                    return ((FieldRow)(this.GetParentRow(this.Table.ParentRelations["FK_Crop_To_Field"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Crop_To_Field"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public StaffRow StaffRow {
+                get {
+                    return ((StaffRow)(this.GetParentRow(this.Table.ParentRelations["FK_Crop_To_Staff"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Crop_To_Staff"]);
                 }
             }
             
@@ -2351,321 +2758,6 @@ namespace farmingprogram {
         }
         
         /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class FertilizerRow : global::System.Data.DataRow {
-            
-            private FertilizerDataTable tableFertilizer;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal FertilizerRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableFertilizer = ((FertilizerDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int FertilizerID {
-                get {
-                    return ((int)(this[this.tableFertilizer.FertilizerIDColumn]));
-                }
-                set {
-                    this[this.tableFertilizer.FertilizerIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string fertName {
-                get {
-                    return ((string)(this[this.tableFertilizer.fertNameColumn]));
-                }
-                set {
-                    this[this.tableFertilizer.fertNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string fertDose {
-                get {
-                    return ((string)(this[this.tableFertilizer.fertDoseColumn]));
-                }
-                set {
-                    this[this.tableFertilizer.fertDoseColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string fertNote {
-                get {
-                    return ((string)(this[this.tableFertilizer.fertNoteColumn]));
-                }
-                set {
-                    this[this.tableFertilizer.fertNoteColumn] = value;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class StaffRow : global::System.Data.DataRow {
-            
-            private StaffDataTable tableStaff;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal StaffRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableStaff = ((StaffDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int StaffID {
-                get {
-                    return ((int)(this[this.tableStaff.StaffIDColumn]));
-                }
-                set {
-                    this[this.tableStaff.StaffIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string FirstName {
-                get {
-                    return ((string)(this[this.tableStaff.FirstNameColumn]));
-                }
-                set {
-                    this[this.tableStaff.FirstNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string LastName {
-                get {
-                    return ((string)(this[this.tableStaff.LastNameColumn]));
-                }
-                set {
-                    this[this.tableStaff.LastNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Title {
-                get {
-                    return ((string)(this[this.tableStaff.TitleColumn]));
-                }
-                set {
-                    this[this.tableStaff.TitleColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool Manager {
-                get {
-                    try {
-                        return ((bool)(this[this.tableStaff.ManagerColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Manager\' in table \'Staff\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableStaff.ManagerColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsManagerNull() {
-                return this.IsNull(this.tableStaff.ManagerColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetManagerNull() {
-                this[this.tableStaff.ManagerColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class ContainerRow : global::System.Data.DataRow {
-            
-            private ContainerDataTable tableContainer;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal ContainerRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableContainer = ((ContainerDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int ContainerID {
-                get {
-                    return ((int)(this[this.tableContainer.ContainerIDColumn]));
-                }
-                set {
-                    this[this.tableContainer.ContainerIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string contName {
-                get {
-                    return ((string)(this[this.tableContainer.contNameColumn]));
-                }
-                set {
-                    this[this.tableContainer.contNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string contType {
-                get {
-                    return ((string)(this[this.tableContainer.contTypeColumn]));
-                }
-                set {
-                    this[this.tableContainer.contTypeColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int contSize {
-                get {
-                    return ((int)(this[this.tableContainer.contSizeColumn]));
-                }
-                set {
-                    this[this.tableContainer.contSizeColumn] = value;
-                }
-            }
-        }
-        
-        /// <summary>
-        ///Represents strongly named DataRow class.
-        ///</summary>
-        public partial class FieldRow : global::System.Data.DataRow {
-            
-            private FieldDataTable tableField;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            internal FieldRow(global::System.Data.DataRowBuilder rb) : 
-                    base(rb) {
-                this.tableField = ((FieldDataTable)(this.Table));
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int FieldID {
-                get {
-                    return ((int)(this[this.tableField.FieldIDColumn]));
-                }
-                set {
-                    this[this.tableField.FieldIDColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string FieldName {
-                get {
-                    return ((string)(this[this.tableField.FieldNameColumn]));
-                }
-                set {
-                    this[this.tableField.FieldNameColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string FieldStatus {
-                get {
-                    return ((string)(this[this.tableField.FieldStatusColumn]));
-                }
-                set {
-                    this[this.tableField.FieldStatusColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string FieldNotes {
-                get {
-                    try {
-                        return ((string)(this[this.tableField.FieldNotesColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'FieldNotes\' in table \'Field\' is DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableField.FieldNotesColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public bool IsFieldNotesNull() {
-                return this.IsNull(this.tableField.FieldNotesColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public void SetFieldNotesNull() {
-                this[this.tableField.FieldNotesColumn] = global::System.Convert.DBNull;
-            }
-        }
-        
-        /// <summary>
-        ///Row event argument class
-        ///</summary>
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class CropRowChangeEvent : global::System.EventArgs {
-            
-            private CropRow eventRow;
-            
-            private global::System.Data.DataRowAction eventAction;
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CropRowChangeEvent(CropRow row, global::System.Data.DataRowAction action) {
-                this.eventRow = row;
-                this.eventAction = action;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CropRow Row {
-                get {
-                    return this.eventRow;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataRowAction Action {
-                get {
-                    return this.eventAction;
-                }
-            }
-        }
-        
-        /// <summary>
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -2685,6 +2777,40 @@ namespace farmingprogram {
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public FertilizerRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public class FieldRowChangeEvent : global::System.EventArgs {
+            
+            private FieldRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FieldRowChangeEvent(FieldRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public FieldRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -2771,22 +2897,22 @@ namespace farmingprogram {
         ///Row event argument class
         ///</summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public class FieldRowChangeEvent : global::System.EventArgs {
+        public class CropRowChangeEvent : global::System.EventArgs {
             
-            private FieldRow eventRow;
+            private CropRow eventRow;
             
             private global::System.Data.DataRowAction eventAction;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public FieldRowChangeEvent(FieldRow row, global::System.Data.DataRowAction action) {
+            public CropRowChangeEvent(CropRow row, global::System.Data.DataRowAction action) {
                 this.eventRow = row;
                 this.eventAction = action;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public FieldRow Row {
+            public CropRow Row {
                 get {
                     return this.eventRow;
                 }
@@ -2804,653 +2930,6 @@ namespace farmingprogram {
 }
 namespace farmingprogram.FarmingDataSetTableAdapters {
     
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class CropTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public CropTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Crop";
-            tableMapping.ColumnMappings.Add("CropID", "CropID");
-            tableMapping.ColumnMappings.Add("CropName", "CropName");
-            tableMapping.ColumnMappings.Add("DatePlanted", "DatePlanted");
-            tableMapping.ColumnMappings.Add("EstimatedHarvestDate", "EstimatedHarvestDate");
-            tableMapping.ColumnMappings.Add("CropNotes", "CropNotes");
-            tableMapping.ColumnMappings.Add("FertilizerID", "FertilizerID");
-            tableMapping.ColumnMappings.Add("CropStatus", "CropStatus");
-            tableMapping.ColumnMappings.Add("LastDose", "LastDose");
-            tableMapping.ColumnMappings.Add("NextDose", "NextDose");
-            tableMapping.ColumnMappings.Add("DosedByStaff", "DosedByStaff");
-            tableMapping.ColumnMappings.Add("CropStorageType", "CropStorageType");
-            tableMapping.ColumnMappings.Add("CropMinMax", "CropMinMax");
-            tableMapping.ColumnMappings.Add("FieldID", "FieldID");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Crop] WHERE (([CropID] = @Original_CropID) AND ([CropName] = @Original_CropName) AND ([DatePlanted] = @Original_DatePlanted) AND ([EstimatedHarvestDate] = @Original_EstimatedHarvestDate) AND ((@IsNull_CropNotes = 1 AND [CropNotes] IS NULL) OR ([CropNotes] = @Original_CropNotes)) AND ((@IsNull_FertilizerID = 1 AND [FertilizerID] IS NULL) OR ([FertilizerID] = @Original_FertilizerID)) AND ([CropStatus] = @Original_CropStatus) AND ((@IsNull_LastDose = 1 AND [LastDose] IS NULL) OR ([LastDose] = @Original_LastDose)) AND ((@IsNull_NextDose = 1 AND [NextDose] IS NULL) OR ([NextDose] = @Original_NextDose)) AND ((@IsNull_DosedByStaff = 1 AND [DosedByStaff] IS NULL) OR ([DosedByStaff] = @Original_DosedByStaff)) AND ([CropStorageType] = @Original_CropStorageType) AND ([CropMinMax] = @Original_CropMinMax) AND ([FieldID] = @Original_FieldID))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DatePlanted", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePlanted", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EstimatedHarvestDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EstimatedHarvestDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CropNotes", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropStatus", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStatus", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_LastDose", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_NextDose", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NextDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DosedByStaff", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DosedByStaff", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropStorageType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStorageType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropMinMax", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropMinMax", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Crop] ([CropName], [DatePlanted], [EstimatedHarvestDate], [CropNotes], [FertilizerID], [CropStatus], [LastDose], [NextDose], [DosedByStaff], [CropStorageType], [CropMinMax], [FieldID]) VALUES (@CropName, @DatePlanted, @EstimatedHarvestDate, @CropNotes, @FertilizerID, @CropStatus, @LastDose, @NextDose, @DosedByStaff, @CropStorageType, @CropMinMax, @FieldID);
-SELECT CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, FertilizerID, CropStatus, LastDose, NextDose, DosedByStaff, CropStorageType, CropMinMax, FieldID FROM Crop WHERE (CropID = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DatePlanted", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePlanted", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EstimatedHarvestDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EstimatedHarvestDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropStatus", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStatus", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NextDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DosedByStaff", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropStorageType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStorageType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropMinMax", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropMinMax", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Crop] SET [CropName] = @CropName, [DatePlanted] = @DatePlanted, [EstimatedHarvestDate] = @EstimatedHarvestDate, [CropNotes] = @CropNotes, [FertilizerID] = @FertilizerID, [CropStatus] = @CropStatus, [LastDose] = @LastDose, [NextDose] = @NextDose, [DosedByStaff] = @DosedByStaff, [CropStorageType] = @CropStorageType, [CropMinMax] = @CropMinMax, [FieldID] = @FieldID WHERE (([CropID] = @Original_CropID) AND ([CropName] = @Original_CropName) AND ([DatePlanted] = @Original_DatePlanted) AND ([EstimatedHarvestDate] = @Original_EstimatedHarvestDate) AND ((@IsNull_CropNotes = 1 AND [CropNotes] IS NULL) OR ([CropNotes] = @Original_CropNotes)) AND ((@IsNull_FertilizerID = 1 AND [FertilizerID] IS NULL) OR ([FertilizerID] = @Original_FertilizerID)) AND ([CropStatus] = @Original_CropStatus) AND ((@IsNull_LastDose = 1 AND [LastDose] IS NULL) OR ([LastDose] = @Original_LastDose)) AND ((@IsNull_NextDose = 1 AND [NextDose] IS NULL) OR ([NextDose] = @Original_NextDose)) AND ((@IsNull_DosedByStaff = 1 AND [DosedByStaff] IS NULL) OR ([DosedByStaff] = @Original_DosedByStaff)) AND ([CropStorageType] = @Original_CropStorageType) AND ([CropMinMax] = @Original_CropMinMax) AND ([FieldID] = @Original_FieldID));
-SELECT CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, FertilizerID, CropStatus, LastDose, NextDose, DosedByStaff, CropStorageType, CropMinMax, FieldID FROM Crop WHERE (CropID = @CropID)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DatePlanted", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePlanted", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EstimatedHarvestDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EstimatedHarvestDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropStatus", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStatus", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NextDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DosedByStaff", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropStorageType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStorageType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropMinMax", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropMinMax", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DatePlanted", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePlanted", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EstimatedHarvestDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EstimatedHarvestDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CropNotes", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropStatus", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStatus", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_LastDose", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_NextDose", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NextDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DosedByStaff", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DosedByStaff", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropStorageType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStorageType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropMinMax", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropMinMax", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::farmingprogram.Properties.Settings.Default.DbFarmProgramConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, Fer" +
-                "tilizerID, CropStatus, LastDose, NextDose, DosedByStaff, CropStorageType, CropMi" +
-                "nMax, \r\n                         FieldID\r\nFROM            Crop";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FarmingDataSet.CropDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FarmingDataSet.CropDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FarmingDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "Crop");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_CropID, string Original_CropName, System.DateTime Original_DatePlanted, System.DateTime Original_EstimatedHarvestDate, string Original_CropNotes, global::System.Nullable<int> Original_FertilizerID, string Original_CropStatus, global::System.Nullable<global::System.DateTime> Original_LastDose, global::System.Nullable<global::System.DateTime> Original_NextDose, string Original_DosedByStaff, string Original_CropStorageType, string Original_CropMinMax, int Original_FieldID) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_CropID));
-            if ((Original_CropName == null)) {
-                throw new global::System.ArgumentNullException("Original_CropName");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_CropName));
-            }
-            this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_DatePlanted));
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_EstimatedHarvestDate));
-            if ((Original_CropNotes == null)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_CropNotes));
-            }
-            if ((Original_FertilizerID.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_FertilizerID.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CropStatus == null)) {
-                throw new global::System.ArgumentNullException("Original_CropStatus");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_CropStatus));
-            }
-            if ((Original_LastDose.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[10].Value = ((System.DateTime)(Original_LastDose.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((Original_NextDose.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[12].Value = ((System.DateTime)(Original_NextDose.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((Original_DosedByStaff == null)) {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[14].Value = ((string)(Original_DosedByStaff));
-            }
-            if ((Original_CropStorageType == null)) {
-                throw new global::System.ArgumentNullException("Original_CropStorageType");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[15].Value = ((string)(Original_CropStorageType));
-            }
-            if ((Original_CropMinMax == null)) {
-                throw new global::System.ArgumentNullException("Original_CropMinMax");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[16].Value = ((string)(Original_CropMinMax));
-            }
-            this.Adapter.DeleteCommand.Parameters[17].Value = ((int)(Original_FieldID));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string CropName, System.DateTime DatePlanted, System.DateTime EstimatedHarvestDate, string CropNotes, global::System.Nullable<int> FertilizerID, string CropStatus, global::System.Nullable<global::System.DateTime> LastDose, global::System.Nullable<global::System.DateTime> NextDose, string DosedByStaff, string CropStorageType, string CropMinMax, int FieldID) {
-            if ((CropName == null)) {
-                throw new global::System.ArgumentNullException("CropName");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(CropName));
-            }
-            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(DatePlanted));
-            this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(EstimatedHarvestDate));
-            if ((CropNotes == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(CropNotes));
-            }
-            if ((FertilizerID.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(FertilizerID.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((CropStatus == null)) {
-                throw new global::System.ArgumentNullException("CropStatus");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(CropStatus));
-            }
-            if ((LastDose.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(LastDose.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((NextDose.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(NextDose.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((DosedByStaff == null)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((string)(DosedByStaff));
-            }
-            if ((CropStorageType == null)) {
-                throw new global::System.ArgumentNullException("CropStorageType");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((string)(CropStorageType));
-            }
-            if ((CropMinMax == null)) {
-                throw new global::System.ArgumentNullException("CropMinMax");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(CropMinMax));
-            }
-            this.Adapter.InsertCommand.Parameters[11].Value = ((int)(FieldID));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string CropName, 
-                    System.DateTime DatePlanted, 
-                    System.DateTime EstimatedHarvestDate, 
-                    string CropNotes, 
-                    global::System.Nullable<int> FertilizerID, 
-                    string CropStatus, 
-                    global::System.Nullable<global::System.DateTime> LastDose, 
-                    global::System.Nullable<global::System.DateTime> NextDose, 
-                    string DosedByStaff, 
-                    string CropStorageType, 
-                    string CropMinMax, 
-                    int FieldID, 
-                    int Original_CropID, 
-                    string Original_CropName, 
-                    System.DateTime Original_DatePlanted, 
-                    System.DateTime Original_EstimatedHarvestDate, 
-                    string Original_CropNotes, 
-                    global::System.Nullable<int> Original_FertilizerID, 
-                    string Original_CropStatus, 
-                    global::System.Nullable<global::System.DateTime> Original_LastDose, 
-                    global::System.Nullable<global::System.DateTime> Original_NextDose, 
-                    string Original_DosedByStaff, 
-                    string Original_CropStorageType, 
-                    string Original_CropMinMax, 
-                    int Original_FieldID, 
-                    int CropID) {
-            if ((CropName == null)) {
-                throw new global::System.ArgumentNullException("CropName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(CropName));
-            }
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(DatePlanted));
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(EstimatedHarvestDate));
-            if ((CropNotes == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(CropNotes));
-            }
-            if ((FertilizerID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(FertilizerID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((CropStatus == null)) {
-                throw new global::System.ArgumentNullException("CropStatus");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(CropStatus));
-            }
-            if ((LastDose.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(LastDose.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((NextDose.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(NextDose.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((DosedByStaff == null)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(DosedByStaff));
-            }
-            if ((CropStorageType == null)) {
-                throw new global::System.ArgumentNullException("CropStorageType");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(CropStorageType));
-            }
-            if ((CropMinMax == null)) {
-                throw new global::System.ArgumentNullException("CropMinMax");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(CropMinMax));
-            }
-            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(FieldID));
-            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_CropID));
-            if ((Original_CropName == null)) {
-                throw new global::System.ArgumentNullException("Original_CropName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_CropName));
-            }
-            this.Adapter.UpdateCommand.Parameters[14].Value = ((System.DateTime)(Original_DatePlanted));
-            this.Adapter.UpdateCommand.Parameters[15].Value = ((System.DateTime)(Original_EstimatedHarvestDate));
-            if ((Original_CropNotes == null)) {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_CropNotes));
-            }
-            if ((Original_FertilizerID.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_FertilizerID.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((Original_CropStatus == null)) {
-                throw new global::System.ArgumentNullException("Original_CropStatus");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(Original_CropStatus));
-            }
-            if ((Original_LastDose.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[22].Value = ((System.DateTime)(Original_LastDose.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            if ((Original_NextDose.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[24].Value = ((System.DateTime)(Original_NextDose.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
-            }
-            if ((Original_DosedByStaff == null)) {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[26].Value = ((string)(Original_DosedByStaff));
-            }
-            if ((Original_CropStorageType == null)) {
-                throw new global::System.ArgumentNullException("Original_CropStorageType");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[27].Value = ((string)(Original_CropStorageType));
-            }
-            if ((Original_CropMinMax == null)) {
-                throw new global::System.ArgumentNullException("Original_CropMinMax");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[28].Value = ((string)(Original_CropMinMax));
-            }
-            this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(Original_FieldID));
-            this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(CropID));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(
-                    string CropName, 
-                    System.DateTime DatePlanted, 
-                    System.DateTime EstimatedHarvestDate, 
-                    string CropNotes, 
-                    global::System.Nullable<int> FertilizerID, 
-                    string CropStatus, 
-                    global::System.Nullable<global::System.DateTime> LastDose, 
-                    global::System.Nullable<global::System.DateTime> NextDose, 
-                    string DosedByStaff, 
-                    string CropStorageType, 
-                    string CropMinMax, 
-                    int FieldID, 
-                    int Original_CropID, 
-                    string Original_CropName, 
-                    System.DateTime Original_DatePlanted, 
-                    System.DateTime Original_EstimatedHarvestDate, 
-                    string Original_CropNotes, 
-                    global::System.Nullable<int> Original_FertilizerID, 
-                    string Original_CropStatus, 
-                    global::System.Nullable<global::System.DateTime> Original_LastDose, 
-                    global::System.Nullable<global::System.DateTime> Original_NextDose, 
-                    string Original_DosedByStaff, 
-                    string Original_CropStorageType, 
-                    string Original_CropMinMax, 
-                    int Original_FieldID) {
-            return this.Update(CropName, DatePlanted, EstimatedHarvestDate, CropNotes, FertilizerID, CropStatus, LastDose, NextDose, DosedByStaff, CropStorageType, CropMinMax, FieldID, Original_CropID, Original_CropName, Original_DatePlanted, Original_EstimatedHarvestDate, Original_CropNotes, Original_FertilizerID, Original_CropStatus, Original_LastDose, Original_NextDose, Original_DosedByStaff, Original_CropStorageType, Original_CropMinMax, Original_FieldID, Original_CropID);
-        }
-    }
     
     /// <summary>
     ///Represents the connection and commands used to retrieve and save data.
@@ -3838,776 +3317,6 @@ SELECT FertilizerID, fertName, fertDose, fertNote FROM Fertilizer WHERE (Fertili
     [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
         ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class StaffTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public StaffTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Staff";
-            tableMapping.ColumnMappings.Add("StaffID", "StaffID");
-            tableMapping.ColumnMappings.Add("FirstName", "FirstName");
-            tableMapping.ColumnMappings.Add("LastName", "LastName");
-            tableMapping.ColumnMappings.Add("Title", "Title");
-            tableMapping.ColumnMappings.Add("Manager", "Manager");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Staff] WHERE (([StaffID] = @Original_StaffID) AND ([FirstName] = @Or" +
-                "iginal_FirstName) AND ([LastName] = @Original_LastName) AND ([Title] = @Original" +
-                "_Title) AND ((@IsNull_Manager = 1 AND [Manager] IS NULL) OR ([Manager] = @Origin" +
-                "al_Manager)))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StaffID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FirstName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Manager", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Manager", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Manager", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Manager", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [Staff] ([FirstName], [LastName], [Title], [Manager]) VALUES (@FirstN" +
-                "ame, @LastName, @Title, @Manager);\r\nSELECT StaffID, FirstName, LastName, Title, " +
-                "Manager FROM Staff WHERE (StaffID = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Manager", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Manager", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Staff] SET [FirstName] = @FirstName, [LastName] = @LastName, [Title] = @Title, [Manager] = @Manager WHERE (([StaffID] = @Original_StaffID) AND ([FirstName] = @Original_FirstName) AND ([LastName] = @Original_LastName) AND ([Title] = @Original_Title) AND ((@IsNull_Manager = 1 AND [Manager] IS NULL) OR ([Manager] = @Original_Manager)));
-SELECT StaffID, FirstName, LastName, Title, Manager FROM Staff WHERE (StaffID = @StaffID)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Manager", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Manager", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StaffID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FirstName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Manager", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Manager", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Manager", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Manager", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StaffID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "StaffID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::farmingprogram.Properties.Settings.Default.DbFarmProgramConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        Staff.*\r\nFROM            Staff";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FarmingDataSet.StaffDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FarmingDataSet.StaffDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            FarmingDataSet.StaffDataTable dataTable = new FarmingDataSet.StaffDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FarmingDataSet.StaffDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FarmingDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "Staff");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_StaffID, string Original_FirstName, string Original_LastName, string Original_Title, global::System.Nullable<bool> Original_Manager) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_StaffID));
-            if ((Original_FirstName == null)) {
-                throw new global::System.ArgumentNullException("Original_FirstName");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_FirstName));
-            }
-            if ((Original_LastName == null)) {
-                throw new global::System.ArgumentNullException("Original_LastName");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_LastName));
-            }
-            if ((Original_Title == null)) {
-                throw new global::System.ArgumentNullException("Original_Title");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_Title));
-            }
-            if ((Original_Manager.HasValue == true)) {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((bool)(Original_Manager.Value));
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
-                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string FirstName, string LastName, string Title, global::System.Nullable<bool> Manager) {
-            if ((FirstName == null)) {
-                throw new global::System.ArgumentNullException("FirstName");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(FirstName));
-            }
-            if ((LastName == null)) {
-                throw new global::System.ArgumentNullException("LastName");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(LastName));
-            }
-            if ((Title == null)) {
-                throw new global::System.ArgumentNullException("Title");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Title));
-            }
-            if ((Manager.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((bool)(Manager.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string FirstName, string LastName, string Title, global::System.Nullable<bool> Manager, int Original_StaffID, string Original_FirstName, string Original_LastName, string Original_Title, global::System.Nullable<bool> Original_Manager, int StaffID) {
-            if ((FirstName == null)) {
-                throw new global::System.ArgumentNullException("FirstName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(FirstName));
-            }
-            if ((LastName == null)) {
-                throw new global::System.ArgumentNullException("LastName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(LastName));
-            }
-            if ((Title == null)) {
-                throw new global::System.ArgumentNullException("Title");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Title));
-            }
-            if ((Manager.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((bool)(Manager.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_StaffID));
-            if ((Original_FirstName == null)) {
-                throw new global::System.ArgumentNullException("Original_FirstName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_FirstName));
-            }
-            if ((Original_LastName == null)) {
-                throw new global::System.ArgumentNullException("Original_LastName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_LastName));
-            }
-            if ((Original_Title == null)) {
-                throw new global::System.ArgumentNullException("Original_Title");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Title));
-            }
-            if ((Original_Manager.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((bool)(Original_Manager.Value));
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(StaffID));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string FirstName, string LastName, string Title, global::System.Nullable<bool> Manager, int Original_StaffID, string Original_FirstName, string Original_LastName, string Original_Title, global::System.Nullable<bool> Original_Manager) {
-            return this.Update(FirstName, LastName, Title, Manager, Original_StaffID, Original_FirstName, Original_LastName, Original_Title, Original_Manager, Original_StaffID);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-    public partial class ContainerTableAdapter : global::System.ComponentModel.Component {
-        
-        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
-        
-        private global::System.Data.SqlClient.SqlConnection _connection;
-        
-        private global::System.Data.SqlClient.SqlTransaction _transaction;
-        
-        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
-        
-        private bool _clearBeforeFill;
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public ContainerTableAdapter() {
-            this.ClearBeforeFill = true;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
-            get {
-                if ((this._adapter == null)) {
-                    this.InitAdapter();
-                }
-                return this._adapter;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlConnection Connection {
-            get {
-                if ((this._connection == null)) {
-                    this.InitConnection();
-                }
-                return this._connection;
-            }
-            set {
-                this._connection = value;
-                if ((this.Adapter.InsertCommand != null)) {
-                    this.Adapter.InsertCommand.Connection = value;
-                }
-                if ((this.Adapter.DeleteCommand != null)) {
-                    this.Adapter.DeleteCommand.Connection = value;
-                }
-                if ((this.Adapter.UpdateCommand != null)) {
-                    this.Adapter.UpdateCommand.Connection = value;
-                }
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    if ((this.CommandCollection[i] != null)) {
-                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
-                    }
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        internal global::System.Data.SqlClient.SqlTransaction Transaction {
-            get {
-                return this._transaction;
-            }
-            set {
-                this._transaction = value;
-                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
-                    this.CommandCollection[i].Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.DeleteCommand != null))) {
-                    this.Adapter.DeleteCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.InsertCommand != null))) {
-                    this.Adapter.InsertCommand.Transaction = this._transaction;
-                }
-                if (((this.Adapter != null) 
-                            && (this.Adapter.UpdateCommand != null))) {
-                    this.Adapter.UpdateCommand.Transaction = this._transaction;
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
-            get {
-                if ((this._commandCollection == null)) {
-                    this.InitCommandCollection();
-                }
-                return this._commandCollection;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        public bool ClearBeforeFill {
-            get {
-                return this._clearBeforeFill;
-            }
-            set {
-                this._clearBeforeFill = value;
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitAdapter() {
-            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
-            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
-            tableMapping.SourceTable = "Table";
-            tableMapping.DataSetTable = "Container";
-            tableMapping.ColumnMappings.Add("ContainerID", "ContainerID");
-            tableMapping.ColumnMappings.Add("contName", "contName");
-            tableMapping.ColumnMappings.Add("contType", "contType");
-            tableMapping.ColumnMappings.Add("contSize", "contSize");
-            this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Container] WHERE (([ContainerID] = @Original_ContainerID) AND ([cont" +
-                "Name] = @Original_contName) AND ([contType] = @Original_contType) AND ([contSize" +
-                "] = @Original_contSize))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContainerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [Container] ([contName], [contType], [contSize]) VALUES (@contName, @" +
-                "contType, @contSize);\r\nSELECT ContainerID, contName, contType, contSize FROM Con" +
-                "tainer WHERE (ContainerID = SCOPE_IDENTITY())";
-            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [Container] SET [contName] = @contName, [contType] = @contType, [contSize] = @contSize WHERE (([ContainerID] = @Original_ContainerID) AND ([contName] = @Original_contName) AND ([contType] = @Original_contType) AND ([contSize] = @Original_contSize));
-SELECT ContainerID, contName, contType, contSize FROM Container WHERE (ContainerID = @ContainerID)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContainerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContainerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitConnection() {
-            this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::farmingprogram.Properties.Settings.Default.DbFarmProgramConnectionString;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
-            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT        Container.*\r\nFROM            Container";
-            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(FarmingDataSet.ContainerDataTable dataTable) {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            if ((this.ClearBeforeFill == true)) {
-                dataTable.Clear();
-            }
-            int returnValue = this.Adapter.Fill(dataTable);
-            return returnValue;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual FarmingDataSet.ContainerDataTable GetData() {
-            this.Adapter.SelectCommand = this.CommandCollection[0];
-            FarmingDataSet.ContainerDataTable dataTable = new FarmingDataSet.ContainerDataTable();
-            this.Adapter.Fill(dataTable);
-            return dataTable;
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FarmingDataSet.ContainerDataTable dataTable) {
-            return this.Adapter.Update(dataTable);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(FarmingDataSet dataSet) {
-            return this.Adapter.Update(dataSet, "Container");
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow dataRow) {
-            return this.Adapter.Update(new global::System.Data.DataRow[] {
-                        dataRow});
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        public virtual int Update(global::System.Data.DataRow[] dataRows) {
-            return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_ContainerID, string Original_contName, string Original_contType, int Original_contSize) {
-            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ContainerID));
-            if ((Original_contName == null)) {
-                throw new global::System.ArgumentNullException("Original_contName");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_contName));
-            }
-            if ((Original_contType == null)) {
-                throw new global::System.ArgumentNullException("Original_contType");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_contType));
-            }
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_contSize));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string contName, string contType, int contSize) {
-            if ((contName == null)) {
-                throw new global::System.ArgumentNullException("contName");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(contName));
-            }
-            if ((contType == null)) {
-                throw new global::System.ArgumentNullException("contType");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(contType));
-            }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(contSize));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string contName, string contType, int contSize, int Original_ContainerID, string Original_contName, string Original_contType, int Original_contSize, int ContainerID) {
-            if ((contName == null)) {
-                throw new global::System.ArgumentNullException("contName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(contName));
-            }
-            if ((contType == null)) {
-                throw new global::System.ArgumentNullException("contType");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(contType));
-            }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(contSize));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_ContainerID));
-            if ((Original_contName == null)) {
-                throw new global::System.ArgumentNullException("Original_contName");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_contName));
-            }
-            if ((Original_contType == null)) {
-                throw new global::System.ArgumentNullException("Original_contType");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_contType));
-            }
-            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_contSize));
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(ContainerID));
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string contName, string contType, int contSize, int Original_ContainerID, string Original_contName, string Original_contType, int Original_contSize) {
-            return this.Update(contName, contType, contSize, Original_ContainerID, Original_contName, Original_contType, Original_contSize, Original_ContainerID);
-        }
-    }
-    
-    /// <summary>
-    ///Represents the connection and commands used to retrieve and save data.
-    ///</summary>
-    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
-    [global::System.ComponentModel.ToolboxItem(true)]
-    [global::System.ComponentModel.DataObjectAttribute(true)]
-    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
-    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
     public partial class FieldTableAdapter : global::System.ComponentModel.Component {
         
         private global::System.Data.SqlClient.SqlDataAdapter _adapter;
@@ -4983,6 +3692,1412 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
     }
     
     /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class StaffTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public StaffTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "Staff";
+            tableMapping.ColumnMappings.Add("StaffID", "StaffID");
+            tableMapping.ColumnMappings.Add("FirstName", "FirstName");
+            tableMapping.ColumnMappings.Add("LastName", "LastName");
+            tableMapping.ColumnMappings.Add("Title", "Title");
+            tableMapping.ColumnMappings.Add("Rights", "Rights");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Staff] WHERE (([StaffID] = @Original_StaffID) AND ([FirstName] = @Or" +
+                "iginal_FirstName) AND ([LastName] = @Original_LastName) AND ([Title] = @Original" +
+                "_Title) AND ((@IsNull_Rights = 1 AND [Rights] IS NULL) OR ([Rights] = @Original_" +
+                "Rights)))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StaffID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FirstName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Rights", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rights", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Rights", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rights", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Staff] ([FirstName], [LastName], [Title], [Rights]) VALUES (@FirstNa" +
+                "me, @LastName, @Title, @Rights);\r\nSELECT StaffID, FirstName, LastName, Title, Ri" +
+                "ghts FROM Staff WHERE (StaffID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Rights", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rights", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Staff] SET [FirstName] = @FirstName, [LastName] = @LastName, [Title] = @Title, [Rights] = @Rights WHERE (([StaffID] = @Original_StaffID) AND ([FirstName] = @Original_FirstName) AND ([LastName] = @Original_LastName) AND ([Title] = @Original_Title) AND ((@IsNull_Rights = 1 AND [Rights] IS NULL) OR ([Rights] = @Original_Rights)));
+SELECT StaffID, FirstName, LastName, Title, Rights FROM Staff WHERE (StaffID = @StaffID)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Rights", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rights", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StaffID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FirstName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Title", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Title", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Rights", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rights", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Rights", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Rights", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StaffID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "StaffID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::farmingprogram.Properties.Settings.Default.DbFarmProgramConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT        StaffID, FirstName, LastName, Title, Rights\r\nFROM            Staff";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FarmingDataSet.StaffDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FarmingDataSet.StaffDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FarmingDataSet.StaffDataTable dataTable = new FarmingDataSet.StaffDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FarmingDataSet.StaffDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FarmingDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "Staff");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_StaffID, string Original_FirstName, string Original_LastName, string Original_Title, global::System.Nullable<int> Original_Rights) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_StaffID));
+            if ((Original_FirstName == null)) {
+                throw new global::System.ArgumentNullException("Original_FirstName");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_FirstName));
+            }
+            if ((Original_LastName == null)) {
+                throw new global::System.ArgumentNullException("Original_LastName");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_LastName));
+            }
+            if ((Original_Title == null)) {
+                throw new global::System.ArgumentNullException("Original_Title");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_Title));
+            }
+            if ((Original_Rights.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((int)(Original_Rights.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string FirstName, string LastName, string Title, global::System.Nullable<int> Rights) {
+            if ((FirstName == null)) {
+                throw new global::System.ArgumentNullException("FirstName");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(FirstName));
+            }
+            if ((LastName == null)) {
+                throw new global::System.ArgumentNullException("LastName");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(LastName));
+            }
+            if ((Title == null)) {
+                throw new global::System.ArgumentNullException("Title");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Title));
+            }
+            if ((Rights.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(Rights.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string FirstName, string LastName, string Title, global::System.Nullable<int> Rights, int Original_StaffID, string Original_FirstName, string Original_LastName, string Original_Title, global::System.Nullable<int> Original_Rights, int StaffID) {
+            if ((FirstName == null)) {
+                throw new global::System.ArgumentNullException("FirstName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(FirstName));
+            }
+            if ((LastName == null)) {
+                throw new global::System.ArgumentNullException("LastName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(LastName));
+            }
+            if ((Title == null)) {
+                throw new global::System.ArgumentNullException("Title");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Title));
+            }
+            if ((Rights.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Rights.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_StaffID));
+            if ((Original_FirstName == null)) {
+                throw new global::System.ArgumentNullException("Original_FirstName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_FirstName));
+            }
+            if ((Original_LastName == null)) {
+                throw new global::System.ArgumentNullException("Original_LastName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_LastName));
+            }
+            if ((Original_Title == null)) {
+                throw new global::System.ArgumentNullException("Original_Title");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Title));
+            }
+            if ((Original_Rights.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_Rights.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[10].Value = ((int)(StaffID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string FirstName, string LastName, string Title, global::System.Nullable<int> Rights, int Original_StaffID, string Original_FirstName, string Original_LastName, string Original_Title, global::System.Nullable<int> Original_Rights) {
+            return this.Update(FirstName, LastName, Title, Rights, Original_StaffID, Original_FirstName, Original_LastName, Original_Title, Original_Rights, Original_StaffID);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class ContainerTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public ContainerTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "Container";
+            tableMapping.ColumnMappings.Add("ContainerID", "ContainerID");
+            tableMapping.ColumnMappings.Add("contName", "contName");
+            tableMapping.ColumnMappings.Add("contType", "contType");
+            tableMapping.ColumnMappings.Add("contSize", "contSize");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [Container] WHERE (([ContainerID] = @Original_ContainerID) AND ([cont" +
+                "Name] = @Original_contName) AND ([contType] = @Original_contType) AND ([contSize" +
+                "] = @Original_contSize))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContainerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Container] ([contName], [contType], [contSize]) VALUES (@contName, @" +
+                "contType, @contSize);\r\nSELECT ContainerID, contName, contType, contSize FROM Con" +
+                "tainer WHERE (ContainerID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Container] SET [contName] = @contName, [contType] = @contType, [contSize] = @contSize WHERE (([ContainerID] = @Original_ContainerID) AND ([contName] = @Original_contName) AND ([contType] = @Original_contType) AND ([contSize] = @Original_contSize));
+SELECT ContainerID, contName, contType, contSize FROM Container WHERE (ContainerID = @ContainerID)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContainerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContainerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::farmingprogram.Properties.Settings.Default.DbFarmProgramConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT        Container.*\r\nFROM            Container";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FarmingDataSet.ContainerDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FarmingDataSet.ContainerDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FarmingDataSet.ContainerDataTable dataTable = new FarmingDataSet.ContainerDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FarmingDataSet.ContainerDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FarmingDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "Container");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_ContainerID, string Original_contName, string Original_contType, int Original_contSize) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_ContainerID));
+            if ((Original_contName == null)) {
+                throw new global::System.ArgumentNullException("Original_contName");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_contName));
+            }
+            if ((Original_contType == null)) {
+                throw new global::System.ArgumentNullException("Original_contType");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_contType));
+            }
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_contSize));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string contName, string contType, int contSize) {
+            if ((contName == null)) {
+                throw new global::System.ArgumentNullException("contName");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(contName));
+            }
+            if ((contType == null)) {
+                throw new global::System.ArgumentNullException("contType");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(contType));
+            }
+            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(contSize));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string contName, string contType, int contSize, int Original_ContainerID, string Original_contName, string Original_contType, int Original_contSize, int ContainerID) {
+            if ((contName == null)) {
+                throw new global::System.ArgumentNullException("contName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(contName));
+            }
+            if ((contType == null)) {
+                throw new global::System.ArgumentNullException("contType");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(contType));
+            }
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(contSize));
+            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_ContainerID));
+            if ((Original_contName == null)) {
+                throw new global::System.ArgumentNullException("Original_contName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_contName));
+            }
+            if ((Original_contType == null)) {
+                throw new global::System.ArgumentNullException("Original_contType");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_contType));
+            }
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_contSize));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(ContainerID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string contName, string contType, int contSize, int Original_ContainerID, string Original_contName, string Original_contType, int Original_contSize) {
+            return this.Update(contName, contType, contSize, Original_ContainerID, Original_contName, Original_contType, Original_contSize, Original_ContainerID);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class CropTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public CropTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "Crop";
+            tableMapping.ColumnMappings.Add("CropID", "CropID");
+            tableMapping.ColumnMappings.Add("CropName", "CropName");
+            tableMapping.ColumnMappings.Add("DatePlanted", "DatePlanted");
+            tableMapping.ColumnMappings.Add("EstimatedHarvestDate", "EstimatedHarvestDate");
+            tableMapping.ColumnMappings.Add("CropNotes", "CropNotes");
+            tableMapping.ColumnMappings.Add("FertilizerID", "FertilizerID");
+            tableMapping.ColumnMappings.Add("CropStatus", "CropStatus");
+            tableMapping.ColumnMappings.Add("LastDose", "LastDose");
+            tableMapping.ColumnMappings.Add("NextDose", "NextDose");
+            tableMapping.ColumnMappings.Add("DosedByStaff", "DosedByStaff");
+            tableMapping.ColumnMappings.Add("CropStorageType", "CropStorageType");
+            tableMapping.ColumnMappings.Add("CropMinMax", "CropMinMax");
+            tableMapping.ColumnMappings.Add("FieldID", "FieldID");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [Crop] WHERE (([CropID] = @Original_CropID) AND ([CropName] = @Original_CropName) AND ([DatePlanted] = @Original_DatePlanted) AND ([EstimatedHarvestDate] = @Original_EstimatedHarvestDate) AND ((@IsNull_CropNotes = 1 AND [CropNotes] IS NULL) OR ([CropNotes] = @Original_CropNotes)) AND ((@IsNull_FertilizerID = 1 AND [FertilizerID] IS NULL) OR ([FertilizerID] = @Original_FertilizerID)) AND ([CropStatus] = @Original_CropStatus) AND ((@IsNull_LastDose = 1 AND [LastDose] IS NULL) OR ([LastDose] = @Original_LastDose)) AND ((@IsNull_NextDose = 1 AND [NextDose] IS NULL) OR ([NextDose] = @Original_NextDose)) AND ((@IsNull_DosedByStaff = 1 AND [DosedByStaff] IS NULL) OR ([DosedByStaff] = @Original_DosedByStaff)) AND ([CropStorageType] = @Original_CropStorageType) AND ([CropMinMax] = @Original_CropMinMax) AND ([FieldID] = @Original_FieldID))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DatePlanted", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePlanted", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EstimatedHarvestDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EstimatedHarvestDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CropNotes", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropStatus", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStatus", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_LastDose", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_NextDose", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NextDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DosedByStaff", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DosedByStaff", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropStorageType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStorageType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropMinMax", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropMinMax", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [Crop] ([CropName], [DatePlanted], [EstimatedHarvestDate], [CropNotes], [FertilizerID], [CropStatus], [LastDose], [NextDose], [DosedByStaff], [CropStorageType], [CropMinMax], [FieldID]) VALUES (@CropName, @DatePlanted, @EstimatedHarvestDate, @CropNotes, @FertilizerID, @CropStatus, @LastDose, @NextDose, @DosedByStaff, @CropStorageType, @CropMinMax, @FieldID);
+SELECT CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, FertilizerID, CropStatus, LastDose, NextDose, DosedByStaff, CropStorageType, CropMinMax, FieldID FROM Crop WHERE (CropID = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DatePlanted", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePlanted", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EstimatedHarvestDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EstimatedHarvestDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropStatus", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStatus", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NextDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DosedByStaff", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropStorageType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStorageType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropMinMax", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropMinMax", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [Crop] SET [CropName] = @CropName, [DatePlanted] = @DatePlanted, [EstimatedHarvestDate] = @EstimatedHarvestDate, [CropNotes] = @CropNotes, [FertilizerID] = @FertilizerID, [CropStatus] = @CropStatus, [LastDose] = @LastDose, [NextDose] = @NextDose, [DosedByStaff] = @DosedByStaff, [CropStorageType] = @CropStorageType, [CropMinMax] = @CropMinMax, [FieldID] = @FieldID WHERE (([CropID] = @Original_CropID) AND ([CropName] = @Original_CropName) AND ([DatePlanted] = @Original_DatePlanted) AND ([EstimatedHarvestDate] = @Original_EstimatedHarvestDate) AND ((@IsNull_CropNotes = 1 AND [CropNotes] IS NULL) OR ([CropNotes] = @Original_CropNotes)) AND ((@IsNull_FertilizerID = 1 AND [FertilizerID] IS NULL) OR ([FertilizerID] = @Original_FertilizerID)) AND ([CropStatus] = @Original_CropStatus) AND ((@IsNull_LastDose = 1 AND [LastDose] IS NULL) OR ([LastDose] = @Original_LastDose)) AND ((@IsNull_NextDose = 1 AND [NextDose] IS NULL) OR ([NextDose] = @Original_NextDose)) AND ((@IsNull_DosedByStaff = 1 AND [DosedByStaff] IS NULL) OR ([DosedByStaff] = @Original_DosedByStaff)) AND ([CropStorageType] = @Original_CropStorageType) AND ([CropMinMax] = @Original_CropMinMax) AND ([FieldID] = @Original_FieldID));
+SELECT CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, FertilizerID, CropStatus, LastDose, NextDose, DosedByStaff, CropStorageType, CropMinMax, FieldID FROM Crop WHERE (CropID = @CropID)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DatePlanted", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePlanted", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@EstimatedHarvestDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EstimatedHarvestDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropStatus", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStatus", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@LastDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NextDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@DosedByStaff", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropStorageType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStorageType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropMinMax", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropMinMax", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DatePlanted", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DatePlanted", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_EstimatedHarvestDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "EstimatedHarvestDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_CropNotes", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropNotes", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropStatus", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStatus", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_LastDose", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_LastDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "LastDose", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_NextDose", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_NextDose", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "NextDose", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_DosedByStaff", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_DosedByStaff", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "DosedByStaff", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropStorageType", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropStorageType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropMinMax", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropMinMax", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::farmingprogram.Properties.Settings.Default.DbFarmProgramConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT        Crop.*\r\nFROM            Crop";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(FarmingDataSet.CropDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual FarmingDataSet.CropDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            FarmingDataSet.CropDataTable dataTable = new FarmingDataSet.CropDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FarmingDataSet.CropDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(FarmingDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "Crop");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_CropID, string Original_CropName, System.DateTime Original_DatePlanted, System.DateTime Original_EstimatedHarvestDate, string Original_CropNotes, global::System.Nullable<int> Original_FertilizerID, string Original_CropStatus, global::System.Nullable<global::System.DateTime> Original_LastDose, global::System.Nullable<global::System.DateTime> Original_NextDose, global::System.Nullable<int> Original_DosedByStaff, int Original_CropStorageType, string Original_CropMinMax, int Original_FieldID) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_CropID));
+            if ((Original_CropName == null)) {
+                throw new global::System.ArgumentNullException("Original_CropName");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_CropName));
+            }
+            this.Adapter.DeleteCommand.Parameters[2].Value = ((System.DateTime)(Original_DatePlanted));
+            this.Adapter.DeleteCommand.Parameters[3].Value = ((System.DateTime)(Original_EstimatedHarvestDate));
+            if ((Original_CropNotes == null)) {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_CropNotes));
+            }
+            if ((Original_FertilizerID.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[7].Value = ((int)(Original_FertilizerID.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[6].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CropStatus == null)) {
+                throw new global::System.ArgumentNullException("Original_CropStatus");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[8].Value = ((string)(Original_CropStatus));
+            }
+            if ((Original_LastDose.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[10].Value = ((System.DateTime)(Original_LastDose.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            if ((Original_NextDose.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[12].Value = ((System.DateTime)(Original_NextDose.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[12].Value = global::System.DBNull.Value;
+            }
+            if ((Original_DosedByStaff.HasValue == true)) {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[14].Value = ((int)(Original_DosedByStaff.Value));
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[13].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[14].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.DeleteCommand.Parameters[15].Value = ((int)(Original_CropStorageType));
+            if ((Original_CropMinMax == null)) {
+                throw new global::System.ArgumentNullException("Original_CropMinMax");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[16].Value = ((string)(Original_CropMinMax));
+            }
+            this.Adapter.DeleteCommand.Parameters[17].Value = ((int)(Original_FieldID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string CropName, System.DateTime DatePlanted, System.DateTime EstimatedHarvestDate, string CropNotes, global::System.Nullable<int> FertilizerID, string CropStatus, global::System.Nullable<global::System.DateTime> LastDose, global::System.Nullable<global::System.DateTime> NextDose, global::System.Nullable<int> DosedByStaff, int CropStorageType, string CropMinMax, int FieldID) {
+            if ((CropName == null)) {
+                throw new global::System.ArgumentNullException("CropName");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(CropName));
+            }
+            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(DatePlanted));
+            this.Adapter.InsertCommand.Parameters[2].Value = ((System.DateTime)(EstimatedHarvestDate));
+            if ((CropNotes == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(CropNotes));
+            }
+            if ((FertilizerID.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(FertilizerID.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((CropStatus == null)) {
+                throw new global::System.ArgumentNullException("CropStatus");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(CropStatus));
+            }
+            if ((LastDose.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((System.DateTime)(LastDose.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((NextDose.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((System.DateTime)(NextDose.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((DosedByStaff.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(DosedByStaff.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.InsertCommand.Parameters[9].Value = ((int)(CropStorageType));
+            if ((CropMinMax == null)) {
+                throw new global::System.ArgumentNullException("CropMinMax");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(CropMinMax));
+            }
+            this.Adapter.InsertCommand.Parameters[11].Value = ((int)(FieldID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string CropName, 
+                    System.DateTime DatePlanted, 
+                    System.DateTime EstimatedHarvestDate, 
+                    string CropNotes, 
+                    global::System.Nullable<int> FertilizerID, 
+                    string CropStatus, 
+                    global::System.Nullable<global::System.DateTime> LastDose, 
+                    global::System.Nullable<global::System.DateTime> NextDose, 
+                    global::System.Nullable<int> DosedByStaff, 
+                    int CropStorageType, 
+                    string CropMinMax, 
+                    int FieldID, 
+                    int Original_CropID, 
+                    string Original_CropName, 
+                    System.DateTime Original_DatePlanted, 
+                    System.DateTime Original_EstimatedHarvestDate, 
+                    string Original_CropNotes, 
+                    global::System.Nullable<int> Original_FertilizerID, 
+                    string Original_CropStatus, 
+                    global::System.Nullable<global::System.DateTime> Original_LastDose, 
+                    global::System.Nullable<global::System.DateTime> Original_NextDose, 
+                    global::System.Nullable<int> Original_DosedByStaff, 
+                    int Original_CropStorageType, 
+                    string Original_CropMinMax, 
+                    int Original_FieldID, 
+                    int CropID) {
+            if ((CropName == null)) {
+                throw new global::System.ArgumentNullException("CropName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(CropName));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(DatePlanted));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((System.DateTime)(EstimatedHarvestDate));
+            if ((CropNotes == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(CropNotes));
+            }
+            if ((FertilizerID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(FertilizerID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((CropStatus == null)) {
+                throw new global::System.ArgumentNullException("CropStatus");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(CropStatus));
+            }
+            if ((LastDose.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((System.DateTime)(LastDose.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            if ((NextDose.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(NextDose.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((DosedByStaff.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(DosedByStaff.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(CropStorageType));
+            if ((CropMinMax == null)) {
+                throw new global::System.ArgumentNullException("CropMinMax");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(CropMinMax));
+            }
+            this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(FieldID));
+            this.Adapter.UpdateCommand.Parameters[12].Value = ((int)(Original_CropID));
+            if ((Original_CropName == null)) {
+                throw new global::System.ArgumentNullException("Original_CropName");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_CropName));
+            }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((System.DateTime)(Original_DatePlanted));
+            this.Adapter.UpdateCommand.Parameters[15].Value = ((System.DateTime)(Original_EstimatedHarvestDate));
+            if ((Original_CropNotes == null)) {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((string)(Original_CropNotes));
+            }
+            if ((Original_FertilizerID.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[19].Value = ((int)(Original_FertilizerID.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[19].Value = global::System.DBNull.Value;
+            }
+            if ((Original_CropStatus == null)) {
+                throw new global::System.ArgumentNullException("Original_CropStatus");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[20].Value = ((string)(Original_CropStatus));
+            }
+            if ((Original_LastDose.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[22].Value = ((System.DateTime)(Original_LastDose.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[21].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[22].Value = global::System.DBNull.Value;
+            }
+            if ((Original_NextDose.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[24].Value = ((System.DateTime)(Original_NextDose.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[23].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[24].Value = global::System.DBNull.Value;
+            }
+            if ((Original_DosedByStaff.HasValue == true)) {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[26].Value = ((int)(Original_DosedByStaff.Value));
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[25].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[26].Value = global::System.DBNull.Value;
+            }
+            this.Adapter.UpdateCommand.Parameters[27].Value = ((int)(Original_CropStorageType));
+            if ((Original_CropMinMax == null)) {
+                throw new global::System.ArgumentNullException("Original_CropMinMax");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[28].Value = ((string)(Original_CropMinMax));
+            }
+            this.Adapter.UpdateCommand.Parameters[29].Value = ((int)(Original_FieldID));
+            this.Adapter.UpdateCommand.Parameters[30].Value = ((int)(CropID));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(
+                    string CropName, 
+                    System.DateTime DatePlanted, 
+                    System.DateTime EstimatedHarvestDate, 
+                    string CropNotes, 
+                    global::System.Nullable<int> FertilizerID, 
+                    string CropStatus, 
+                    global::System.Nullable<global::System.DateTime> LastDose, 
+                    global::System.Nullable<global::System.DateTime> NextDose, 
+                    global::System.Nullable<int> DosedByStaff, 
+                    int CropStorageType, 
+                    string CropMinMax, 
+                    int FieldID, 
+                    int Original_CropID, 
+                    string Original_CropName, 
+                    System.DateTime Original_DatePlanted, 
+                    System.DateTime Original_EstimatedHarvestDate, 
+                    string Original_CropNotes, 
+                    global::System.Nullable<int> Original_FertilizerID, 
+                    string Original_CropStatus, 
+                    global::System.Nullable<global::System.DateTime> Original_LastDose, 
+                    global::System.Nullable<global::System.DateTime> Original_NextDose, 
+                    global::System.Nullable<int> Original_DosedByStaff, 
+                    int Original_CropStorageType, 
+                    string Original_CropMinMax, 
+                    int Original_FieldID) {
+            return this.Update(CropName, DatePlanted, EstimatedHarvestDate, CropNotes, FertilizerID, CropStatus, LastDose, NextDose, DosedByStaff, CropStorageType, CropMinMax, FieldID, Original_CropID, Original_CropName, Original_DatePlanted, Original_EstimatedHarvestDate, Original_CropNotes, Original_FertilizerID, Original_CropStatus, Original_LastDose, Original_NextDose, Original_DosedByStaff, Original_CropStorageType, Original_CropMinMax, Original_FieldID, Original_CropID);
+        }
+    }
+    
+    /// <summary>
     ///TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     ///</summary>
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -4994,15 +5109,15 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
         
         private UpdateOrderOption _updateOrder;
         
-        private CropTableAdapter _cropTableAdapter;
-        
         private FertilizerTableAdapter _fertilizerTableAdapter;
+        
+        private FieldTableAdapter _fieldTableAdapter;
         
         private StaffTableAdapter _staffTableAdapter;
         
         private ContainerTableAdapter _containerTableAdapter;
         
-        private FieldTableAdapter _fieldTableAdapter;
+        private CropTableAdapter _cropTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -5024,12 +5139,12 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public CropTableAdapter CropTableAdapter {
+        public FertilizerTableAdapter FertilizerTableAdapter {
             get {
-                return this._cropTableAdapter;
+                return this._fertilizerTableAdapter;
             }
             set {
-                this._cropTableAdapter = value;
+                this._fertilizerTableAdapter = value;
             }
         }
         
@@ -5038,12 +5153,12 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public FertilizerTableAdapter FertilizerTableAdapter {
+        public FieldTableAdapter FieldTableAdapter {
             get {
-                return this._fertilizerTableAdapter;
+                return this._fieldTableAdapter;
             }
             set {
-                this._fertilizerTableAdapter = value;
+                this._fieldTableAdapter = value;
             }
         }
         
@@ -5080,12 +5195,12 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
         [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
             "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
             "a", "System.Drawing.Design.UITypeEditor")]
-        public FieldTableAdapter FieldTableAdapter {
+        public CropTableAdapter CropTableAdapter {
             get {
-                return this._fieldTableAdapter;
+                return this._cropTableAdapter;
             }
             set {
-                this._fieldTableAdapter = value;
+                this._cropTableAdapter = value;
             }
         }
         
@@ -5108,13 +5223,13 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                 if ((this._connection != null)) {
                     return this._connection;
                 }
-                if (((this._cropTableAdapter != null) 
-                            && (this._cropTableAdapter.Connection != null))) {
-                    return this._cropTableAdapter.Connection;
-                }
                 if (((this._fertilizerTableAdapter != null) 
                             && (this._fertilizerTableAdapter.Connection != null))) {
                     return this._fertilizerTableAdapter.Connection;
+                }
+                if (((this._fieldTableAdapter != null) 
+                            && (this._fieldTableAdapter.Connection != null))) {
+                    return this._fieldTableAdapter.Connection;
                 }
                 if (((this._staffTableAdapter != null) 
                             && (this._staffTableAdapter.Connection != null))) {
@@ -5124,9 +5239,9 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                             && (this._containerTableAdapter.Connection != null))) {
                     return this._containerTableAdapter.Connection;
                 }
-                if (((this._fieldTableAdapter != null) 
-                            && (this._fieldTableAdapter.Connection != null))) {
-                    return this._fieldTableAdapter.Connection;
+                if (((this._cropTableAdapter != null) 
+                            && (this._cropTableAdapter.Connection != null))) {
+                    return this._cropTableAdapter.Connection;
                 }
                 return null;
             }
@@ -5141,10 +5256,10 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
         public int TableAdapterInstanceCount {
             get {
                 int count = 0;
-                if ((this._cropTableAdapter != null)) {
+                if ((this._fertilizerTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._fertilizerTableAdapter != null)) {
+                if ((this._fieldTableAdapter != null)) {
                     count = (count + 1);
                 }
                 if ((this._staffTableAdapter != null)) {
@@ -5153,7 +5268,7 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                 if ((this._containerTableAdapter != null)) {
                     count = (count + 1);
                 }
-                if ((this._fieldTableAdapter != null)) {
+                if ((this._cropTableAdapter != null)) {
                     count = (count + 1);
                 }
                 return count;
@@ -5167,21 +5282,21 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateUpdatedRows(FarmingDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._cropTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Crop.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._cropTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._fertilizerTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Fertilizer.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._fertilizerTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._fieldTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Field.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._fieldTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -5203,12 +5318,12 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._fieldTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Field.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+            if ((this._cropTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Crop.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
-                    result = (result + this._fieldTableAdapter.Update(updatedRows));
+                    result = (result + this._cropTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -5222,19 +5337,19 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateInsertedRows(FarmingDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._cropTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Crop.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._cropTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._fertilizerTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Fertilizer.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._fertilizerTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._fieldTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Field.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._fieldTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -5254,11 +5369,11 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._fieldTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Field.Select(null, null, global::System.Data.DataViewRowState.Added);
+            if ((this._cropTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Crop.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
-                    result = (result + this._fieldTableAdapter.Update(addedRows));
+                    result = (result + this._cropTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -5272,11 +5387,11 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(FarmingDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._fieldTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Field.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+            if ((this._cropTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Crop.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
-                    result = (result + this._fieldTableAdapter.Update(deletedRows));
+                    result = (result + this._cropTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -5296,19 +5411,19 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._fieldTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Field.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._fieldTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._fertilizerTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Fertilizer.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._fertilizerTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._cropTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Crop.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._cropTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -5351,13 +5466,13 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
             if ((dataSet.HasChanges() == false)) {
                 return 0;
             }
-            if (((this._cropTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._cropTableAdapter.Connection) == false))) {
+            if (((this._fertilizerTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._fertilizerTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._fertilizerTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._fertilizerTableAdapter.Connection) == false))) {
+            if (((this._fieldTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._fieldTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -5371,8 +5486,8 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
-            if (((this._fieldTableAdapter != null) 
-                        && (this.MatchTableAdapterConnection(this._fieldTableAdapter.Connection) == false))) {
+            if (((this._cropTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._cropTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s" +
                         "tring.");
             }
@@ -5408,15 +5523,6 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
             try {
                 // ---- Prepare for update -----------
                 //
-                if ((this._cropTableAdapter != null)) {
-                    revertConnections.Add(this._cropTableAdapter, this._cropTableAdapter.Connection);
-                    this._cropTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._cropTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._cropTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._cropTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._cropTableAdapter.Adapter);
-                    }
-                }
                 if ((this._fertilizerTableAdapter != null)) {
                     revertConnections.Add(this._fertilizerTableAdapter, this._fertilizerTableAdapter.Connection);
                     this._fertilizerTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
@@ -5424,6 +5530,15 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                     if (this._fertilizerTableAdapter.Adapter.AcceptChangesDuringUpdate) {
                         this._fertilizerTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
                         adaptersWithAcceptChangesDuringUpdate.Add(this._fertilizerTableAdapter.Adapter);
+                    }
+                }
+                if ((this._fieldTableAdapter != null)) {
+                    revertConnections.Add(this._fieldTableAdapter, this._fieldTableAdapter.Connection);
+                    this._fieldTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._fieldTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._fieldTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._fieldTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._fieldTableAdapter.Adapter);
                     }
                 }
                 if ((this._staffTableAdapter != null)) {
@@ -5444,13 +5559,13 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                         adaptersWithAcceptChangesDuringUpdate.Add(this._containerTableAdapter.Adapter);
                     }
                 }
-                if ((this._fieldTableAdapter != null)) {
-                    revertConnections.Add(this._fieldTableAdapter, this._fieldTableAdapter.Connection);
-                    this._fieldTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
-                    this._fieldTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
-                    if (this._fieldTableAdapter.Adapter.AcceptChangesDuringUpdate) {
-                        this._fieldTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
-                        adaptersWithAcceptChangesDuringUpdate.Add(this._fieldTableAdapter.Adapter);
+                if ((this._cropTableAdapter != null)) {
+                    revertConnections.Add(this._cropTableAdapter, this._cropTableAdapter.Connection);
+                    this._cropTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._cropTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._cropTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._cropTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._cropTableAdapter.Adapter);
                     }
                 }
                 // 
@@ -5511,13 +5626,13 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                 if (workConnOpened) {
                     workConnection.Close();
                 }
-                if ((this._cropTableAdapter != null)) {
-                    this._cropTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cropTableAdapter]));
-                    this._cropTableAdapter.Transaction = null;
-                }
                 if ((this._fertilizerTableAdapter != null)) {
                     this._fertilizerTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fertilizerTableAdapter]));
                     this._fertilizerTableAdapter.Transaction = null;
+                }
+                if ((this._fieldTableAdapter != null)) {
+                    this._fieldTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fieldTableAdapter]));
+                    this._fieldTableAdapter.Transaction = null;
                 }
                 if ((this._staffTableAdapter != null)) {
                     this._staffTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._staffTableAdapter]));
@@ -5527,9 +5642,9 @@ SELECT FieldID, FieldName, FieldStatus, FieldNotes FROM Field WHERE (FieldID = @
                     this._containerTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._containerTableAdapter]));
                     this._containerTableAdapter.Transaction = null;
                 }
-                if ((this._fieldTableAdapter != null)) {
-                    this._fieldTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._fieldTableAdapter]));
-                    this._fieldTableAdapter.Transaction = null;
+                if ((this._cropTableAdapter != null)) {
+                    this._cropTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._cropTableAdapter]));
+                    this._cropTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];
