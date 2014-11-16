@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace farmingprogram
 {
-
+    //Created by 1333187
     public partial class SplashScreen : Form
     {        
         public const int SPLASH_SCREEN_TIMEOUT = 5000;

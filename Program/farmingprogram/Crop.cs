@@ -13,10 +13,10 @@ namespace farmingprogram
        //attributes         
         private string CropName, CropNotes, CropStatus, DosedByStaff, CropStorageType, CropMinMax;
         private DateTime DatePlanted, EstimatedHarvestDate, LastDose, NextDose;
-        private int FertilizerID, FieldID; 
+        private int FertilizerID, FieldID, CropID; 
 
         //constructors
-        public Crop (string cropName, DateTime datePlanted, DateTime estimatedHarvestDate, string cropNotes, int fertilizerID, string cropStatus, DateTime lastDose, DateTime nextDose, string dosedByStaff, string cropStorageType, string cropMinMax, int fieldID)
+        public Crop (int cropID, string cropName, DateTime datePlanted, DateTime estimatedHarvestDate, string cropNotes, int fertilizerID, string cropStatus, DateTime lastDose, DateTime nextDose, string dosedByStaff, string cropStorageType, string cropMinMax, int fieldID)
         {
             this.CropName = cropName; 
             this.DatePlanted = datePlanted; 
@@ -29,7 +29,8 @@ namespace farmingprogram
             this.DosedByStaff = dosedByStaff;
             this.CropStorageType = cropStorageType;
             this.CropMinMax = cropMinMax;
-            this.FieldID = fieldID;            
+            this.FieldID = fieldID;
+            this.CropID = cropID;
         }
 
         //properties
@@ -37,6 +38,12 @@ namespace farmingprogram
         {
             get { return CropName;} 
             set { CropName = value; }
+        }
+
+        public int cropId
+        {
+            get { return CropID; }
+            set { CropID = value; }
         }
 
         public DateTime datePlanted

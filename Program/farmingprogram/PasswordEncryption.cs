@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.IO;
 
-//SP1062
+//Made by 1333187
 namespace farmingprogram
 {
     class PasswordEncryption

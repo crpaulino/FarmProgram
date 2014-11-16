@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace farmingprogram
 {
     //CREATED BY: SP1062 pls add SID
-    class LogIn
+    class LoginDetail
     {
         private string username, password;
         private int rights;
 
-        public LogIn(string username, string password, int rights)
+        public LoginDetail(string username, string password, int rights)
         {
             this.username = username;
             this.password = password;

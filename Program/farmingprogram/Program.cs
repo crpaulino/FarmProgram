@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace farmingprogram
 {
-    //CREATED BY: SP1062 pls add SID
+    //Made by 1333187
     static class Program
     {
         /// <summary>
@@ -22,14 +22,14 @@ namespace farmingprogram
             Application.Run(new LoginInterface());
         }
 
-        private static LogIn staff;
+        private static LoginDetail staff;
 
-        public static void setStaff(LogIn s)
+        public static void setStaff(LoginDetail s)
         {
             staff = s;
         }
 
-        public static LogIn getStaff()
+        public static LoginDetail getStaff()
         {
             return staff;
         }

@@ -10,7 +10,7 @@ using System.Data;
 
 namespace farmingprogram
 {
-    //CREATED BY: SP1062 pls add SID
+    //Made by 1333187
     class SqlConnector
     {
         private static SqlConnection connection = null;
