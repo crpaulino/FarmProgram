@@ -20,19 +20,22 @@ namespace farmingprogram
 
             SqlConnector.startConnection();
             Application.Run(new LoginInterface());
-            Application.Run(new MainProgram());
+            if (loginDetail != null)
+            {
+                Application.Run(new MainProgram());
+            }
         }
 
-        private static LoginDetail staff;
+        private static LoginDetail loginDetail;
 
-        public static void setStaff(LoginDetail s)
+        public static void setLogin(LoginDetail ld)
         {
-            staff = s;
+            loginDetail = ld;
         }
 
-        public static LoginDetail getStaff()
+        public static LoginDetail getLoginDetail()
         {
-            return staff;
+            return loginDetail;
         }
     }
 }

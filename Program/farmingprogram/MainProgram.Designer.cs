@@ -38,12 +38,13 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.containerStorageType = new System.Windows.Forms.ComboBox();
-            this.staffBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.containerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.farmingDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.farmingDataSet = new farmingprogram.FarmingDataSet();
             this.fieldId = new System.Windows.Forms.ComboBox();
             this.fieldBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dosedBy = new System.Windows.Forms.ComboBox();
+            this.staffBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cropMinMax = new System.Windows.Forms.TextBox();
             this.datePlanted = new System.Windows.Forms.DateTimePicker();
             this.estimatedHarvest = new System.Windows.Forms.DateTimePicker();
@@ -67,17 +68,6 @@
             this.cropName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.cropBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.addCropButton = new System.Windows.Forms.Button();
-            this.removeCropButton = new System.Windows.Forms.Button();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.cropTableAdapter = new farmingprogram.FarmingDataSetTableAdapters.CropTableAdapter();
-            this.fertilizerTableAdapter = new farmingprogram.FarmingDataSetTableAdapters.FertilizerTableAdapter();
-            this.staffTableAdapter = new farmingprogram.FarmingDataSetTableAdapters.StaffTableAdapter();
-            this.fieldTableAdapter = new farmingprogram.FarmingDataSetTableAdapters.FieldTableAdapter();
-            this.staffBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.containerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.containerTableAdapter = new farmingprogram.FarmingDataSetTableAdapters.ContainerTableAdapter();
             this.cropNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.datePlantedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estimatedHarvestDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -90,17 +80,27 @@
             this.cropStorageTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.cropMinMaxDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fieldIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.cropBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.addCropButton = new System.Windows.Forms.Button();
+            this.removeCropButton = new System.Windows.Forms.Button();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.cropTableAdapter = new farmingprogram.FarmingDataSetTableAdapters.CropTableAdapter();
+            this.fertilizerTableAdapter = new farmingprogram.FarmingDataSetTableAdapters.FertilizerTableAdapter();
+            this.staffTableAdapter = new farmingprogram.FarmingDataSetTableAdapters.StaffTableAdapter();
+            this.fieldTableAdapter = new farmingprogram.FarmingDataSetTableAdapters.FieldTableAdapter();
+            this.staffBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.containerTableAdapter = new farmingprogram.FarmingDataSetTableAdapters.ContainerTableAdapter();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.staffBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.containerBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.farmingDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.farmingDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.staffBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fertilizerBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cropBindingSource)).BeginInit();
             this.tabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.staffBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.containerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage2
@@ -161,10 +161,10 @@
             this.containerStorageType.TabIndex = 45;
             this.containerStorageType.ValueMember = "ContainerID";
             // 
-            // staffBindingSource
+            // containerBindingSource
             // 
-            this.staffBindingSource.DataMember = "Staff";
-            this.staffBindingSource.DataSource = this.farmingDataSetBindingSource;
+            this.containerBindingSource.DataMember = "Container";
+            this.containerBindingSource.DataSource = this.farmingDataSetBindingSource;
             // 
             // farmingDataSetBindingSource
             // 
@@ -202,6 +202,11 @@
             this.dosedBy.Size = new System.Drawing.Size(124, 21);
             this.dosedBy.TabIndex = 43;
             this.dosedBy.ValueMember = "StaffID";
+            // 
+            // staffBindingSource
+            // 
+            this.staffBindingSource.DataMember = "Staff";
+            this.staffBindingSource.DataSource = this.farmingDataSetBindingSource;
             // 
             // cropMinMax
             // 
@@ -406,70 +411,6 @@
             this.dataGridView.Size = new System.Drawing.Size(1245, 500);
             this.dataGridView.TabIndex = 4;
             // 
-            // cropBindingSource
-            // 
-            this.cropBindingSource.DataMember = "Crop";
-            this.cropBindingSource.DataSource = this.farmingDataSetBindingSource;
-            // 
-            // addCropButton
-            // 
-            this.addCropButton.Location = new System.Drawing.Point(1220, 630);
-            this.addCropButton.Name = "addCropButton";
-            this.addCropButton.Size = new System.Drawing.Size(116, 23);
-            this.addCropButton.TabIndex = 2;
-            this.addCropButton.Text = "Add Crop";
-            this.addCropButton.UseVisualStyleBackColor = true;
-            // 
-            // removeCropButton
-            // 
-            this.removeCropButton.Location = new System.Drawing.Point(1085, 630);
-            this.removeCropButton.Name = "removeCropButton";
-            this.removeCropButton.Size = new System.Drawing.Size(116, 23);
-            this.removeCropButton.TabIndex = 1;
-            this.removeCropButton.Text = "Remove Crop";
-            this.removeCropButton.UseVisualStyleBackColor = true;
-            this.removeCropButton.Click += new System.EventHandler(this.removeCropButton_Click);
-            // 
-            // tabControl
-            // 
-            this.tabControl.Controls.Add(this.tabPage1);
-            this.tabControl.Controls.Add(this.tabPage2);
-            this.tabControl.Location = new System.Drawing.Point(12, 12);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1363, 685);
-            this.tabControl.TabIndex = 0;
-            // 
-            // cropTableAdapter
-            // 
-            this.cropTableAdapter.ClearBeforeFill = true;
-            // 
-            // fertilizerTableAdapter
-            // 
-            this.fertilizerTableAdapter.ClearBeforeFill = true;
-            // 
-            // staffTableAdapter
-            // 
-            this.staffTableAdapter.ClearBeforeFill = true;
-            // 
-            // fieldTableAdapter
-            // 
-            this.fieldTableAdapter.ClearBeforeFill = true;
-            // 
-            // staffBindingSource1
-            // 
-            this.staffBindingSource1.DataMember = "Staff";
-            this.staffBindingSource1.DataSource = this.farmingDataSetBindingSource;
-            // 
-            // containerBindingSource
-            // 
-            this.containerBindingSource.DataMember = "Container";
-            this.containerBindingSource.DataSource = this.farmingDataSetBindingSource;
-            // 
-            // containerTableAdapter
-            // 
-            this.containerTableAdapter.ClearBeforeFill = true;
-            // 
             // cropNameDataGridViewTextBoxColumn
             // 
             this.cropNameDataGridViewTextBoxColumn.DataPropertyName = "CropName";
@@ -577,6 +518,66 @@
             this.fieldIDDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.fieldIDDataGridViewTextBoxColumn.ValueMember = "FieldID";
             // 
+            // cropBindingSource
+            // 
+            this.cropBindingSource.DataMember = "Crop";
+            this.cropBindingSource.DataSource = this.farmingDataSetBindingSource;
+            // 
+            // addCropButton
+            // 
+            this.addCropButton.Location = new System.Drawing.Point(1220, 630);
+            this.addCropButton.Name = "addCropButton";
+            this.addCropButton.Size = new System.Drawing.Size(116, 23);
+            this.addCropButton.TabIndex = 2;
+            this.addCropButton.Text = "Add Crop";
+            this.addCropButton.UseVisualStyleBackColor = true;
+            this.addCropButton.Click += new System.EventHandler(this.addCropButton_Click);
+            // 
+            // removeCropButton
+            // 
+            this.removeCropButton.Location = new System.Drawing.Point(1085, 630);
+            this.removeCropButton.Name = "removeCropButton";
+            this.removeCropButton.Size = new System.Drawing.Size(116, 23);
+            this.removeCropButton.TabIndex = 1;
+            this.removeCropButton.Text = "Remove Crop";
+            this.removeCropButton.UseVisualStyleBackColor = true;
+            this.removeCropButton.Click += new System.EventHandler(this.removeCropButton_Click);
+            // 
+            // tabControl
+            // 
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Location = new System.Drawing.Point(12, 12);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(1363, 685);
+            this.tabControl.TabIndex = 0;
+            // 
+            // cropTableAdapter
+            // 
+            this.cropTableAdapter.ClearBeforeFill = true;
+            // 
+            // fertilizerTableAdapter
+            // 
+            this.fertilizerTableAdapter.ClearBeforeFill = true;
+            // 
+            // staffTableAdapter
+            // 
+            this.staffTableAdapter.ClearBeforeFill = true;
+            // 
+            // fieldTableAdapter
+            // 
+            this.fieldTableAdapter.ClearBeforeFill = true;
+            // 
+            // staffBindingSource1
+            // 
+            this.staffBindingSource1.DataMember = "Staff";
+            this.staffBindingSource1.DataSource = this.farmingDataSetBindingSource;
+            // 
+            // containerTableAdapter
+            // 
+            this.containerTableAdapter.ClearBeforeFill = true;
+            // 
             // MainProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -589,16 +590,16 @@
             this.Load += new System.EventHandler(this.MainProgram_Load);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.staffBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.containerBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.farmingDataSetBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.farmingDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.staffBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fertilizerBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cropBindingSource)).EndInit();
             this.tabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.staffBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.containerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }

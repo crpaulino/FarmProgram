@@ -59,8 +59,11 @@ namespace farmingprogram
                 {
                     String name = command.GetString(0).ToLower();
                     String pass = command.GetString(1).ToLower();
+                    int rights = command.GetInt32(2);
+
                     if (name.Equals(username.ToLower()) && pass.Equals(PasswordEncryption.Encrypt(password).ToLower()))
                     {
+                        Program.setLogin(new LoginDetail(name, pass, rights));
                         getConnection().Close();
                         return true;
                     }

@@ -41,8 +41,6 @@ namespace farmingprogram
                 while (toDelete-- > 0)
                 {
                     FarmingDataSet.CropRow row = ((FarmingDataSet.CropRow)(dataGridView.Rows[dataGridView.SelectedRows[toDelete].Index].DataBoundItem as DataRowView).Row);
-                    //FarmingDataSet.CropRow row = farmingDataSet.Crop.FindByCropID(rowId);
-                    
                     cropTableAdapter.Delete(row.CropID, row.CropName, row.DatePlanted, row.EstimatedHarvestDate, row.CropNotes, row.FertilizerID, row.CropStatus, row.LastDose, row.NextDose, row.DosedByStaff, row.CropStorageType, row.CropMinMax, row.FieldID);
                     farmingDataSet.Crop.RemoveCropRow(row);
                     cropTableAdapter.Update(farmingDataSet.Crop);
@@ -52,6 +50,13 @@ namespace farmingprogram
             {
                 MessageBox.Show("You have nothing selected to delete");
             }
+        }
+
+        private void addCropButton_Click(object sender, EventArgs e)
+        {
+            cropTableAdapter.Insert(cropName.Text, datePlanted.Value, estimatedHarvest.Value, cropNotes.Text, Int32.Parse(fertilizerId.ValueMember), cropStatus.Text, lastDose.Value, nextDose.Value, Int32.Parse(dosedBy.ValueMember), Int32.Parse(containerStorageType.ValueMember), cropMinMax.Text, Int32.Parse(fieldId.ValueMember));
+            this.cropTableAdapter.Fill(this.farmingDataSet.Crop);
+            dataGridView.Refresh();
         }        
     }
 }
