@@ -32,15 +32,17 @@ namespace farmingprogram
             this.fertilizerTableAdapter.Fill(this.farmingDataSet.Fertilizer);
             // TODO: This line of code loads data into the 'farmingDataSet.Crop' table. You can move, or remove it, as needed.
             this.cropTableAdapter.Fill(this.farmingDataSet.Crop);            
-        }   
+        }
+
+        #region Crop Tab
         private void removeCropButton_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count > 0)
+            if (cropGridView.SelectedRows.Count > 0)
             {
-                int toDelete = dataGridView.SelectedRows.Count;
+                int toDelete = cropGridView.SelectedRows.Count;
                 while (toDelete-- > 0)
                 {
-                    FarmingDataSet.CropRow row = ((FarmingDataSet.CropRow)(dataGridView.Rows[dataGridView.SelectedRows[toDelete].Index].DataBoundItem as DataRowView).Row);
+                    FarmingDataSet.CropRow row = ((FarmingDataSet.CropRow)(cropGridView.Rows[cropGridView.SelectedRows[toDelete].Index].DataBoundItem as DataRowView).Row);
                     cropTableAdapter.Delete(row.CropID, row.CropName, row.DatePlanted, row.EstimatedHarvestDate, row.CropNotes, row.FertilizerID, row.CropStatus, row.LastDose, row.NextDose, row.DosedByStaff, row.CropStorageType, row.CropMinMax, row.FieldID);
                     farmingDataSet.Crop.RemoveCropRow(row);
                     cropTableAdapter.Update(farmingDataSet.Crop);
@@ -54,9 +56,56 @@ namespace farmingprogram
 
         private void addCropButton_Click(object sender, EventArgs e)
         {
-            cropTableAdapter.Insert(cropName.Text, datePlanted.Value, estimatedHarvest.Value, cropNotes.Text, Int32.Parse(fertilizerId.ValueMember), cropStatus.Text, lastDose.Value, nextDose.Value, Int32.Parse(dosedBy.ValueMember), Int32.Parse(containerStorageType.ValueMember), cropMinMax.Text, Int32.Parse(fieldId.ValueMember));
+            if (handleNullOrWhitespace(cropName) || handleNullOrWhitespace(cropStatus) || handleNullOrWhitespace(cropMinMax))
+            {
+                return;
+            }
+            cropTableAdapter.Insert(cropName.Text, datePlanted.Value, estimatedHarvest.Value, cropNotes.Text, Int32.Parse(fertilizerId.SelectedValue.ToString()), cropStatus.Text, lastDose.Value, nextDose.Value, Int32.Parse(dosedBy.SelectedValue.ToString()), Int32.Parse(containerStorageType.SelectedValue.ToString()), cropMinMax.Text, Int32.Parse(fieldId.SelectedValue.ToString()));
             this.cropTableAdapter.Fill(this.farmingDataSet.Crop);
-            dataGridView.Refresh();
-        }        
+            cropGridView.Refresh();
+        }
+        #endregion
+
+        #region Fertilizer tab
+        private void removeFertilizer_Click(object sender, EventArgs e)
+        {
+            if (fertilizerGridView.SelectedRows.Count > 0)
+            {
+                int toDelete = fertilizerGridView.SelectedRows.Count;
+                while (toDelete-- > 0)
+                {
+                    FarmingDataSet.FertilizerRow row = ((FarmingDataSet.FertilizerRow)(fertilizerGridView.Rows[fertilizerGridView.SelectedRows[toDelete].Index].DataBoundItem as DataRowView).Row);
+                    fertilizerTableAdapter.Delete(row.FertilizerID, row.fertName, row.fertDose, row.fertNote);
+                    farmingDataSet.Fertilizer.RemoveFertilizerRow(row);
+                    fertilizerTableAdapter.Update(farmingDataSet.Fertilizer);
+                }
+            }
+            else
+            {
+                MessageBox.Show("You have nothing selected to delete");
+            }
+        }
+
+        private void addFertilizer_Click(object sender, EventArgs e)
+        {
+            if (handleNullOrWhitespace(fertilizerName) || handleNullOrWhitespace(fertilizerNote) || handleNullOrWhitespace(fertilizerDose))
+            {
+                return;
+            }
+            fertilizerTableAdapter.Insert(fertilizerName.Text, fertilizerDose.Text, fertilizerNote.Text);
+            this.fertilizerTableAdapter.Fill(this.farmingDataSet.Fertilizer);
+            fertilizerGridView.Refresh();
+        }
+        #endregion
+
+        public Boolean handleNullOrWhitespace(TextBox box)
+        {
+            if (String.IsNullOrWhiteSpace(box.Text))
+            {
+                MessageBox.Show(box.Name + " cannot be empty.");
+                return true;
+            }
+            return false;
+        }
     }
 }
