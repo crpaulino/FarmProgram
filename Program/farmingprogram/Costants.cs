@@ -9,7 +9,7 @@ namespace farmingprogram
     class Costants
     {
         //Crops (Shannon and Sanjay)
-        String CROP_DELETE_QUERY = "DELETE FROM Crop Where CropID=@cropId";
+        String CROP_DELETE_QUERY = @"DELETE FROM Crop Where CropID = @cropId";
         String CROP_INSERT_QUERY = "";
         String CROP_UPDATE_QUERY = "";
         //Storage (Mark)
@@ -33,12 +33,12 @@ namespace farmingprogram
         String CONTAINER_UPDATE_QUERY = "";
 
         //Harvest (Carlos)
-        String HARVEST_DELETE_QUERY = "";
+        String HARVEST_DELETE_QUERY = @"DELETE FROM [Harvest] WHERE ([HarvestID] = @Original_HarvestID)";
         String HARVEST_INSERT_QUERY = "";
         String HARVEST_UPDATE_QUERY = "";
 
         //Fertilizer (Thomas and Sanjay)
-        String FERTILIZER_DELETE_QUERY = "";
+        String FERTILIZER_DELETE_QUERY = @"DELETE FROM [Fertilizer] WHERE ([FertilizerID] = @Original_FertilizerID)";
         String FERTILIZER_INSERT_QUERY = "";
         String FERTILIZER_UPDATE_QUERY = "";
 
