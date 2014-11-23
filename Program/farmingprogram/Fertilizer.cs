@@ -11,16 +11,18 @@ namespace farmingprogram
     class Fertilizer
     {
         //Attributes
+        private int FertilizerID;
         private string FertName;
         private string FertDose;
         private string FertNote; 
 
         //constructors
-        public Fertilizer(string fertname, string fertdose, string fertnote)
+        public Fertilizer(int fertilizerId, string fertname, string fertdose, string fertnote)
         {
             this.FertName = fertname;
             this.FertDose = fertdose;
             this.FertNote = fertnote;
+            this.FertilizerID = fertilizerId;
 
         }
         //properties    
@@ -28,6 +30,12 @@ namespace farmingprogram
         {
             get { return FertName; }
             set { FertName = value; }
+        }
+
+        public int fertilizerId
+        {
+            get { return fertilizerId; }
+            set { fertilizerId = value; }
         }
 
         public string fertDose

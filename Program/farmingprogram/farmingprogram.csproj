@@ -62,16 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Container.cs" />
+    <Compile Include="Costants.cs" />
     <Compile Include="Crop.cs" />
-    <Compile Include="FarmingDataSet.cs">
-      <DependentUpon>FarmingDataSet.xsd</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="FarmingDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FarmingDataSet.xsd</DependentUpon>
-    </Compile>
+    <Compile Include="FarmingDataSet.cs" />
     <Compile Include="Fertilizer.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="Harvest.cs" />
@@ -120,17 +113,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="FarmingDataSet.xsc">
-      <DependentUpon>FarmingDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="FarmingDataSet.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>FarmingDataSet.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="FarmingDataSet.xss">
-      <DependentUpon>FarmingDataSet.xsd</DependentUpon>
-    </None>
+    <None Include="Properties\DataSources\Container.datasource" />
+    <None Include="Properties\DataSources\Crop.datasource" />
+    <None Include="Properties\DataSources\Fertilizer.datasource" />
+    <None Include="Properties\DataSources\Field.datasource" />
+    <None Include="Properties\DataSources\Harvest.datasource" />
+    <None Include="Properties\DataSources\Staff.datasource" />
+    <None Include="Properties\DataSources\Storage.datasource" />
+    <None Include="Properties\DataSources\Vehicle.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -173,6 +163,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -18,9 +18,7 @@ namespace farmingprogram
 
         public static void startConnection()
         {
-            string executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string connectionString = ConfigurationManager.ConnectionStrings["farmingprogram.Properties.Settings.DbFarmProgramConnectionString"].ConnectionString;
-
             connection = new SqlConnection(connectionString);
             try
             {
@@ -35,10 +33,6 @@ namespace farmingprogram
 
         public static SqlConnection getConnection()
         {
-            if (connection == null || connection.State == ConnectionState.Closed)
-            {
-                startConnection();
-            }
             return connection;
         }
 

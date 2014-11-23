@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace farmingprogram
 {
     //made by student 1311808
-    //integrated by 1312754
+    //integrated by 1312754 & 1333187
     class Crop
     {
        //attributes         

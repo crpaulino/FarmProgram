@@ -10,15 +10,16 @@ namespace farmingprogram
     class Field
     {
         //Attributes
+        private int FieldId;
         private string FieldName, FieldStatus, FieldNotes;
 
         //constructors
-        public Field(string fieldname, string fieldstatus, string fieldnotes)
-
+        public Field(int fieldId, string fieldname, string fieldstatus, string fieldnotes)
         {
-        this.FieldName = fieldname;
-        this.FieldNotes = fieldnotes;
-        this.FieldStatus = fieldstatus;
+            this.FieldName = fieldname;
+            this.FieldNotes = fieldnotes;
+            this.FieldStatus = fieldstatus;
+            this.FieldId = fieldId;
         }
 
         //Properties
@@ -40,7 +41,12 @@ namespace farmingprogram
         {
             get { return FieldStatus; }
             set { FieldStatus = value; }
+        }
 
+        public int fieldID
+        {
+            get { return FieldId; }
+            set { FieldId = value; }
         }
     }
 }

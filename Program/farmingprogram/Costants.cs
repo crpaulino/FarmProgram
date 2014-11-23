@@ -9,43 +9,43 @@ namespace farmingprogram
     class Costants
     {
         //Crops (Shannon and Sanjay)
-        String CROP_DELETE_QUERY = @"DELETE FROM Crop Where CropID = @cropId";
-        String CROP_INSERT_QUERY = "";
-        String CROP_UPDATE_QUERY = "";
+        public static String CROP_DELETE_QUERY = @"DELETE FROM Crop Where CropID = @cropId";
+        public static String CROP_INSERT_QUERY = "";
+        public static String CROP_UPDATE_QUERY = @"SELECT * FROM Crop";
         //Storage (Mark)
-        String STORAGE_DELETE_QUERY = "";
-        String STORAGE_INSERT_QUERY = "";
-        String STORAGE_UPDATE_QUERY = "";
+        public static String STORAGE_DELETE_QUERY = "";
+        public static String STORAGE_INSERT_QUERY = "";
+        public static String STORAGE_UPDATE_QUERY = @"SELECT * FROM Storage";
 
         //Vehicles (Mark)
-        String VEHCILES_DELETE_QUERY = "";
-        String VEHCILES_INSERT_QUERY = "";
-        String VEHCILES_UPDATE_QUERY = "";
+        public static String VEHCILES_DELETE_QUERY = "";
+        public static String VEHCILES_INSERT_QUERY = "";
+        public static String VEHCILES_UPDATE_QUERY = @"SELECT * FROM VEHICLES";
 
         //Staff (Carlos)
-        String STAFF_DELETE_QUERY = "";
-        String STAFF_INSERT_QUERY = "";
-        String STAFF_UPDATE_QUERY = "";
+        public static String STAFF_DELETE_QUERY = "";
+        public static String STAFF_INSERT_QUERY = "";
+        public static String STAFF_UPDATE_QUERY = @"SELECT * FROM Staff";
 
         //Container (Carlos and Sanjay)
-        String CONTAINER_DELETE_QUERY = "";
-        String CONTAINER_INSERT_QUERY = "";
-        String CONTAINER_UPDATE_QUERY = "";
+        public static String CONTAINER_DELETE_QUERY = "";
+        public static String CONTAINER_INSERT_QUERY = "";
+        public static String CONTAINER_UPDATE_QUERY = @"SELECT FROM Container";
 
         //Harvest (Carlos)
-        String HARVEST_DELETE_QUERY = @"DELETE FROM [Harvest] WHERE ([HarvestID] = @Original_HarvestID)";
-        String HARVEST_INSERT_QUERY = "";
-        String HARVEST_UPDATE_QUERY = "";
+        public static String HARVEST_DELETE_QUERY = @"DELETE FROM [Harvest] WHERE ([HarvestID] = @Original_HarvestID)";
+        public static String HARVEST_INSERT_QUERY = "";
+        public static String HARVEST_UPDATE_QUERY = @"SELECT * FROM Harvest";
 
         //Fertilizer (Thomas and Sanjay)
-        String FERTILIZER_DELETE_QUERY = @"DELETE FROM [Fertilizer] WHERE ([FertilizerID] = @Original_FertilizerID)";
-        String FERTILIZER_INSERT_QUERY = "";
-        String FERTILIZER_UPDATE_QUERY = "";
+        public static String FERTILIZER_DELETE_QUERY = @"DELETE FROM [Fertilizer] WHERE ([FertilizerID] = @Original_FertilizerID)";
+        public static String FERTILIZER_INSERT_QUERY = "";
+        public static String FERTILIZER_UPDATE_QUERY = @"SELECT * FROM Fertilizer";
 
         //Field (Thomas)
-        String FIELD_DELETE_QUERY = "";
-        String FIELD_INSERT_QUERY = "";
-        String FIELD_UPDATE_QUERY = "";
+        public static String FIELD_DELETE_QUERY = "";
+        public static String FIELD_INSERT_QUERY = "";
+        public static String FIELD_UPDATE_QUERY = @"SELECT * FROM Field";
 
     }
 }

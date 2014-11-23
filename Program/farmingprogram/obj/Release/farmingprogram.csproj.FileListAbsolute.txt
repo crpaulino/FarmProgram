@@ -10,7 +10,6 @@ C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Release\farmi
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Release\farmingprogram.csproj.GenerateResource.Cache
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Release\farmingprogram.exe
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Release\farmingprogram.pdb
-C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Release\farmingprogram.csprojResolveAssemblyReference.cache
 C:\Users\Mark\Desktop\SFTEngineering-2014-10-25\SFTEngineering\FarmProgram\Program\farmingprogram\bin\Release\farmingprogram.exe.config
 C:\Users\Mark\Desktop\SFTEngineering-2014-10-25\SFTEngineering\FarmProgram\Program\farmingprogram\obj\Release\farmingprogram.exe
 C:\Users\Mark\Desktop\SFTEngineering-2014-10-25\SFTEngineering\FarmProgram\Program\farmingprogram\obj\Release\farmingprogram.pdb

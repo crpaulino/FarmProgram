@@ -18,34 +18,46 @@ namespace farmingprogram
         public MainProgram()
         {
             InitializeComponent();
+            programInstance = this;
+        }
+
+        static MainProgram programInstance = null;
+
+
+        public static MainProgram getSingleton()
+        {
+            return programInstance;
         }
 
         private void MainProgram_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'farmingDataSet.Container' table. You can move, or remove it, as needed.
-            this.containerTableAdapter.Fill(this.farmingDataSet.Container);
-            // TODO: This line of code loads data into the 'farmingDataSet.Field' table. You can move, or remove it, as needed.
-            this.fieldTableAdapter.Fill(this.farmingDataSet.Field);
-            // TODO: This line of code loads data into the 'farmingDataSet.Staff' table. You can move, or remove it, as needed.
-            this.staffTableAdapter.Fill(this.farmingDataSet.Staff);
-            // TODO: This line of code loads data into the 'farmingDataSet.Fertilizer' table. You can move, or remove it, as needed.
-            this.fertilizerTableAdapter.Fill(this.farmingDataSet.Fertilizer);
-            // TODO: This line of code loads data into the 'farmingDataSet.Crop' table. You can move, or remove it, as needed.
-            this.cropTableAdapter.Fill(this.farmingDataSet.Crop);            
+            FarmingDataSet.initializeFieldSet();
+            FarmingDataSet.initializeFertilizerSet();
+            FarmingDataSet.initializeCropSet();
+            cropGridView.DataSource = cropBindingSource;
+            this.Refresh();
         }
 
         #region Crop Tab
         private void removeCropButton_Click(object sender, EventArgs e)
         {
+            Boolean notifyDelete = false;
             if (cropGridView.SelectedRows.Count > 0)
             {
                 int toDelete = cropGridView.SelectedRows.Count;
                 while (toDelete-- > 0)
                 {
-                    FarmingDataSet.CropRow row = ((FarmingDataSet.CropRow)(cropGridView.Rows[cropGridView.SelectedRows[toDelete].Index].DataBoundItem as DataRowView).Row);
-                    cropTableAdapter.Delete(row.CropID, row.CropName, row.DatePlanted, row.EstimatedHarvestDate, row.CropNotes, row.FertilizerID, row.CropStatus, row.LastDose, row.NextDose, row.DosedByStaff, row.CropStorageType, row.CropMinMax, row.FieldID);
-                    farmingDataSet.Crop.RemoveCropRow(row);
-                    cropTableAdapter.Update(farmingDataSet.Crop);
+                    int indexToDelete = cropGridView.SelectedRows[toDelete].Index;
+                    if (FarmingDataSet.deleteCrop((int)cropGridView.Rows[indexToDelete].Cells["CropID"].Value) == 1)
+                    {
+                        this.cropGridView.Rows.Remove(cropGridView.Rows[indexToDelete]);
+                        notifyDelete = true;
+                    }
+                }
+
+                if (notifyDelete)
+                {
+                    MessageBox.Show("The data was deleted sucessfully.");
                 }
             }
             else
@@ -60,9 +72,7 @@ namespace farmingprogram
             {
                 return;
             }
-            cropTableAdapter.Insert(cropName.Text, datePlanted.Value, estimatedHarvest.Value, cropNotes.Text, Int32.Parse(fertilizerId.SelectedValue.ToString()), cropStatus.Text, lastDose.Value, nextDose.Value, Int32.Parse(dosedBy.SelectedValue.ToString()), Int32.Parse(containerStorageType.SelectedValue.ToString()), cropMinMax.Text, Int32.Parse(fieldId.SelectedValue.ToString()));
-            this.cropTableAdapter.Fill(this.farmingDataSet.Crop);
-            cropGridView.Refresh();
+           
         }
         #endregion
 
@@ -74,10 +84,7 @@ namespace farmingprogram
                 int toDelete = fertilizerGridView.SelectedRows.Count;
                 while (toDelete-- > 0)
                 {
-                    FarmingDataSet.FertilizerRow row = ((FarmingDataSet.FertilizerRow)(fertilizerGridView.Rows[fertilizerGridView.SelectedRows[toDelete].Index].DataBoundItem as DataRowView).Row);
-                    fertilizerTableAdapter.Delete(row.FertilizerID, row.fertName, row.fertDose, row.fertNote);
-                    farmingDataSet.Fertilizer.RemoveFertilizerRow(row);
-                    fertilizerTableAdapter.Update(farmingDataSet.Fertilizer);
+                   
                 }
             }
             else
@@ -92,8 +99,8 @@ namespace farmingprogram
             {
                 return;
             }
-            fertilizerTableAdapter.Insert(fertilizerName.Text, fertilizerDose.Text, fertilizerNote.Text);
-            this.fertilizerTableAdapter.Fill(this.farmingDataSet.Fertilizer);
+            /*fertilizerTableAdapter.Insert(fertilizerName.Text, fertilizerDose.Text, fertilizerNote.Text);
+            this.fertilizerTableAdapter.Fill(this.farmingDataSet.Fertilizer);*/
             fertilizerGridView.Refresh();
         }
         #endregion
