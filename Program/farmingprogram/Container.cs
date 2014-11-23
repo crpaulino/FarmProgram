@@ -11,12 +11,14 @@ namespace farmingprogram
     class Container
     {   
         //Attributes
+        private int ContainerID;
         private string ContName, ContType;
         private int ContSize;
 
         //Cosntructor
-        public Container(string containerName, string containerType, int containerSize)
+        public Container(int containerId, string containerName, string containerType, int containerSize)
         {
+            this.ContainerID = containerId;
             this.ContName = containerName;
             this.ContType = containerType;
             this.ContSize = containerSize;
@@ -38,6 +40,12 @@ namespace farmingprogram
         {
             get { return ContSize; }
             set { ContSize = value; }
+        }
+
+        public int containerId
+        {
+            get { return ContainerID; }
+            set { ContainerID = value; }
         }
     }
 }

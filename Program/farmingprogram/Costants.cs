@@ -30,7 +30,7 @@ namespace farmingprogram
         //Container (Carlos and Sanjay)
         public static String CONTAINER_DELETE_QUERY = "";
         public static String CONTAINER_INSERT_QUERY = "";
-        public static String CONTAINER_UPDATE_QUERY = @"SELECT FROM Container";
+        public static String CONTAINER_UPDATE_QUERY = @"SELECT * FROM Container";
 
         //Harvest (Carlos)
         public static String HARVEST_DELETE_QUERY = @"DELETE FROM [Harvest] WHERE ([HarvestID] = @Original_HarvestID)";

@@ -13,6 +13,7 @@ namespace farmingprogram
         public static SqlDataAdapter cropDataAdapter;
         public static SqlDataAdapter fertilizerAdapter;
         public static SqlDataAdapter fieldAdapter;
+        public static SqlDataAdapter containerAdapter;
 
         public static void initializeCropSet()
         {
@@ -63,11 +64,24 @@ namespace farmingprogram
             SqlConnector.getConnection().Open();
             fieldAdapter = new SqlDataAdapter();
             fieldAdapter.SelectCommand = new SqlCommand(Costants.FIELD_UPDATE_QUERY, SqlConnector.getConnection());
-            fieldAdapter.DeleteCommand = new SqlCommand(Costants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
-            fieldAdapter.InsertCommand = new SqlCommand(Costants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
+            fieldAdapter.DeleteCommand = new SqlCommand(Costants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
+            fieldAdapter.InsertCommand = new SqlCommand(Costants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
             DataTable table = new DataTable();
             fieldAdapter.Fill(table);
             MainProgram.getSingleton().fieldBindingSource.DataSource = table;
+            SqlConnector.getConnection().Close();
+        }
+
+        public static void initializeContainerSet()
+        {
+            SqlConnector.getConnection().Open();
+            containerAdapter = new SqlDataAdapter();
+            containerAdapter.SelectCommand = new SqlCommand(Costants.CONTAINER_UPDATE_QUERY, SqlConnector.getConnection());
+            containerAdapter.DeleteCommand = new SqlCommand(Costants.CONTAINER_DELETE_QUERY, SqlConnector.getConnection());
+            containerAdapter.InsertCommand = new SqlCommand(Costants.CONTAINER_INSERT_QUERY, SqlConnector.getConnection());
+            DataTable table = new DataTable();
+            containerAdapter.Fill(table);
+            //MainProgram.getSingleton().containerBindingSource.DataSource = table;
             SqlConnector.getConnection().Close();
         }
     }

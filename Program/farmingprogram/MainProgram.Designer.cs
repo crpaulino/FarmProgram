@@ -70,10 +70,10 @@
             this.removeCropButton = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.fertilizerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.containerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fieldBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cropBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.vehicleBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.containerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.cropNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CropID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.datePlantedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -84,7 +84,7 @@
             this.lastDoseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nextDoseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dosedByStaffDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cropStorageTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cropStorageTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.cropMinMaxDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fieldIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.tabPage2.SuspendLayout();
@@ -93,10 +93,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.cropGridView)).BeginInit();
             this.tabControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fertilizerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.containerBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cropBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehicleBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.containerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage2
@@ -498,6 +498,10 @@
             // 
             this.fertilizerBindingSource.DataSource = typeof(farmingprogram.Fertilizer);
             // 
+            // containerBindingSource
+            // 
+            this.containerBindingSource.DataSource = typeof(farmingprogram.Container);
+            // 
             // fieldBindingSource
             // 
             this.fieldBindingSource.DataSource = typeof(farmingprogram.Field);
@@ -509,10 +513,6 @@
             // vehicleBindingSource
             // 
             this.vehicleBindingSource.DataSource = typeof(farmingprogram.Vehicle);
-            // 
-            // containerBindingSource
-            // 
-            this.containerBindingSource.DataSource = typeof(farmingprogram.Container);
             // 
             // cropNameDataGridViewTextBoxColumn
             // 
@@ -584,8 +584,13 @@
             // cropStorageTypeDataGridViewTextBoxColumn
             // 
             this.cropStorageTypeDataGridViewTextBoxColumn.DataPropertyName = "cropStorageType";
+            this.cropStorageTypeDataGridViewTextBoxColumn.DataSource = this.containerBindingSource;
+            this.cropStorageTypeDataGridViewTextBoxColumn.DisplayMember = "containerName";
             this.cropStorageTypeDataGridViewTextBoxColumn.HeaderText = "Storage";
             this.cropStorageTypeDataGridViewTextBoxColumn.Name = "cropStorageTypeDataGridViewTextBoxColumn";
+            this.cropStorageTypeDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.cropStorageTypeDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.cropStorageTypeDataGridViewTextBoxColumn.ValueMember = "containerId";
             // 
             // cropMinMaxDataGridViewTextBoxColumn
             // 
@@ -622,10 +627,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.cropGridView)).EndInit();
             this.tabControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fertilizerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.containerBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fieldBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cropBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehicleBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.containerBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -674,7 +679,7 @@
         public System.Windows.Forms.BindingSource cropBindingSource;
         public System.Windows.Forms.BindingSource vehicleBindingSource;
         public System.Windows.Forms.BindingSource fieldBindingSource;
-        private System.Windows.Forms.BindingSource containerBindingSource;
+        public System.Windows.Forms.BindingSource containerBindingSource;
         public System.Windows.Forms.BindingSource fertilizerBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn cropNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn CropID;
@@ -686,7 +691,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn lastDoseDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nextDoseDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dosedByStaffDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cropStorageTypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn cropStorageTypeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cropMinMaxDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn fieldIDDataGridViewTextBoxColumn;
 

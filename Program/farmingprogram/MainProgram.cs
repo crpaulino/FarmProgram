@@ -31,6 +31,7 @@ namespace farmingprogram
 
         private void MainProgram_Load(object sender, EventArgs e)
         {
+            FarmingDataSet.initializeContainerSet();
             FarmingDataSet.initializeFieldSet();
             FarmingDataSet.initializeFertilizerSet();
             FarmingDataSet.initializeCropSet();
