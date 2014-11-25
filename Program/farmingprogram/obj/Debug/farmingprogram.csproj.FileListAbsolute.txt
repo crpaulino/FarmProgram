@@ -69,3 +69,6 @@ C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farming
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Desktop\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe.config
+C:\Users\Mark\Desktop\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
+C:\Users\Mark\Desktop\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb

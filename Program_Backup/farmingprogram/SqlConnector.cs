@@ -24,7 +24,7 @@ namespace farmingprogram
             {
                 connection.Open();
             }
-            catch (Exception ex)
+            catch (Exception ex) //summit up idk why...
             {
                 MessageBox.Show("Error opening connection. Closing program.");
                 Environment.Exit(0);

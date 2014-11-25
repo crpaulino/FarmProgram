@@ -95,3 +95,16 @@ C:\Users\crpaulino\Desktop\Program\farmingprogram\obj\Debug\farmingprogram.cspro
 C:\Users\crpaulino\Documents\GitHub\FarmProgram\Program_Backup\farmingprogram\bin\Debug\farmingprogram.exe.config
 C:\Users\crpaulino\Documents\GitHub\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.exe
 C:\Users\crpaulino\Documents\GitHub\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.pdb
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\bin\Debug\farmingprogram.exe.config
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.exe
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.pdb
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\bin\Debug\database\DbFarmProgram.mdf
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\bin\Debug\database\DbFarmProgram_log.ldf
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\bin\Debug\farmingprogram.exe
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\bin\Debug\farmingprogram.pdb
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.csprojResolveAssemblyReference.cache
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.LoginInterface.resources
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.MainProgram.resources
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.SplashScreen.resources
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.Properties.Resources.resources
+C:\Users\Mark\Desktop\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.csproj.GenerateResource.Cache

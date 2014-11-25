@@ -32,11 +32,18 @@ namespace farmingprogram
         private void MainProgram_Load(object sender, EventArgs e)
         {
 //            FarmingDataSet.initializeContainerSet();
-//            FarmingDataSet.initializeFieldSet();
-//            FarmingDataSet.initializeFertilizerSet();
+            FarmingDataSet.initializeFieldSet();
+            FarmingDataSet.initializeFertilizerSet();
+            FarmingDataSet.initializeCropSet();
             DataSet dsCrops= FarmingDataSet.initializeCropSet();
+            DataSet dsFertilizer = FarmingDataSet.initializeFertilizerSet(); //1307211
+            DataSet dsField = FarmingDataSet.initializeFieldSet(); //1311808
             DataTable dtCrops = dsCrops.Tables[0];
+            DataTable dtFertilizer = dsFertilizer.Tables[0];
+            DataTable dtField = dsField.Tables[0];
             cropGridView.DataSource = dtCrops;//cropBindingSource;
+            fertilizerGridView.DataSource = dtFertilizer; //fertilizer binding source
+            //fieldGridView.DataSource = dtField; 
             this.Refresh();
         }
 
