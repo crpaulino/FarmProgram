@@ -92,3 +92,6 @@ C:\Users\crpaulino\Desktop\Program\farmingprogram\obj\Debug\farmingprogram.MainP
 C:\Users\crpaulino\Desktop\Program\farmingprogram\obj\Debug\farmingprogram.SplashScreen.resources
 C:\Users\crpaulino\Desktop\Program\farmingprogram\obj\Debug\farmingprogram.Properties.Resources.resources
 C:\Users\crpaulino\Desktop\Program\farmingprogram\obj\Debug\farmingprogram.csproj.GenerateResource.Cache
+C:\Users\crpaulino\Documents\GitHub\FarmProgram\Program_Backup\farmingprogram\bin\Debug\farmingprogram.exe.config
+C:\Users\crpaulino\Documents\GitHub\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.exe
+C:\Users\crpaulino\Documents\GitHub\FarmProgram\Program_Backup\farmingprogram\obj\Debug\farmingprogram.pdb
