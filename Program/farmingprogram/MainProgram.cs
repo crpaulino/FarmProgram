@@ -31,11 +31,13 @@ namespace farmingprogram
 
         private void MainProgram_Load(object sender, EventArgs e)
         {
-            FarmingDataSet.initializeContainerSet();
             FarmingDataSet.initializeFieldSet();
+            FarmingDataSet.initializeStaffSet();
             FarmingDataSet.initializeFertilizerSet();
+            FarmingDataSet.initializeContainerSet();
             FarmingDataSet.initializeCropSet();
             cropGridView.DataSource = cropBindingSource;
+            this.cropGridView.DataError += new DataGridViewDataErrorEventHandler(DataGridView1_DataError);
             this.Refresh();
         }
 
@@ -55,7 +57,6 @@ namespace farmingprogram
                         notifyDelete = true;
                     }
                 }
-
                 if (notifyDelete)
                 {
                     MessageBox.Show("The data was deleted sucessfully.");
@@ -67,13 +68,47 @@ namespace farmingprogram
             }
         }
 
+        private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs anError)
+        {
+
+            MessageBox.Show("Error happened " + anError.Context.ToString());
+
+            if (anError.Context == DataGridViewDataErrorContexts.Commit)
+            {
+                MessageBox.Show("Commit error");
+            }
+            if (anError.Context == DataGridViewDataErrorContexts.CurrentCellChange)
+            {
+                MessageBox.Show("Cell change");
+            }
+            if (anError.Context == DataGridViewDataErrorContexts.Parsing)
+            {
+                MessageBox.Show("parsing error");
+            }
+            if (anError.Context == DataGridViewDataErrorContexts.LeaveControl)
+            {
+                MessageBox.Show("leave control error");
+            }
+
+            if ((anError.Exception) is ConstraintException)
+            {
+                DataGridView view = (DataGridView)sender;
+                view.Rows[anError.RowIndex].ErrorText = "an error";
+                view.Rows[anError.RowIndex].Cells[anError.ColumnIndex].ErrorText = "an error";
+
+                anError.ThrowException = false;
+            }
+        }
+
         private void addCropButton_Click(object sender, EventArgs e)
         {
             if (handleNullOrWhitespace(cropName) || handleNullOrWhitespace(cropStatus) || handleNullOrWhitespace(cropMinMax))
             {
                 return;
             }
-           
+            Crop crop  = new Crop(0, cropName.Text, datePlanted.Value, estimatedHarvest.Value, cropNotes.Text, Int32.Parse(fertilizerId.SelectedValue.ToString()), cropStatus.Text, lastDose.Value, nextDose.Value, Int32.Parse(dosedBy.SelectedValue.ToString()), Int32.Parse(containerStorageType.SelectedValue.ToString()), cropMinMax.Text, Int32.Parse(fieldId.SelectedValue.ToString()));
+            FarmingDataSet.addCrop(crop);
+            FarmingDataSet.initializeCropSet();
         }
         #endregion
 
@@ -114,6 +149,15 @@ namespace farmingprogram
                 return true;
             }
             return false;
+        }
+
+        private void cropRowEdited(object sender, EventArgs e)
+        {
+
+            for (int i = 0; i < cropGridView.Rows.Count; i++ )
+            {
+                Crop crop = (Crop)this.cropBindingSource.DataSource;
+            }
         }
     }
 }

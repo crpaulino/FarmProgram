@@ -11,41 +11,41 @@ namespace farmingprogram
     class Container
     {   
         //Attributes
-        private int ContainerID;
-        private string ContName, ContType;
-        private int ContSize;
+        private int containerId;
+        private string containerName, containerType;
+        private int containerSize;
 
         //Cosntructor
         public Container(int containerId, string containerName, string containerType, int containerSize)
         {
-            this.ContainerID = containerId;
-            this.ContName = containerName;
-            this.ContType = containerType;
-            this.ContSize = containerSize;
+            this.containerId = containerId;
+            this.containerName = containerName;
+            this.containerType = containerType;
+            this.containerSize = containerSize;
         }
         //properties
-        public string containerName
+        public string contName
         {
-            get { return ContName; }
-            set { ContName = value; }
+            get { return containerName; }
+            set { containerName = value; }
         }
 
-        public string containerType
+        public string contType
         {
-            get { return ContType; }
-            set { ContType = value; }
+            get { return containerType; }
+            set { containerType = value; }
         }
 
-        public int containerSize
+        public int contSize
         {
-            get { return ContSize; }
-            set { ContSize = value; }
+            get { return containerSize; }
+            set { containerSize = value; }
         }
 
-        public int containerId
+        public int ContainerID
         {
-            get { return ContainerID; }
-            set { ContainerID = value; }
+            get { return containerId; }
+            set { containerId = value; }
         }
     }
 }

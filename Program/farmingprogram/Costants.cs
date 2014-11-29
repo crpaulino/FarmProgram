@@ -10,8 +10,10 @@ namespace farmingprogram
     {
         //Crops (Shannon and Sanjay)
         public static String CROP_DELETE_QUERY = @"DELETE FROM Crop Where CropID = @cropId";
-        public static String CROP_INSERT_QUERY = "";
+        public static String CROP_INSERT_QUERY = @"INSERT INTO [Crop] ([CropName], [DatePlanted], [EstimatedHarvestDate], [CropNotes], [FertilizerID], [CropStatus], [LastDose], [NextDose], [DosedByStaff], [CropStorageType], [CropMinMax], [FieldID]) VALUES (@CropName, @DatePlanted, @EstimatedHarvestDate, @CropNotes, @FertilizerID, @CropStatus, @LastDose, @NextDose, @DosedByStaff, @CropStorageType, @CropMinMax, @FieldID)";
         public static String CROP_UPDATE_QUERY = @"SELECT * FROM Crop";
+        public static String CROP_CLEAR_QUERY = @"DELETE * FROM Crop";
+
         //Storage (Mark)
         public static String STORAGE_DELETE_QUERY = "";
         public static String STORAGE_INSERT_QUERY = "";

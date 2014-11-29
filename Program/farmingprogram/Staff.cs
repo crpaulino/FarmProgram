@@ -9,41 +9,48 @@ namespace farmingprogram
     class Staff
     {
         //attribute
-        private string FirstName, LastName, Title;
-        private bool Manager;
+        private int staffId, rights;
+        private string firstName, lastName, title;
 
         //Constructor
-        public Staff(string FirstName, string LastName, string Title, bool Manager)
+        public Staff(int staffId, string firstName, string lastName, string title, int rights)
         {
-            this.FirstName = FirstName;
-            this.LastName = LastName;
-            this.Title = Title;
-            this.Manager = Manager;
+            this.staffId = staffId;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.title = title;
+            this.rights = rights;
         }
 
         //Properties
-        public string firstName
+        public string FirstName
         {
-            get { return FirstName; }
-            set { FirstName = value; }
+            get { return firstName; }
+            set { firstName = value; }
         }
 
-        public string lastName
+        public string LastName
         {
-            get { return LastName; }
-            set { LastName = value; }
+            get { return lastName; }
+            set { lastName = value; }
         }
 
-        public string title
+        public string Title
         {
-            get { return Title; }
-            set { Title = value; }
+            get { return title; }
+            set { title = value; }
         }
 
-        public bool manager
+        public int Rights
         {
-            get { return Manager; }
-            set { Manager = value; }
+            get { return rights; }
+            set { rights = value; }
+        }
+
+        public int StaffID
+        {
+            get { return staffId; }
+            set { staffId = value; }
         }
     }
 }

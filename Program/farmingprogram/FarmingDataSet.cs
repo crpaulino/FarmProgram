@@ -14,10 +14,11 @@ namespace farmingprogram
         public static SqlDataAdapter fertilizerAdapter;
         public static SqlDataAdapter fieldAdapter;
         public static SqlDataAdapter containerAdapter;
+        public static SqlDataAdapter staffAdapter;
 
         public static void initializeCropSet()
         {
-            
+
             SqlConnector.getConnection().Open();
             cropDataAdapter = new SqlDataAdapter();
             cropDataAdapter.SelectCommand = new SqlCommand(Costants.CROP_UPDATE_QUERY, SqlConnector.getConnection());
@@ -28,23 +29,49 @@ namespace farmingprogram
             MainProgram.getSingleton().cropBindingSource.DataSource = table;
             SqlConnector.getConnection().Close();
         }
-
+        
         public static int deleteCrop(int cropId)
         {
             int returnCode = 0;
             try
             {
                 SqlConnector.getConnection().Open();
-                cropDataAdapter.DeleteCommand.Parameters.AddWithValue("@CropID", cropId);
+                cropDataAdapter.DeleteCommand.Parameters.Add(new SqlParameter("@CropID", SqlDbType.Int)).Value = cropId;
                 returnCode = cropDataAdapter.DeleteCommand.ExecuteNonQuery();
             }
             finally
             {
+                cropDataAdapter.DeleteCommand.Parameters.Clear();
                 SqlConnector.getConnection().Close();
             }
             return returnCode;
         }
 
+        public static void addCrop(Crop crop)
+        {
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropName", crop.cropName));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@DatePlanted", crop.datePlanted));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@EstimatedHarvestDate", crop.estimatedHarvestDate));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropNotes", crop.cropNotes));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FertilizerID", crop.fertilizerID));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropStatus", crop.cropStatus));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@LastDose", crop.lastDose));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@NextDose", crop.nextDose));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@DosedByStaff", crop.dosedByStaff));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropStorageType", crop.cropStorageType));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropMinMax", crop.cropMinMax));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldID", crop.fieldID));
+            try
+            {
+                SqlConnector.getConnection().Open();
+                cropDataAdapter.InsertCommand.ExecuteNonQuery();
+            }
+            finally
+            {
+                cropDataAdapter.InsertCommand.Parameters.Clear();
+                SqlConnector.getConnection().Close();
+            }
+        }
 
         public static void initializeFertilizerSet()
         {
@@ -81,7 +108,22 @@ namespace farmingprogram
             containerAdapter.InsertCommand = new SqlCommand(Costants.CONTAINER_INSERT_QUERY, SqlConnector.getConnection());
             DataTable table = new DataTable();
             containerAdapter.Fill(table);
-            //MainProgram.getSingleton().containerBindingSource.DataSource = table;
+            MainProgram.getSingleton().containerBindingSource.DataSource = table;
+            SqlConnector.getConnection().Close();
+        }
+
+
+        public static void initializeStaffSet()
+        {
+            SqlConnector.getConnection().Open();
+            staffAdapter = new SqlDataAdapter();
+            staffAdapter.SelectCommand = new SqlCommand(Costants.STAFF_UPDATE_QUERY, SqlConnector.getConnection());
+            staffAdapter.DeleteCommand = new SqlCommand(Costants.STAFF_DELETE_QUERY, SqlConnector.getConnection());
+            staffAdapter.InsertCommand = new SqlCommand(Costants.STAFF_INSERT_QUERY, SqlConnector.getConnection());
+            DataTable table = new DataTable();
+            staffAdapter.Fill(table);
+            System.Windows.Forms.MessageBox.Show("Staff: " + table.Rows.Count);
+            MainProgram.getSingleton().staffBindingSource.DataSource = table;
             SqlConnector.getConnection().Close();
         }
     }
