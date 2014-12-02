@@ -21,7 +21,7 @@ namespace farmingprogram
             SqlConnector.startConnection();
 
             cropDataAdapter = new SqlDataAdapter();
-            cropDataAdapter.SelectCommand = new SqlCommand(Costants.CROP_UPDATE_QUERY, SqlConnector.getConnection());
+            cropDataAdapter.SelectCommand = new SqlCommand(Costants.CROP_SELECTALL_QUERY, SqlConnector.getConnection());
             cropDataAdapter.DeleteCommand = new SqlCommand(Costants.CROP_DELETE_QUERY, SqlConnector.getConnection());
             cropDataAdapter.InsertCommand = new SqlCommand(Costants.CROP_INSERT_QUERY, SqlConnector.getConnection());
 
@@ -58,7 +58,7 @@ namespace farmingprogram
             SqlConnector.startConnection();
 
             fertilizerDataAdapter = new SqlDataAdapter();
-            fertilizerDataAdapter.SelectCommand = new SqlCommand(Costants.FERTILIZER_UPDATE_QUERY, SqlConnector.getConnection());
+            fertilizerDataAdapter.SelectCommand = new SqlCommand(Costants.FERTILIZER_SELECTALL_QUERY, SqlConnector.getConnection());
             fertilizerDataAdapter.DeleteCommand = new SqlCommand(Costants.FERTILIZER_DELETE_QUERY, SqlConnector.getConnection());
             fertilizerDataAdapter.InsertCommand = new SqlCommand(Costants.FERTILIZER_INSERT_QUERY, SqlConnector.getConnection());
 
@@ -95,7 +95,7 @@ namespace farmingprogram
             SqlConnector.startConnection();
 
             fieldDataAdapter = new SqlDataAdapter();
-            fieldDataAdapter.SelectCommand = new SqlCommand(Costants.FIELD_UPDATE_QUERY, SqlConnector.getConnection());
+            fieldDataAdapter.SelectCommand = new SqlCommand(Costants.FIELD_SELECTALL_QUERY, SqlConnector.getConnection());
             fieldDataAdapter.DeleteCommand = new SqlCommand(Costants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
             fieldDataAdapter.InsertCommand = new SqlCommand(Costants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
 
