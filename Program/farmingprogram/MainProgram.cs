@@ -151,13 +151,14 @@ namespace farmingprogram
             return false;
         }
 
-        private void cropRowEdited(object sender, EventArgs e)
+        private void cropRowEdited(object sender, DataGridViewCellEventArgs e)
         {
+            SqlConnector.getConnection().Open();
+            List<DataGridViewRow> editedRows = new List<DataGridViewRow>();
 
-            for (int i = 0; i < cropGridView.Rows.Count; i++ )
-            {
-                Crop crop = (Crop)this.cropBindingSource.DataSource;
-            }
+            //FarmingDataSet.cropDataAdapter.Update(cropGridView.Rows, "Crop");
+            
+            SqlConnector.getConnection().Close();
         }
     }
 }

@@ -21,9 +21,9 @@ namespace farmingprogram
 
             SqlConnector.getConnection().Open();
             cropDataAdapter = new SqlDataAdapter();
-            cropDataAdapter.SelectCommand = new SqlCommand(Costants.CROP_UPDATE_QUERY, SqlConnector.getConnection());
-            cropDataAdapter.DeleteCommand = new SqlCommand(Costants.CROP_DELETE_QUERY, SqlConnector.getConnection());
-            cropDataAdapter.InsertCommand = new SqlCommand(Costants.CROP_INSERT_QUERY, SqlConnector.getConnection());
+            cropDataAdapter.SelectCommand = new SqlCommand(Constants.CROP_UPDATE_QUERY, SqlConnector.getConnection());
+            cropDataAdapter.DeleteCommand = new SqlCommand(Constants.CROP_DELETE_QUERY, SqlConnector.getConnection());
+            cropDataAdapter.InsertCommand = new SqlCommand(Constants.CROP_INSERT_QUERY, SqlConnector.getConnection());
             DataTable table = new DataTable();
             cropDataAdapter.Fill(table);
             MainProgram.getSingleton().cropBindingSource.DataSource = table;
@@ -77,9 +77,9 @@ namespace farmingprogram
         {
             SqlConnector.getConnection().Open();
             fertilizerAdapter = new SqlDataAdapter();
-            fertilizerAdapter.SelectCommand = new SqlCommand(Costants.FERTILIZER_UPDATE_QUERY, SqlConnector.getConnection());
-            fertilizerAdapter.DeleteCommand = new SqlCommand(Costants.FERTILIZER_DELETE_QUERY, SqlConnector.getConnection());
-            fertilizerAdapter.InsertCommand = new SqlCommand(Costants.FERTILIZER_INSERT_QUERY, SqlConnector.getConnection());
+            fertilizerAdapter.SelectCommand = new SqlCommand(Constants.FERTILIZER_UPDATE_QUERY, SqlConnector.getConnection());
+            fertilizerAdapter.DeleteCommand = new SqlCommand(Constants.FERTILIZER_DELETE_QUERY, SqlConnector.getConnection());
+            fertilizerAdapter.InsertCommand = new SqlCommand(Constants.FERTILIZER_INSERT_QUERY, SqlConnector.getConnection());
             DataTable table = new DataTable();
             fertilizerAdapter.Fill(table);
             MainProgram.getSingleton().fertilizerBindingSource.DataSource = table;
@@ -90,9 +90,9 @@ namespace farmingprogram
         {
             SqlConnector.getConnection().Open();
             fieldAdapter = new SqlDataAdapter();
-            fieldAdapter.SelectCommand = new SqlCommand(Costants.FIELD_UPDATE_QUERY, SqlConnector.getConnection());
-            fieldAdapter.DeleteCommand = new SqlCommand(Costants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
-            fieldAdapter.InsertCommand = new SqlCommand(Costants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
+            fieldAdapter.SelectCommand = new SqlCommand(Constants.FIELD_UPDATE_QUERY, SqlConnector.getConnection());
+            fieldAdapter.DeleteCommand = new SqlCommand(Constants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
+            fieldAdapter.InsertCommand = new SqlCommand(Constants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
             DataTable table = new DataTable();
             fieldAdapter.Fill(table);
             MainProgram.getSingleton().fieldBindingSource.DataSource = table;
@@ -103,9 +103,9 @@ namespace farmingprogram
         {
             SqlConnector.getConnection().Open();
             containerAdapter = new SqlDataAdapter();
-            containerAdapter.SelectCommand = new SqlCommand(Costants.CONTAINER_UPDATE_QUERY, SqlConnector.getConnection());
-            containerAdapter.DeleteCommand = new SqlCommand(Costants.CONTAINER_DELETE_QUERY, SqlConnector.getConnection());
-            containerAdapter.InsertCommand = new SqlCommand(Costants.CONTAINER_INSERT_QUERY, SqlConnector.getConnection());
+            containerAdapter.SelectCommand = new SqlCommand(Constants.CONTAINER_UPDATE_QUERY, SqlConnector.getConnection());
+            containerAdapter.DeleteCommand = new SqlCommand(Constants.CONTAINER_DELETE_QUERY, SqlConnector.getConnection());
+            containerAdapter.InsertCommand = new SqlCommand(Constants.CONTAINER_INSERT_QUERY, SqlConnector.getConnection());
             DataTable table = new DataTable();
             containerAdapter.Fill(table);
             MainProgram.getSingleton().containerBindingSource.DataSource = table;
@@ -117,9 +117,9 @@ namespace farmingprogram
         {
             SqlConnector.getConnection().Open();
             staffAdapter = new SqlDataAdapter();
-            staffAdapter.SelectCommand = new SqlCommand(Costants.STAFF_UPDATE_QUERY, SqlConnector.getConnection());
-            staffAdapter.DeleteCommand = new SqlCommand(Costants.STAFF_DELETE_QUERY, SqlConnector.getConnection());
-            staffAdapter.InsertCommand = new SqlCommand(Costants.STAFF_INSERT_QUERY, SqlConnector.getConnection());
+            staffAdapter.SelectCommand = new SqlCommand(Constants.STAFF_UPDATE_QUERY, SqlConnector.getConnection());
+            staffAdapter.DeleteCommand = new SqlCommand(Constants.STAFF_DELETE_QUERY, SqlConnector.getConnection());
+            staffAdapter.InsertCommand = new SqlCommand(Constants.STAFF_INSERT_QUERY, SqlConnector.getConnection());
             DataTable table = new DataTable();
             staffAdapter.Fill(table);
             System.Windows.Forms.MessageBox.Show("Staff: " + table.Rows.Count);
