@@ -153,12 +153,12 @@ namespace farmingprogram
 
         private void cropRowEdited(object sender, DataGridViewCellEventArgs e)
         {
-            SqlConnector.getConnection().Open();
-            List<DataGridViewRow> editedRows = new List<DataGridViewRow>();
+            //SqlConnector.getConnection().Open();
+            //List<DataGridViewRow> editedRows = new List<DataGridViewRow>();
 
             //FarmingDataSet.cropDataAdapter.Update(cropGridView.Rows, "Crop");
             
-            SqlConnector.getConnection().Close();
+            //SqlConnector.getConnection().Close();
         }
     }
 }
