@@ -36,10 +36,7 @@ namespace farmingprogram
             FarmingDataSet.initializeFertilizerSet();
             FarmingDataSet.initializeContainerSet();
             FarmingDataSet.initializeCropSet();
-            FarmingDataSet.initializeVehicleSet();
             cropGridView.DataSource = cropBindingSource;
-            vehicleGridView.DataSource = vehicleBindingSource;
-
             this.cropGridView.DataError += new DataGridViewDataErrorEventHandler(DataGridView1_DataError);
             this.Refresh();
         }

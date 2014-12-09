@@ -22,9 +22,9 @@ namespace farmingprogram
         public static String STORAGE_SELECTALL_QUERY = "SELECT * FROM Storage";
 
         //Vehicles
-        public static String VEHICLES_DELETE_QUERY = "DELETE FROM Vehicle WHERE VehicleID = @VehicleID";
-        public static String VEHICLES_INSERT_QUERY = "INSERT INTO Vehicle (Type, Make, Model, Description, Capacity) VALUES (@Type, @Make, @Model, @Description, @Capacity)";
-        public static String VEHICLES_SELECTALL_QUERY = "SELECT * FROM Vehicle";
+        public static String VEHCILES_DELETE_QUERY = "DELETE FROM Vehicle WHERE VehicleID = @VehicleID";
+        public static String VEHCILES_INSERT_QUERY = "INSERT INTO Vehicle (Type, Make, Model, Description, Capacity) VALUES (@Type, @Make, @Model, @Description, @Capacity)";
+        public static String VEHCILES_SELECTALL_QUERY = "SELECT * FROM Vehicles";
 
         //Staff
         public static String STAFF_DELETE_QUERY = "DELETE FROM Staff WHERE StaffID = @StaffID";

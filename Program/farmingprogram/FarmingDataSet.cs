@@ -15,14 +15,12 @@ namespace farmingprogram
         public static SqlDataAdapter fieldAdapter;
         public static SqlDataAdapter containerAdapter;
         public static SqlDataAdapter staffAdapter;
-        public static SqlDataAdapter vehicleAdapter;
 
         public static DataTable cropDataTable;
         public static DataTable fertilizerDataTable;
         public static DataTable fieldDataTable;
         public static DataTable containerDataTable;
         public static DataTable staffDataTable;
-        public static DataTable vehicleDataTable;
 
         public static void initializeCropSet()
         {
@@ -101,9 +99,9 @@ namespace farmingprogram
             fieldAdapter.SelectCommand = new SqlCommand(Constants.FIELD_SELECTALL_QUERY, SqlConnector.getConnection());
             fieldAdapter.DeleteCommand = new SqlCommand(Constants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
             fieldAdapter.InsertCommand = new SqlCommand(Constants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
-            fieldDataTable = new DataTable();
-            fieldAdapter.Fill(fieldDataTable);
-            MainProgram.getSingleton().fieldBindingSource.DataSource = fieldDataTable;
+            DataTable table = new DataTable();
+            fieldAdapter.Fill(table);
+            MainProgram.getSingleton().fieldBindingSource.DataSource = table;
             SqlConnector.getConnection().Close();
         }
 
@@ -131,19 +129,6 @@ namespace farmingprogram
             staffDataTable = new DataTable();
             staffAdapter.Fill(staffDataTable);
             MainProgram.getSingleton().staffBindingSource.DataSource = staffDataTable;
-            SqlConnector.getConnection().Close();
-        }
-
-        public static void initializeVehicleSet()
-        {
-            SqlConnector.getConnection().Open();
-            vehicleAdapter = new SqlDataAdapter();
-            vehicleAdapter.SelectCommand = new SqlCommand(Constants.VEHICLES_SELECTALL_QUERY, SqlConnector.getConnection());
-            vehicleAdapter.DeleteCommand = new SqlCommand(Constants.VEHICLES_DELETE_QUERY, SqlConnector.getConnection());
-            vehicleAdapter.InsertCommand = new SqlCommand(Constants.VEHICLES_INSERT_QUERY, SqlConnector.getConnection());
-            vehicleDataTable = new DataTable();
-            vehicleAdapter.Fill(vehicleDataTable);
-            MainProgram.getSingleton().vehicleBindingSource.DataSource = vehicleDataTable;
             SqlConnector.getConnection().Close();
         }
     }

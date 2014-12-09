@@ -62,7 +62,6 @@
             resources.ApplyResources(this.passwordBox, "passwordBox");
             this.passwordBox.Name = "passwordBox";
             this.passwordBox.TextChanged += new System.EventHandler(this.passwordBox_TextChanged);
-            this.passwordBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.passwordBox_KeyDown);
             // 
             // loginBox
             // 
