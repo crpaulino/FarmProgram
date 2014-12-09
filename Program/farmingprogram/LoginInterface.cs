@@ -38,5 +38,13 @@ namespace farmingprogram
                 this.Close();
             }
         }
+
+      
+        //1307211 & 1312754
+        private void passwordBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                loginBox_Click(this, new EventArgs());
+        }
     }
 }
