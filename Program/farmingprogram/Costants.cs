@@ -15,7 +15,8 @@ namespace farmingprogram
         public static String CROP_DELETE_QUERY = "DELETE FROM Crop WHERE CropID = @CropId";
         public static String CROP_INSERT_QUERY = "INSERT INTO Crop (CropName, DatePanted, EstimatedHarvestDate, CropNotes, FertilizerID, CropStatus, LastDose, NextDose, DosedByStaff, CropStorageType, CropMinMax, FieldID) VALUES (@CropName, @DatePanted, @EstimatedHarvestDate, @CropNotes, @FertilizerID, @CropStatus, @LastDose, @NextDose, @DosedByStaff, @CropStorageType, @CropMinMax, @FieldID)";
         public static String CROP_SELECTALL_QUERY = "SELECT * FROM Crop";
-
+        public static String CROP_UPDATE_QUERY = @"UPDATE [dbo].[Crop] SET [CropName] = @CropName, [DatePlanted] = @DatePlanted, [EstimatedHarvestDate] = @EstimatedHarvestDate, [CropNotes] = @CropNotes, [FertilizerID] = @FertilizerID, [CropStatus] = @CropStatus, [LastDose] = @LastDose, [NextDose] = @NextDose, [DosedByStaff] = @DosedByStaff, [CropStorageType] = @CropStorageType, [CropMinMax] = @CropMinMax, [FieldID] = @FieldID WHERE (([CropID] = @Original_CropID) AND ([CropName] = @Original_CropName) AND ([DatePlanted] = @Original_DatePlanted) AND ([EstimatedHarvestDate] = @Original_EstimatedHarvestDate) AND ((@IsNull_CropNotes = 1 AND [CropNotes] IS NULL) OR ([CropNotes] = @Original_CropNotes)) AND ((@IsNull_FertilizerID = 1 AND [FertilizerID] IS NULL) OR ([FertilizerID] = @Original_FertilizerID)) AND ([CropStatus] = @Original_CropStatus) AND ((@IsNull_LastDose = 1 AND [LastDose] IS NULL) OR ([LastDose] = @Original_LastDose)) AND ((@IsNull_NextDose = 1 AND [NextDose] IS NULL) OR ([NextDose] = @Original_NextDose)) AND ((@IsNull_DosedByStaff = 1 AND [DosedByStaff] IS NULL) OR ([DosedByStaff] = @Original_DosedByStaff)) AND ([CropStorageType] = @Original_CropStorageType) AND ([CropMinMax] = @Original_CropMinMax) AND ([FieldID] = @Original_FieldID));
+SELECT CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, FertilizerID, CropStatus, LastDose, NextDose, DosedByStaff, CropStorageType, CropMinMax, FieldID FROM Crop WHERE (CropID = @CropID)";
         //Storage
         public static String STORAGE_DELETE_QUERY = "DELETE FROM Storage WHERE StorageID = @StorageID";
         public static String STORAGE_INSERT_QUERY = "INSERT INTO Storage (StorageName, StorageCapacity, StorageAvailable, StorageNote) VALUES (@StorageName, @StorageCapacity, @StorageAvailable, @StorageNote)";
@@ -45,11 +46,14 @@ namespace farmingprogram
         public static String FERTILIZER_DELETE_QUERY = "DELETE FROM Fertilizer WHERE FertilizerID = @FertilizerID)";
         public static String FERTILIZER_INSERT_QUERY = "INSERT INTO Fertilizer (fertName, fertDose, fertNote) VALUES (@fertName, @fertDose, @fertNote)";
         public static String FERTILIZER_SELECTALL_QUERY = "SELECT * FROM Fertilizer";
+        public static String FERTILIZER_UPDATE_QUERY = @"UPDATE [dbo].[Fertilizer] SET [fertName] = @fertName, [fertDose] = @fertDose, [fertNote] = @fertNote WHERE (([FertilizerID] = @Original_FertilizerID) AND ([fertName] = @Original_fertName) AND ([fertDose] = @Original_fertDose) AND ([fertNote] = @Original_fertNote));
+SELECT FertilizerID, fertName, fertDose, fertNote FROM Fertilizer WHERE (FertilizerID = @FertilizerID)";
 
         //Field
         public static String FIELD_DELETE_QUERY = "DELETE FROM Field WHERE FieldID = @FieldID";
         public static String FIELD_INSERT_QUERY = "INSERT INTO Field (FieldName, FieldStatus, FieldNotes) VALUES (@FieldName, @FieldStatus, @FieldNotes)";
         public static String FIELD_SELECTALL_QUERY = "SELECT * FROM Field";
-
+        public static String FIELD_UPDATE_QUERY = @"UPDATE [dbo].[Harvest] SET [HarvestStartDate] = @HarvestStartDate, [HarvestEndDate] = @HarvestEndDate, [StaffRequired] = @StaffRequired, [ContainerID] = @ContainerID, [CropID] = @CropID, [FieldID] = @FieldID, [StaffID] = @StaffID, [VehicleID] = @VehicleID, [StorageID] = @StorageID WHERE (([HarvestID] = @Original_HarvestID) AND ([HarvestStartDate] = @Original_HarvestStartDate) AND ([HarvestEndDate] = @Original_HarvestEndDate) AND ([StaffRequired] = @Original_StaffRequired) AND ([ContainerID] = @Original_ContainerID) AND ([CropID] = @Original_CropID) AND ([FieldID] = @Original_FieldID) AND ([StaffID] = @Original_StaffID) AND ([VehicleID] = @Original_VehicleID) AND ([StorageID] = @Original_StorageID));
+SELECT HarvestID, HarvestStartDate, HarvestEndDate, StaffRequired, ContainerID, CropID, FieldID, StaffID, VehicleID, StorageID FROM Harvest WHERE (HarvestID = @HarvestID)";
     }
 }

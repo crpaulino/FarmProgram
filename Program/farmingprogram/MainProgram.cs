@@ -51,11 +51,11 @@ namespace farmingprogram
                 while (toDelete-- > 0)
                 {
                     int indexToDelete = cropGridView.SelectedRows[toDelete].Index;
-                    if (FarmingDataSet.deleteCrop((int)cropGridView.Rows[indexToDelete].Cells["CropID"].Value) == 1)
-                    {
+                    //if (FarmingDataSet.deleteCrop((int)cropGridView.Rows[indexToDelete].Cells["CropID"].Value) == 1)
+                   // {
                         this.cropGridView.Rows.Remove(cropGridView.Rows[indexToDelete]);
                         notifyDelete = true;
-                    }
+                   // }
                 }
                 if (notifyDelete)
                 {
@@ -115,12 +115,22 @@ namespace farmingprogram
         #region Fertilizer tab
         private void removeFertilizer_Click(object sender, EventArgs e)
         {
+            Boolean notifyDelete = false;
             if (fertilizerGridView.SelectedRows.Count > 0)
             {
-                int toDelete = fertilizerGridView.SelectedRows.Count;
+                int toDelete = cropGridView.SelectedRows.Count;
                 while (toDelete-- > 0)
                 {
-                   
+                    int indexToDelete = cropGridView.SelectedRows[toDelete].Index;
+                    //if (FarmingDataSet.deleteCrop((int)fertilizerGridView.Rows[indexToDelete].Cells["FertilizerID"].Value) == 1)
+                    //{
+                        this.cropGridView.Rows.Remove(fertilizerGridView.Rows[indexToDelete]);
+                        notifyDelete = true;
+                   // }
+                }
+                if (notifyDelete)
+                {
+                    MessageBox.Show("The data was deleted sucessfully.");
                 }
             }
             else
@@ -135,9 +145,9 @@ namespace farmingprogram
             {
                 return;
             }
-            /*fertilizerTableAdapter.Insert(fertilizerName.Text, fertilizerDose.Text, fertilizerNote.Text);
-            this.fertilizerTableAdapter.Fill(this.farmingDataSet.Fertilizer);*/
-            fertilizerGridView.Refresh();
+            Fertilizer fertilizer = new Fertilizer(0, fertilizerName.Text, fertilizerDose.Text, fertilizerNote.Text);
+            FarmingDataSet.addFertilizer(fertilizer);
+            FarmingDataSet.initializeFertilizerSet();
         }
         #endregion
 
@@ -161,9 +171,60 @@ namespace farmingprogram
                 FarmingDataSet.cropDataAdapter.Update(FarmingDataSet.cropDataTable);
                 SqlConnector.getConnection().Close();
             }
-            catch (Exception ex)
+            catch (Exception ignore)
             {
+            }
+        }
+        
+        private void fertilizerRowEdited(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                SqlConnector.getConnection().Open();
+                Validate();
+                fertilizerBindingSource.EndEdit();
+                FarmingDataSet.fertilizerAdapter.Update(FarmingDataSet.fertilizerDataTable);
+                SqlConnector.getConnection().Close();
+            }
+            catch (Exception ignore)
+            {
+            }
+        }
 
+        private void addFieldButton_Click(object sender, EventArgs e)
+        {
+            if (handleNullOrWhitespace(fieldNameBox) || handleNullOrWhitespace(fieldStatusBox))
+            {
+                return;
+            }
+            Field field = new Field(0, fieldNameBox.Text, fieldStatusBox.Text, fieldNotesBox.Text);
+            FarmingDataSet.addField(field);
+            FarmingDataSet.initializeFieldSet();
+        }
+
+        private static void removeRow(DataGridView dgv, String idCellName, SqlDataAdapter adapter)
+        {
+            Boolean notifyDelete = false;
+            if (dgv.SelectedRows.Count > 0)
+            {
+                int toDelete = dgv.SelectedRows.Count;
+                while (toDelete-- > 0)
+                {
+                    int indexToDelete = dgv.SelectedRows[toDelete].Index;
+                    if (FarmingDataSet.deleteFromTable(adapter, "@FertilizerID", (int)dgv.Rows[indexToDelete].Cells[idCellName].Value) == 1)
+                    {
+                        dgv.Rows.Remove(dgv.Rows[indexToDelete]);
+                        notifyDelete = true;
+                    }
+                }
+                if (notifyDelete)
+                {
+                    MessageBox.Show("The data was deleted sucessfully.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("You have nothing selected to delete");
             }
         }
     }

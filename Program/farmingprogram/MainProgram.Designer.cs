@@ -40,14 +40,15 @@
             this.fertilizerName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.fertilizerGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fertNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fertDoseDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fertNoteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fertilizerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.CropTab = new System.Windows.Forms.TabPage();
             this.cropGridView = new System.Windows.Forms.DataGridView();
-            this.cropNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CropID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cropNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.datePlantedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.estimatedHarvestDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cropNotesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,29 +92,21 @@
             this.removeCropButton = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.FieldTab = new System.Windows.Forms.TabPage();
+            this.removeFieldButton = new System.Windows.Forms.Button();
+            this.addFieldButton = new System.Windows.Forms.Button();
+            this.fieldStatusBox = new System.Windows.Forms.TextBox();
+            this.fieldNotesBox = new System.Windows.Forms.TextBox();
+            this.fieldNameBox = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.fieldGridView = new System.Windows.Forms.DataGridView();
-            this.HarvestTab = new System.Windows.Forms.TabPage();
-            this.harvestGridView = new System.Windows.Forms.DataGridView();
-            this.harvestBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.vehicleGridView = new System.Windows.Forms.DataGridView();
-            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.makeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.capacityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vehicleBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.fertilizerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.containerGridView = new System.Windows.Forms.DataGridView();
-            this.contNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.contSizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.containerIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fieldIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fieldNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fieldNotesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fieldStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fieldIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.HarvestTab = new System.Windows.Forms.TabPage();
+            this.harvestGridView = new System.Windows.Forms.DataGridView();
             this.harvestStartDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.harvestEndDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.staffRequiredDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -123,6 +116,21 @@
             this.staffIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vehicleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.storageIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.harvestBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.vehicleGridView = new System.Windows.Forms.DataGridView();
+            this.typeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.makeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.capacityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vehicleBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.containerGridView = new System.Windows.Forms.DataGridView();
+            this.contNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.contSizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.containerIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FertilizerTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fertilizerGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fertilizerBindingSource)).BeginInit();
@@ -141,7 +149,6 @@
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.vehicleGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehicleBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fertilizerBindingSource1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.containerGridView)).BeginInit();
             this.SuspendLayout();
@@ -238,15 +245,24 @@
             this.fertilizerGridView.AutoGenerateColumns = false;
             this.fertilizerGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.fertilizerGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
             this.fertNameDataGridViewTextBoxColumn,
             this.fertDoseDataGridViewTextBoxColumn,
             this.fertNoteDataGridViewTextBoxColumn});
             this.fertilizerGridView.DataSource = this.fertilizerBindingSource;
-            this.fertilizerGridView.Location = new System.Drawing.Point(48, 47);
+            this.fertilizerGridView.Location = new System.Drawing.Point(37, 41);
             this.fertilizerGridView.Name = "fertilizerGridView";
             this.fertilizerGridView.RowHeadersWidth = 45;
             this.fertilizerGridView.Size = new System.Drawing.Size(1245, 500);
             this.fertilizerGridView.TabIndex = 0;
+            this.fertilizerGridView.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.fertilizerRowEdited);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "fertilizerId";
+            this.dataGridViewTextBoxColumn1.HeaderText = "fertilizerId";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Visible = false;
             // 
             // fertNameDataGridViewTextBoxColumn
             // 
@@ -315,8 +331,8 @@
             this.cropGridView.AutoGenerateColumns = false;
             this.cropGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.cropGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.cropNameDataGridViewTextBoxColumn,
             this.CropID,
+            this.cropNameDataGridViewTextBoxColumn,
             this.datePlantedDataGridViewTextBoxColumn,
             this.estimatedHarvestDateDataGridViewTextBoxColumn,
             this.cropNotesDataGridViewTextBoxColumn,
@@ -335,12 +351,6 @@
             this.cropGridView.TabIndex = 46;
             this.cropGridView.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.cropRowEdited);
             // 
-            // cropNameDataGridViewTextBoxColumn
-            // 
-            this.cropNameDataGridViewTextBoxColumn.DataPropertyName = "cropName";
-            this.cropNameDataGridViewTextBoxColumn.HeaderText = "Crop Name";
-            this.cropNameDataGridViewTextBoxColumn.Name = "cropNameDataGridViewTextBoxColumn";
-            // 
             // CropID
             // 
             this.CropID.DataPropertyName = "cropId";
@@ -348,6 +358,12 @@
             this.CropID.Name = "CropID";
             this.CropID.ReadOnly = true;
             this.CropID.Visible = false;
+            // 
+            // cropNameDataGridViewTextBoxColumn
+            // 
+            this.cropNameDataGridViewTextBoxColumn.DataPropertyName = "cropName";
+            this.cropNameDataGridViewTextBoxColumn.HeaderText = "Crop Name";
+            this.cropNameDataGridViewTextBoxColumn.Name = "cropNameDataGridViewTextBoxColumn";
             // 
             // datePlantedDataGridViewTextBoxColumn
             // 
@@ -699,6 +715,14 @@
             // 
             // FieldTab
             // 
+            this.FieldTab.Controls.Add(this.removeFieldButton);
+            this.FieldTab.Controls.Add(this.addFieldButton);
+            this.FieldTab.Controls.Add(this.fieldStatusBox);
+            this.FieldTab.Controls.Add(this.fieldNotesBox);
+            this.FieldTab.Controls.Add(this.fieldNameBox);
+            this.FieldTab.Controls.Add(this.label18);
+            this.FieldTab.Controls.Add(this.label17);
+            this.FieldTab.Controls.Add(this.label16);
             this.FieldTab.Controls.Add(this.fieldGridView);
             this.FieldTab.Location = new System.Drawing.Point(4, 22);
             this.FieldTab.Name = "FieldTab";
@@ -708,21 +732,113 @@
             this.FieldTab.Text = "Fields";
             this.FieldTab.UseVisualStyleBackColor = true;
             // 
+            // removeFieldButton
+            // 
+            this.removeFieldButton.Location = new System.Drawing.Point(1227, 613);
+            this.removeFieldButton.Name = "removeFieldButton";
+            this.removeFieldButton.Size = new System.Drawing.Size(116, 23);
+            this.removeFieldButton.TabIndex = 10;
+            this.removeFieldButton.Text = "Remove Field";
+            this.removeFieldButton.UseVisualStyleBackColor = true;
+            // 
+            // addFieldButton
+            // 
+            this.addFieldButton.Location = new System.Drawing.Point(1105, 613);
+            this.addFieldButton.Name = "addFieldButton";
+            this.addFieldButton.Size = new System.Drawing.Size(116, 23);
+            this.addFieldButton.TabIndex = 9;
+            this.addFieldButton.Text = "Add Field";
+            this.addFieldButton.UseVisualStyleBackColor = true;
+            this.addFieldButton.Click += new System.EventHandler(this.addFieldButton_Click);
+            // 
+            // fieldStatusBox
+            // 
+            this.fieldStatusBox.Location = new System.Drawing.Point(318, 574);
+            this.fieldStatusBox.Name = "fieldStatusBox";
+            this.fieldStatusBox.Size = new System.Drawing.Size(100, 20);
+            this.fieldStatusBox.TabIndex = 5;
+            // 
+            // fieldNotesBox
+            // 
+            this.fieldNotesBox.Location = new System.Drawing.Point(183, 574);
+            this.fieldNotesBox.Name = "fieldNotesBox";
+            this.fieldNotesBox.Size = new System.Drawing.Size(100, 20);
+            this.fieldNotesBox.TabIndex = 4;
+            // 
+            // fieldNameBox
+            // 
+            this.fieldNameBox.Location = new System.Drawing.Point(41, 575);
+            this.fieldNameBox.Name = "fieldNameBox";
+            this.fieldNameBox.Size = new System.Drawing.Size(100, 20);
+            this.fieldNameBox.TabIndex = 3;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(315, 559);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(62, 13);
+            this.label18.TabIndex = 2;
+            this.label18.Text = "Field Status";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(180, 558);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(60, 13);
+            this.label17.TabIndex = 2;
+            this.label17.Text = "Field Notes";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(38, 558);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(60, 13);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Field Name";
+            // 
             // fieldGridView
             // 
             this.fieldGridView.AutoGenerateColumns = false;
             this.fieldGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.fieldGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.fieldIDDataGridViewTextBoxColumn1,
             this.fieldNameDataGridViewTextBoxColumn,
             this.fieldNotesDataGridViewTextBoxColumn,
-            this.fieldStatusDataGridViewTextBoxColumn,
-            this.fieldIDDataGridViewTextBoxColumn1});
+            this.fieldStatusDataGridViewTextBoxColumn});
             this.fieldGridView.DataSource = this.fieldBindingSource;
-            this.fieldGridView.Location = new System.Drawing.Point(55, 79);
+            this.fieldGridView.Location = new System.Drawing.Point(32, 37);
             this.fieldGridView.Name = "fieldGridView";
             this.fieldGridView.RowHeadersWidth = 45;
             this.fieldGridView.Size = new System.Drawing.Size(1245, 500);
             this.fieldGridView.TabIndex = 1;
+            // 
+            // fieldIDDataGridViewTextBoxColumn1
+            // 
+            this.fieldIDDataGridViewTextBoxColumn1.DataPropertyName = "fieldID";
+            this.fieldIDDataGridViewTextBoxColumn1.HeaderText = "fieldID";
+            this.fieldIDDataGridViewTextBoxColumn1.Name = "fieldIDDataGridViewTextBoxColumn1";
+            this.fieldIDDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // fieldNameDataGridViewTextBoxColumn
+            // 
+            this.fieldNameDataGridViewTextBoxColumn.DataPropertyName = "fieldName";
+            this.fieldNameDataGridViewTextBoxColumn.HeaderText = "Field Name";
+            this.fieldNameDataGridViewTextBoxColumn.Name = "fieldNameDataGridViewTextBoxColumn";
+            // 
+            // fieldNotesDataGridViewTextBoxColumn
+            // 
+            this.fieldNotesDataGridViewTextBoxColumn.DataPropertyName = "fieldNotes";
+            this.fieldNotesDataGridViewTextBoxColumn.HeaderText = "Field Notes";
+            this.fieldNotesDataGridViewTextBoxColumn.Name = "fieldNotesDataGridViewTextBoxColumn";
+            // 
+            // fieldStatusDataGridViewTextBoxColumn
+            // 
+            this.fieldStatusDataGridViewTextBoxColumn.DataPropertyName = "fieldStatus";
+            this.fieldStatusDataGridViewTextBoxColumn.HeaderText = "Field Status";
+            this.fieldStatusDataGridViewTextBoxColumn.Name = "fieldStatusDataGridViewTextBoxColumn";
             // 
             // HarvestTab
             // 
@@ -750,157 +866,11 @@
             this.vehicleDataGridViewTextBoxColumn,
             this.storageIDDataGridViewTextBoxColumn});
             this.harvestGridView.DataSource = this.harvestBindingSource;
-            this.harvestGridView.Location = new System.Drawing.Point(55, 79);
+            this.harvestGridView.Location = new System.Drawing.Point(36, 45);
             this.harvestGridView.Name = "harvestGridView";
             this.harvestGridView.RowHeadersWidth = 45;
             this.harvestGridView.Size = new System.Drawing.Size(1245, 500);
             this.harvestGridView.TabIndex = 1;
-            // 
-            // harvestBindingSource
-            // 
-            this.harvestBindingSource.DataSource = typeof(farmingprogram.Harvest);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.vehicleGridView);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1355, 659);
-            this.tabPage1.TabIndex = 4;
-            this.tabPage1.Text = "Vehicles";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // vehicleGridView
-            // 
-            this.vehicleGridView.AutoGenerateColumns = false;
-            this.vehicleGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.vehicleGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.typeDataGridViewTextBoxColumn,
-            this.makeDataGridViewTextBoxColumn,
-            this.modelDataGridViewTextBoxColumn,
-            this.descriptionDataGridViewTextBoxColumn,
-            this.capacityDataGridViewTextBoxColumn});
-            this.vehicleGridView.DataSource = this.vehicleBindingSource;
-            this.vehicleGridView.Location = new System.Drawing.Point(55, 79);
-            this.vehicleGridView.Name = "vehicleGridView";
-            this.vehicleGridView.RowHeadersWidth = 45;
-            this.vehicleGridView.Size = new System.Drawing.Size(1245, 500);
-            this.vehicleGridView.TabIndex = 1;
-            // 
-            // typeDataGridViewTextBoxColumn
-            // 
-            this.typeDataGridViewTextBoxColumn.DataPropertyName = "type";
-            this.typeDataGridViewTextBoxColumn.HeaderText = "type";
-            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
-            // 
-            // makeDataGridViewTextBoxColumn
-            // 
-            this.makeDataGridViewTextBoxColumn.DataPropertyName = "make";
-            this.makeDataGridViewTextBoxColumn.HeaderText = "make";
-            this.makeDataGridViewTextBoxColumn.Name = "makeDataGridViewTextBoxColumn";
-            // 
-            // modelDataGridViewTextBoxColumn
-            // 
-            this.modelDataGridViewTextBoxColumn.DataPropertyName = "model";
-            this.modelDataGridViewTextBoxColumn.HeaderText = "model";
-            this.modelDataGridViewTextBoxColumn.Name = "modelDataGridViewTextBoxColumn";
-            // 
-            // descriptionDataGridViewTextBoxColumn
-            // 
-            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "description";
-            this.descriptionDataGridViewTextBoxColumn.HeaderText = "description";
-            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
-            // 
-            // capacityDataGridViewTextBoxColumn
-            // 
-            this.capacityDataGridViewTextBoxColumn.DataPropertyName = "capacity";
-            this.capacityDataGridViewTextBoxColumn.HeaderText = "capacity";
-            this.capacityDataGridViewTextBoxColumn.Name = "capacityDataGridViewTextBoxColumn";
-            // 
-            // vehicleBindingSource
-            // 
-            this.vehicleBindingSource.DataSource = typeof(farmingprogram.Vehicle);
-            // 
-            // fertilizerBindingSource1
-            // 
-            this.fertilizerBindingSource1.DataSource = typeof(farmingprogram.Fertilizer);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.containerGridView);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1355, 659);
-            this.tabPage2.TabIndex = 5;
-            this.tabPage2.Text = "Containers";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // containerGridView
-            // 
-            this.containerGridView.AutoGenerateColumns = false;
-            this.containerGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.containerGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.contNameDataGridViewTextBoxColumn,
-            this.contTypeDataGridViewTextBoxColumn,
-            this.contSizeDataGridViewTextBoxColumn,
-            this.containerIDDataGridViewTextBoxColumn1});
-            this.containerGridView.DataSource = this.containerBindingSource;
-            this.containerGridView.Location = new System.Drawing.Point(55, 79);
-            this.containerGridView.Name = "containerGridView";
-            this.containerGridView.RowHeadersWidth = 45;
-            this.containerGridView.Size = new System.Drawing.Size(1245, 500);
-            this.containerGridView.TabIndex = 1;
-            // 
-            // contNameDataGridViewTextBoxColumn
-            // 
-            this.contNameDataGridViewTextBoxColumn.DataPropertyName = "contName";
-            this.contNameDataGridViewTextBoxColumn.HeaderText = "contName";
-            this.contNameDataGridViewTextBoxColumn.Name = "contNameDataGridViewTextBoxColumn";
-            // 
-            // contTypeDataGridViewTextBoxColumn
-            // 
-            this.contTypeDataGridViewTextBoxColumn.DataPropertyName = "contType";
-            this.contTypeDataGridViewTextBoxColumn.HeaderText = "contType";
-            this.contTypeDataGridViewTextBoxColumn.Name = "contTypeDataGridViewTextBoxColumn";
-            // 
-            // contSizeDataGridViewTextBoxColumn
-            // 
-            this.contSizeDataGridViewTextBoxColumn.DataPropertyName = "contSize";
-            this.contSizeDataGridViewTextBoxColumn.HeaderText = "contSize";
-            this.contSizeDataGridViewTextBoxColumn.Name = "contSizeDataGridViewTextBoxColumn";
-            // 
-            // containerIDDataGridViewTextBoxColumn1
-            // 
-            this.containerIDDataGridViewTextBoxColumn1.DataPropertyName = "ContainerID";
-            this.containerIDDataGridViewTextBoxColumn1.HeaderText = "ContainerID";
-            this.containerIDDataGridViewTextBoxColumn1.Name = "containerIDDataGridViewTextBoxColumn1";
-            // 
-            // fieldNameDataGridViewTextBoxColumn
-            // 
-            this.fieldNameDataGridViewTextBoxColumn.DataPropertyName = "fieldName";
-            this.fieldNameDataGridViewTextBoxColumn.HeaderText = "Field Name";
-            this.fieldNameDataGridViewTextBoxColumn.Name = "fieldNameDataGridViewTextBoxColumn";
-            // 
-            // fieldNotesDataGridViewTextBoxColumn
-            // 
-            this.fieldNotesDataGridViewTextBoxColumn.DataPropertyName = "fieldNotes";
-            this.fieldNotesDataGridViewTextBoxColumn.HeaderText = "Field Notes";
-            this.fieldNotesDataGridViewTextBoxColumn.Name = "fieldNotesDataGridViewTextBoxColumn";
-            // 
-            // fieldStatusDataGridViewTextBoxColumn
-            // 
-            this.fieldStatusDataGridViewTextBoxColumn.DataPropertyName = "fieldStatus";
-            this.fieldStatusDataGridViewTextBoxColumn.HeaderText = "Field Status";
-            this.fieldStatusDataGridViewTextBoxColumn.Name = "fieldStatusDataGridViewTextBoxColumn";
-            // 
-            // fieldIDDataGridViewTextBoxColumn1
-            // 
-            this.fieldIDDataGridViewTextBoxColumn1.DataPropertyName = "fieldID";
-            this.fieldIDDataGridViewTextBoxColumn1.HeaderText = "fieldID";
-            this.fieldIDDataGridViewTextBoxColumn1.Name = "fieldIDDataGridViewTextBoxColumn1";
-            this.fieldIDDataGridViewTextBoxColumn1.Visible = false;
             // 
             // harvestStartDateDataGridViewTextBoxColumn
             // 
@@ -977,6 +947,123 @@
             this.storageIDDataGridViewTextBoxColumn.HeaderText = "storageID";
             this.storageIDDataGridViewTextBoxColumn.Name = "storageIDDataGridViewTextBoxColumn";
             // 
+            // harvestBindingSource
+            // 
+            this.harvestBindingSource.DataSource = typeof(farmingprogram.Harvest);
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.vehicleGridView);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1355, 659);
+            this.tabPage1.TabIndex = 4;
+            this.tabPage1.Text = "Vehicles";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // vehicleGridView
+            // 
+            this.vehicleGridView.AutoGenerateColumns = false;
+            this.vehicleGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.vehicleGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.typeDataGridViewTextBoxColumn,
+            this.makeDataGridViewTextBoxColumn,
+            this.modelDataGridViewTextBoxColumn,
+            this.descriptionDataGridViewTextBoxColumn,
+            this.capacityDataGridViewTextBoxColumn});
+            this.vehicleGridView.DataSource = this.vehicleBindingSource;
+            this.vehicleGridView.Location = new System.Drawing.Point(29, 41);
+            this.vehicleGridView.Name = "vehicleGridView";
+            this.vehicleGridView.RowHeadersWidth = 45;
+            this.vehicleGridView.Size = new System.Drawing.Size(1245, 500);
+            this.vehicleGridView.TabIndex = 1;
+            // 
+            // typeDataGridViewTextBoxColumn
+            // 
+            this.typeDataGridViewTextBoxColumn.DataPropertyName = "type";
+            this.typeDataGridViewTextBoxColumn.HeaderText = "type";
+            this.typeDataGridViewTextBoxColumn.Name = "typeDataGridViewTextBoxColumn";
+            // 
+            // makeDataGridViewTextBoxColumn
+            // 
+            this.makeDataGridViewTextBoxColumn.DataPropertyName = "make";
+            this.makeDataGridViewTextBoxColumn.HeaderText = "make";
+            this.makeDataGridViewTextBoxColumn.Name = "makeDataGridViewTextBoxColumn";
+            // 
+            // modelDataGridViewTextBoxColumn
+            // 
+            this.modelDataGridViewTextBoxColumn.DataPropertyName = "model";
+            this.modelDataGridViewTextBoxColumn.HeaderText = "model";
+            this.modelDataGridViewTextBoxColumn.Name = "modelDataGridViewTextBoxColumn";
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "description";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            // 
+            // capacityDataGridViewTextBoxColumn
+            // 
+            this.capacityDataGridViewTextBoxColumn.DataPropertyName = "capacity";
+            this.capacityDataGridViewTextBoxColumn.HeaderText = "capacity";
+            this.capacityDataGridViewTextBoxColumn.Name = "capacityDataGridViewTextBoxColumn";
+            // 
+            // vehicleBindingSource
+            // 
+            this.vehicleBindingSource.DataSource = typeof(farmingprogram.Vehicle);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.containerGridView);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1355, 659);
+            this.tabPage2.TabIndex = 5;
+            this.tabPage2.Text = "Containers";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // containerGridView
+            // 
+            this.containerGridView.AutoGenerateColumns = false;
+            this.containerGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.containerGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.contNameDataGridViewTextBoxColumn,
+            this.contTypeDataGridViewTextBoxColumn,
+            this.contSizeDataGridViewTextBoxColumn,
+            this.containerIDDataGridViewTextBoxColumn1});
+            this.containerGridView.DataSource = this.containerBindingSource;
+            this.containerGridView.Location = new System.Drawing.Point(30, 40);
+            this.containerGridView.Name = "containerGridView";
+            this.containerGridView.RowHeadersWidth = 45;
+            this.containerGridView.Size = new System.Drawing.Size(1245, 500);
+            this.containerGridView.TabIndex = 1;
+            // 
+            // contNameDataGridViewTextBoxColumn
+            // 
+            this.contNameDataGridViewTextBoxColumn.DataPropertyName = "contName";
+            this.contNameDataGridViewTextBoxColumn.HeaderText = "contName";
+            this.contNameDataGridViewTextBoxColumn.Name = "contNameDataGridViewTextBoxColumn";
+            // 
+            // contTypeDataGridViewTextBoxColumn
+            // 
+            this.contTypeDataGridViewTextBoxColumn.DataPropertyName = "contType";
+            this.contTypeDataGridViewTextBoxColumn.HeaderText = "contType";
+            this.contTypeDataGridViewTextBoxColumn.Name = "contTypeDataGridViewTextBoxColumn";
+            // 
+            // contSizeDataGridViewTextBoxColumn
+            // 
+            this.contSizeDataGridViewTextBoxColumn.DataPropertyName = "contSize";
+            this.contSizeDataGridViewTextBoxColumn.HeaderText = "contSize";
+            this.contSizeDataGridViewTextBoxColumn.Name = "contSizeDataGridViewTextBoxColumn";
+            // 
+            // containerIDDataGridViewTextBoxColumn1
+            // 
+            this.containerIDDataGridViewTextBoxColumn1.DataPropertyName = "ContainerID";
+            this.containerIDDataGridViewTextBoxColumn1.HeaderText = "ContainerID";
+            this.containerIDDataGridViewTextBoxColumn1.Name = "containerIDDataGridViewTextBoxColumn1";
+            // 
             // MainProgram
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1000,6 +1087,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.cropBindingSource)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.FieldTab.ResumeLayout(false);
+            this.FieldTab.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fieldGridView)).EndInit();
             this.HarvestTab.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.harvestGridView)).EndInit();
@@ -1007,7 +1095,6 @@
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.vehicleGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehicleBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fertilizerBindingSource1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.containerGridView)).EndInit();
             this.ResumeLayout(false);
@@ -1061,23 +1148,6 @@
         public System.Windows.Forms.BindingSource containerBindingSource;
         public System.Windows.Forms.BindingSource fertilizerBindingSource;
         public System.Windows.Forms.BindingSource staffBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cropNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CropID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn datePlantedDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn estimatedHarvestDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cropNotesDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn fertilizerIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cropStatusDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastDoseDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nextDoseDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dosedByStaffDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn cropStorageTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cropMinMaxDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn fieldIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource fertilizerBindingSource1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fertNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fertDoseDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fertNoteDataGridViewTextBoxColumn;
         private System.Windows.Forms.TabPage FieldTab;
         private System.Windows.Forms.DataGridView fieldGridView;
         private System.Windows.Forms.TabPage HarvestTab;
@@ -1096,10 +1166,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn contTypeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn contSizeDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn containerIDDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fieldNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fieldNotesDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fieldStatusDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fieldIDDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn harvestStartDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn harvestEndDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn staffRequiredDataGridViewTextBoxColumn;
@@ -1109,6 +1175,35 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn staffIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn vehicleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn storageIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox fieldStatusBox;
+        private System.Windows.Forms.TextBox fieldNotesBox;
+        private System.Windows.Forms.TextBox fieldNameBox;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button removeFieldButton;
+        private System.Windows.Forms.Button addFieldButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fertNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fertDoseDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fertNoteDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CropID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cropNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn datePlantedDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn estimatedHarvestDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cropNotesDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn fertilizerIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cropStatusDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastDoseDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nextDoseDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dosedByStaffDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn cropStorageTypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cropMinMaxDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewComboBoxColumn fieldIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fieldIDDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fieldNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fieldNotesDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fieldStatusDataGridViewTextBoxColumn;
 
     }
 }

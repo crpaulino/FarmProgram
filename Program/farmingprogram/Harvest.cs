@@ -10,11 +10,11 @@ namespace farmingprogram
     {
         //Attributes         
         private DateTime HarvestStartDate, HarvestEndDate;
-        private int StaffRequired, ContainerID, CropID, FieldID, StaffID, VehicleID, StorageID; 
-
+        private int harvestID, StaffRequired, ContainerID, CropID, FieldID, StaffID, VehicleID, StorageID;
         //Constructors
-        public Harvest (DateTime HarvestStartDate, DateTime HarvestEndDate, int StaffRequired, int ContainerID, int CropID, int FieldID, int StaffID, int VehicleID, int StorageID)
+        public Harvest (int HarvestID, DateTime HarvestStartDate, DateTime HarvestEndDate, int StaffRequired, int ContainerID, int CropID, int FieldID, int StaffID, int VehicleID, int StorageID)
         {
+            this.harvestID = HarvestID;
             this.HarvestStartDate = HarvestStartDate; 
             this.HarvestEndDate = HarvestEndDate; 
 			this.StaffRequired = StaffRequired; 
@@ -55,6 +55,12 @@ namespace farmingprogram
         {
             get { return CropID; }
             set { CropID = value; }
+        }
+
+        public int HarvestID
+        {
+            get { return harvestID; }
+            set { harvestID = value; }
         }
 
         public int fieldID
