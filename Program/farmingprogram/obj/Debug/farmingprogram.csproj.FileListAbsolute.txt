@@ -71,3 +71,13 @@ C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farming
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.pdb
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb
+C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\database\DbFarmProgram.mdf
+C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\database\DbFarmProgram_log.ldf
+C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe
+C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.pdb
+C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csprojResolveAssemblyReference.cache
+C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.LoginInterface.resources
+C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.MainProgram.resources
+C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.SplashScreen.resources
+C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.Properties.Resources.resources
+C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csproj.GenerateResource.Cache
