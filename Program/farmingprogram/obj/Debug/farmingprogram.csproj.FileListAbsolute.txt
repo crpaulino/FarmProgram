@@ -1,4 +1,3 @@
-C:\Users\sp1062\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csprojResolveAssemblyReference.cache
 C:\Users\sp1062\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.LoginInterface.resources
 C:\Users\sp1062\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.MainProgram.resources
 C:\Users\sp1062\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.SplashScreen.resources

@@ -36,7 +36,6 @@ namespace farmingprogram
             FarmingDataSet.initializeFertilizerSet();
             FarmingDataSet.initializeContainerSet();
             FarmingDataSet.initializeCropSet();
-            cropGridView.DataSource = cropBindingSource;
             this.Refresh();
         }
 
