@@ -10,3 +10,4 @@ C:\Users\sp1062\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\fa
 C:\Users\sp1062\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.pdb
 C:\Users\sp1062\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
 C:\Users\sp1062\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb
+C:\Users\sp1062\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csprojResolveAssemblyReference.cache

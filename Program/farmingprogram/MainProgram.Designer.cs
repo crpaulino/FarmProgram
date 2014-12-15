@@ -126,22 +126,20 @@
             this.capacityDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vehicleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.removeContainerButton = new System.Windows.Forms.Button();
+            this.addContainerButton = new System.Windows.Forms.Button();
+            this.containerSizeBox = new System.Windows.Forms.TextBox();
+            this.containerTypeBox = new System.Windows.Forms.TextBox();
+            this.containerNameBox = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.containerGridView = new System.Windows.Forms.DataGridView();
             this.containerIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contSizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.containerNameBox = new System.Windows.Forms.TextBox();
-            this.containerTypeBox = new System.Windows.Forms.TextBox();
-            this.containerSizeBox = new System.Windows.Forms.TextBox();
-            this.removeContainerButton = new System.Windows.Forms.Button();
-            this.addContainerButton = new System.Windows.Forms.Button();
-            this.containerIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -727,7 +725,6 @@
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Controls.Add(this.tabPage3);
-            this.tabControl.Controls.Add(this.tabPage4);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -1055,6 +1052,74 @@
             this.tabPage2.Text = "Containers";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // removeContainerButton
+            // 
+            this.removeContainerButton.Location = new System.Drawing.Point(1233, 610);
+            this.removeContainerButton.Name = "removeContainerButton";
+            this.removeContainerButton.Size = new System.Drawing.Size(116, 23);
+            this.removeContainerButton.TabIndex = 12;
+            this.removeContainerButton.Text = "Remove Container";
+            this.removeContainerButton.UseVisualStyleBackColor = true;
+            this.removeContainerButton.Click += new System.EventHandler(this.removeContainerButton_Click);
+            // 
+            // addContainerButton
+            // 
+            this.addContainerButton.Location = new System.Drawing.Point(1111, 610);
+            this.addContainerButton.Name = "addContainerButton";
+            this.addContainerButton.Size = new System.Drawing.Size(116, 23);
+            this.addContainerButton.TabIndex = 11;
+            this.addContainerButton.Text = "Add Container";
+            this.addContainerButton.UseVisualStyleBackColor = true;
+            this.addContainerButton.Click += new System.EventHandler(this.addContainerButton_Click);
+            // 
+            // containerSizeBox
+            // 
+            this.containerSizeBox.Location = new System.Drawing.Point(306, 569);
+            this.containerSizeBox.Name = "containerSizeBox";
+            this.containerSizeBox.Size = new System.Drawing.Size(100, 20);
+            this.containerSizeBox.TabIndex = 7;
+            // 
+            // containerTypeBox
+            // 
+            this.containerTypeBox.Location = new System.Drawing.Point(164, 569);
+            this.containerTypeBox.Name = "containerTypeBox";
+            this.containerTypeBox.Size = new System.Drawing.Size(100, 20);
+            this.containerTypeBox.TabIndex = 6;
+            // 
+            // containerNameBox
+            // 
+            this.containerNameBox.Location = new System.Drawing.Point(30, 569);
+            this.containerNameBox.Name = "containerNameBox";
+            this.containerNameBox.Size = new System.Drawing.Size(100, 20);
+            this.containerNameBox.TabIndex = 5;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(303, 553);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(73, 13);
+            this.label21.TabIndex = 4;
+            this.label21.Text = "Container size";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(161, 553);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(75, 13);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Container type";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(27, 553);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(81, 13);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Container name";
+            // 
             // containerGridView
             // 
             this.containerGridView.AutoGenerateColumns = false;
@@ -1096,74 +1161,6 @@
             this.contSizeDataGridViewTextBoxColumn.HeaderText = "Size";
             this.contSizeDataGridViewTextBoxColumn.Name = "contSizeDataGridViewTextBoxColumn";
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(27, 553);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(81, 13);
-            this.label19.TabIndex = 2;
-            this.label19.Text = "Container name";
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(161, 553);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(75, 13);
-            this.label20.TabIndex = 3;
-            this.label20.Text = "Container type";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(303, 553);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(73, 13);
-            this.label21.TabIndex = 4;
-            this.label21.Text = "Container size";
-            // 
-            // containerNameBox
-            // 
-            this.containerNameBox.Location = new System.Drawing.Point(30, 569);
-            this.containerNameBox.Name = "containerNameBox";
-            this.containerNameBox.Size = new System.Drawing.Size(100, 20);
-            this.containerNameBox.TabIndex = 5;
-            // 
-            // containerTypeBox
-            // 
-            this.containerTypeBox.Location = new System.Drawing.Point(164, 569);
-            this.containerTypeBox.Name = "containerTypeBox";
-            this.containerTypeBox.Size = new System.Drawing.Size(100, 20);
-            this.containerTypeBox.TabIndex = 6;
-            // 
-            // containerSizeBox
-            // 
-            this.containerSizeBox.Location = new System.Drawing.Point(306, 569);
-            this.containerSizeBox.Name = "containerSizeBox";
-            this.containerSizeBox.Size = new System.Drawing.Size(100, 20);
-            this.containerSizeBox.TabIndex = 7;
-            // 
-            // removeContainerButton
-            // 
-            this.removeContainerButton.Location = new System.Drawing.Point(1233, 610);
-            this.removeContainerButton.Name = "removeContainerButton";
-            this.removeContainerButton.Size = new System.Drawing.Size(116, 23);
-            this.removeContainerButton.TabIndex = 12;
-            this.removeContainerButton.Text = "Remove Container";
-            this.removeContainerButton.UseVisualStyleBackColor = true;
-            this.removeContainerButton.Click += new System.EventHandler(this.removeContainerButton_Click);
-            // 
-            // addContainerButton
-            // 
-            this.addContainerButton.Location = new System.Drawing.Point(1111, 610);
-            this.addContainerButton.Name = "addContainerButton";
-            this.addContainerButton.Size = new System.Drawing.Size(116, 23);
-            this.addContainerButton.TabIndex = 11;
-            this.addContainerButton.Text = "Add Container";
-            this.addContainerButton.UseVisualStyleBackColor = true;
-            this.addContainerButton.Click += new System.EventHandler(this.addContainerButton_Click);
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.dataGridView1);
@@ -1174,16 +1171,6 @@
             this.tabPage3.TabIndex = 6;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1355, 659);
-            this.tabPage4.TabIndex = 7;
-            this.tabPage4.Text = "tabPage4";
-            this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -1390,6 +1377,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn titleDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn rightsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn staffIDDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.TabPage tabPage4;
     }
 }
