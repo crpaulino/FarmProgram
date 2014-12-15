@@ -83,8 +83,12 @@ namespace farmingprogram
             {
                 SqlConnector.getConnection().Open();
                 adapter.DeleteCommand.Parameters.Add(new SqlParameter(idParam, SqlDbType.Int)).Value = id;
-                returnCode = cropDataAdapter.DeleteCommand.ExecuteNonQuery();
+                returnCode = adapter.DeleteCommand.ExecuteNonQuery();
             }
+            catch (Exception exception)
+            {
+                System.Windows.Forms.MessageBox.Show("Cannot delete the data, it is used on another table. Please delete this data first.");
+            } 
             finally
             {
                 adapter.DeleteCommand.Parameters.Clear();
@@ -157,10 +161,30 @@ namespace farmingprogram
             fieldAdapter.SelectCommand = new SqlCommand(Constants.FIELD_SELECTALL_QUERY, SqlConnector.getConnection());
             fieldAdapter.DeleteCommand = new SqlCommand(Constants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
             fieldAdapter.InsertCommand = new SqlCommand(Constants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
+
+            if (fieldAdapter.UpdateCommand == null)
+            {
+                fieldAdapter.UpdateCommand = new SqlCommand(Constants.FIELD_UPDATE_QUERY, SqlConnector.getConnection());
+                setFieldUpdateParams();
+            }
             DataTable table = new DataTable();
             fieldAdapter.Fill(table);
             MainProgram.getSingleton().fieldBindingSource.DataSource = table;
             SqlConnector.getConnection().Close();
+        }
+
+        private static void setFieldUpdateParams()
+        {
+            fieldAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldStatus", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldStatus", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldNotes", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldStatus", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldStatus", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_FieldNotes", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldNotes", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldNotes", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
 
         public static void initializeContainerSet()
@@ -223,5 +247,24 @@ namespace farmingprogram
                 SqlConnector.getConnection().Close();
             }
         }
+
+
+        public static void addContainer(Container container)
+        {
+            containerAdapter.InsertCommand.Parameters.Add(new SqlParameter("@contName", container.contName));
+            containerAdapter.InsertCommand.Parameters.Add(new SqlParameter("@contSize", container.contSize));
+            containerAdapter.InsertCommand.Parameters.Add(new SqlParameter("@contType", container.contType));
+            try
+            {
+                SqlConnector.getConnection().Open();
+                containerAdapter.InsertCommand.ExecuteNonQuery();
+            }
+            finally
+            {
+                containerAdapter.InsertCommand.Parameters.Clear();
+                SqlConnector.getConnection().Close();
+            }
+        }
+
     }
 }

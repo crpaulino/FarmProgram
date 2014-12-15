@@ -127,9 +127,20 @@
             this.vehicleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.containerGridView = new System.Windows.Forms.DataGridView();
+            this.containerIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contSizeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+<<<<<<< HEAD
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.containerNameBox = new System.Windows.Forms.TextBox();
+            this.containerTypeBox = new System.Windows.Forms.TextBox();
+            this.containerSizeBox = new System.Windows.Forms.TextBox();
+            this.removeContainerButton = new System.Windows.Forms.Button();
+            this.addContainerButton = new System.Windows.Forms.Button();
+=======
             this.containerIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -139,6 +150,7 @@
             this.titleDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rightsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.staffIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+>>>>>>> origin/master
             this.FertilizerTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fertilizerGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fertilizerBindingSource)).BeginInit();
@@ -752,6 +764,7 @@
             this.removeFieldButton.TabIndex = 10;
             this.removeFieldButton.Text = "Remove Field";
             this.removeFieldButton.UseVisualStyleBackColor = true;
+            this.removeFieldButton.Click += new System.EventHandler(this.removeFieldButton_Click);
             // 
             // addFieldButton
             // 
@@ -826,6 +839,7 @@
             this.fieldGridView.RowHeadersWidth = 45;
             this.fieldGridView.Size = new System.Drawing.Size(1245, 500);
             this.fieldGridView.TabIndex = 1;
+            this.fieldGridView.RowValidated += new System.Windows.Forms.DataGridViewCellEventHandler(this.fieldRowEdited);
             // 
             // fieldIDDataGridViewTextBoxColumn1
             // 
@@ -1027,6 +1041,14 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.removeContainerButton);
+            this.tabPage2.Controls.Add(this.addContainerButton);
+            this.tabPage2.Controls.Add(this.containerSizeBox);
+            this.tabPage2.Controls.Add(this.containerTypeBox);
+            this.tabPage2.Controls.Add(this.containerNameBox);
+            this.tabPage2.Controls.Add(this.label21);
+            this.tabPage2.Controls.Add(this.label20);
+            this.tabPage2.Controls.Add(this.label19);
             this.tabPage2.Controls.Add(this.containerGridView);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -1041,10 +1063,10 @@
             this.containerGridView.AutoGenerateColumns = false;
             this.containerGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.containerGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.containerIDDataGridViewTextBoxColumn1,
             this.contNameDataGridViewTextBoxColumn,
             this.contTypeDataGridViewTextBoxColumn,
-            this.contSizeDataGridViewTextBoxColumn,
-            this.containerIDDataGridViewTextBoxColumn1});
+            this.contSizeDataGridViewTextBoxColumn});
             this.containerGridView.DataSource = this.containerBindingSource;
             this.containerGridView.Location = new System.Drawing.Point(30, 40);
             this.containerGridView.Name = "containerGridView";
@@ -1052,29 +1074,98 @@
             this.containerGridView.Size = new System.Drawing.Size(1245, 500);
             this.containerGridView.TabIndex = 1;
             // 
-            // contNameDataGridViewTextBoxColumn
-            // 
-            this.contNameDataGridViewTextBoxColumn.DataPropertyName = "contName";
-            this.contNameDataGridViewTextBoxColumn.HeaderText = "contName";
-            this.contNameDataGridViewTextBoxColumn.Name = "contNameDataGridViewTextBoxColumn";
-            // 
-            // contTypeDataGridViewTextBoxColumn
-            // 
-            this.contTypeDataGridViewTextBoxColumn.DataPropertyName = "contType";
-            this.contTypeDataGridViewTextBoxColumn.HeaderText = "contType";
-            this.contTypeDataGridViewTextBoxColumn.Name = "contTypeDataGridViewTextBoxColumn";
-            // 
-            // contSizeDataGridViewTextBoxColumn
-            // 
-            this.contSizeDataGridViewTextBoxColumn.DataPropertyName = "contSize";
-            this.contSizeDataGridViewTextBoxColumn.HeaderText = "contSize";
-            this.contSizeDataGridViewTextBoxColumn.Name = "contSizeDataGridViewTextBoxColumn";
-            // 
             // containerIDDataGridViewTextBoxColumn1
             // 
             this.containerIDDataGridViewTextBoxColumn1.DataPropertyName = "ContainerID";
             this.containerIDDataGridViewTextBoxColumn1.HeaderText = "ContainerID";
             this.containerIDDataGridViewTextBoxColumn1.Name = "containerIDDataGridViewTextBoxColumn1";
+            this.containerIDDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // contNameDataGridViewTextBoxColumn
+            // 
+            this.contNameDataGridViewTextBoxColumn.DataPropertyName = "contName";
+            this.contNameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.contNameDataGridViewTextBoxColumn.Name = "contNameDataGridViewTextBoxColumn";
+            // 
+            // contTypeDataGridViewTextBoxColumn
+            // 
+            this.contTypeDataGridViewTextBoxColumn.DataPropertyName = "contType";
+            this.contTypeDataGridViewTextBoxColumn.HeaderText = "Type";
+            this.contTypeDataGridViewTextBoxColumn.Name = "contTypeDataGridViewTextBoxColumn";
+            // 
+            // contSizeDataGridViewTextBoxColumn
+            // 
+            this.contSizeDataGridViewTextBoxColumn.DataPropertyName = "contSize";
+            this.contSizeDataGridViewTextBoxColumn.HeaderText = "Size";
+            this.contSizeDataGridViewTextBoxColumn.Name = "contSizeDataGridViewTextBoxColumn";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(27, 553);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(81, 13);
+            this.label19.TabIndex = 2;
+            this.label19.Text = "Container name";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(161, 553);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(75, 13);
+            this.label20.TabIndex = 3;
+            this.label20.Text = "Container type";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(303, 553);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(73, 13);
+            this.label21.TabIndex = 4;
+            this.label21.Text = "Container size";
+            // 
+            // containerNameBox
+            // 
+            this.containerNameBox.Location = new System.Drawing.Point(30, 569);
+            this.containerNameBox.Name = "containerNameBox";
+            this.containerNameBox.Size = new System.Drawing.Size(100, 20);
+            this.containerNameBox.TabIndex = 5;
+            // 
+            // containerTypeBox
+            // 
+            this.containerTypeBox.Location = new System.Drawing.Point(164, 569);
+            this.containerTypeBox.Name = "containerTypeBox";
+            this.containerTypeBox.Size = new System.Drawing.Size(100, 20);
+            this.containerTypeBox.TabIndex = 6;
+            // 
+            // containerSizeBox
+            // 
+            this.containerSizeBox.Location = new System.Drawing.Point(306, 569);
+            this.containerSizeBox.Name = "containerSizeBox";
+            this.containerSizeBox.Size = new System.Drawing.Size(100, 20);
+            this.containerSizeBox.TabIndex = 7;
+            // 
+            // removeContainerButton
+            // 
+            this.removeContainerButton.Location = new System.Drawing.Point(1233, 610);
+            this.removeContainerButton.Name = "removeContainerButton";
+            this.removeContainerButton.Size = new System.Drawing.Size(116, 23);
+            this.removeContainerButton.TabIndex = 12;
+            this.removeContainerButton.Text = "Remove Container";
+            this.removeContainerButton.UseVisualStyleBackColor = true;
+            this.removeContainerButton.Click += new System.EventHandler(this.removeContainerButton_Click);
+            // 
+            // addContainerButton
+            // 
+            this.addContainerButton.Location = new System.Drawing.Point(1111, 610);
+            this.addContainerButton.Name = "addContainerButton";
+            this.addContainerButton.Size = new System.Drawing.Size(116, 23);
+            this.addContainerButton.TabIndex = 11;
+            this.addContainerButton.Text = "Add Container";
+            this.addContainerButton.UseVisualStyleBackColor = true;
+            this.addContainerButton.Click += new System.EventHandler(this.addContainerButton_Click);
             // 
             // tabPage3
             // 
@@ -1176,6 +1267,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.vehicleGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehicleBindingSource)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.containerGridView)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -1244,10 +1336,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn capacityDataGridViewTextBoxColumn;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridView containerGridView;
-        private System.Windows.Forms.DataGridViewTextBoxColumn contNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn contTypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn contSizeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn containerIDDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn harvestStartDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn harvestEndDateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn staffRequiredDataGridViewTextBoxColumn;
@@ -1286,6 +1374,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fieldNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fieldNotesDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fieldStatusDataGridViewTextBoxColumn;
+<<<<<<< HEAD
+        private System.Windows.Forms.DataGridViewTextBoxColumn containerIDDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contTypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn contSizeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.TextBox containerSizeBox;
+        private System.Windows.Forms.TextBox containerTypeBox;
+        private System.Windows.Forms.TextBox containerNameBox;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button removeContainerButton;
+        private System.Windows.Forms.Button addContainerButton;
+=======
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
@@ -1294,6 +1396,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rightsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn staffIDDataGridViewTextBoxColumn1;
         private System.Windows.Forms.TabPage tabPage4;
+>>>>>>> origin/master
 
     }
 }

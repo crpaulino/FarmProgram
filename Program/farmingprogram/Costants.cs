@@ -43,7 +43,7 @@ SELECT CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, Fertilize
         public static String HARVEST_SELECTALL_QUERY = "SELECT * FROM Harvest";
 
         //Fertilizer
-        public static String FERTILIZER_DELETE_QUERY = "DELETE FROM Fertilizer WHERE FertilizerID = @FertilizerID)";
+        public static String FERTILIZER_DELETE_QUERY = "DELETE FROM Fertilizer WHERE FertilizerID = @FertilizerID";
         public static String FERTILIZER_INSERT_QUERY = "INSERT INTO Fertilizer (fertName, fertDose, fertNote) VALUES (@fertName, @fertDose, @fertNote)";
         public static String FERTILIZER_SELECTALL_QUERY = "SELECT * FROM Fertilizer";
         public static String FERTILIZER_UPDATE_QUERY = @"UPDATE [dbo].[Fertilizer] SET [fertName] = @fertName, [fertDose] = @fertDose, [fertNote] = @fertNote WHERE (([FertilizerID] = @Original_FertilizerID) AND ([fertName] = @Original_fertName) AND ([fertDose] = @Original_fertDose) AND ([fertNote] = @Original_fertNote));

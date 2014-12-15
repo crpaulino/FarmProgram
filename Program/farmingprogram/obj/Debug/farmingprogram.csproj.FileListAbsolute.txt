@@ -59,18 +59,19 @@ C:\Users\sp1062\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\fa
 C:\Users\Mark\Desktop\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe.config
 C:\Users\Mark\Desktop\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
 C:\Users\Mark\Desktop\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb
+C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\database\DbFarmProgram.mdf
+C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\database\DbFarmProgram_log.ldf
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.LoginInterface.resources
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.MainProgram.resources
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.SplashScreen.resources
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.Properties.Resources.resources
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csproj.GenerateResource.Cache
-C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\database\DbFarmProgram.mdf
-C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\database\DbFarmProgram_log.ldf
-C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe.config
-C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe
-C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.pdb
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb
+<<<<<<< HEAD
+C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe.config
+C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csprojResolveAssemblyReference.cache
+=======
 C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\database\DbFarmProgram.mdf
 C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\database\DbFarmProgram_log.ldf
 C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe
@@ -81,3 +82,4 @@ C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\De
 C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.SplashScreen.resources
 C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.Properties.Resources.resources
 C:\Users\ScyLentShade\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csproj.GenerateResource.Cache
+>>>>>>> origin/master

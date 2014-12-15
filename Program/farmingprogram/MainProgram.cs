@@ -37,67 +37,13 @@ namespace farmingprogram
             FarmingDataSet.initializeContainerSet();
             FarmingDataSet.initializeCropSet();
             cropGridView.DataSource = cropBindingSource;
-            this.cropGridView.DataError += new DataGridViewDataErrorEventHandler(DataGridView1_DataError);
             this.Refresh();
         }
 
         #region Crop Tab
         private void removeCropButton_Click(object sender, EventArgs e)
         {
-            Boolean notifyDelete = false;
-            if (cropGridView.SelectedRows.Count > 0)
-            {
-                int toDelete = cropGridView.SelectedRows.Count;
-                while (toDelete-- > 0)
-                {
-                    int indexToDelete = cropGridView.SelectedRows[toDelete].Index;
-                    //if (FarmingDataSet.deleteCrop((int)cropGridView.Rows[indexToDelete].Cells["CropID"].Value) == 1)
-                   // {
-                        this.cropGridView.Rows.Remove(cropGridView.Rows[indexToDelete]);
-                        notifyDelete = true;
-                   // }
-                }
-                if (notifyDelete)
-                {
-                    MessageBox.Show("The data was deleted sucessfully.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("You have nothing selected to delete");
-            }
-        }
-
-        private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs anError)
-        {
-
-            MessageBox.Show("Error happened " + anError.Context.ToString());
-
-            if (anError.Context == DataGridViewDataErrorContexts.Commit)
-            {
-                MessageBox.Show("Commit error");
-            }
-            if (anError.Context == DataGridViewDataErrorContexts.CurrentCellChange)
-            {
-                MessageBox.Show("Cell change");
-            }
-            if (anError.Context == DataGridViewDataErrorContexts.Parsing)
-            {
-                MessageBox.Show("parsing error");
-            }
-            if (anError.Context == DataGridViewDataErrorContexts.LeaveControl)
-            {
-                MessageBox.Show("leave control error");
-            }
-
-            if ((anError.Exception) is ConstraintException)
-            {
-                DataGridView view = (DataGridView)sender;
-                view.Rows[anError.RowIndex].ErrorText = "an error";
-                view.Rows[anError.RowIndex].Cells[anError.ColumnIndex].ErrorText = "an error";
-
-                anError.ThrowException = false;
-            }
+            removeRow(cropGridView, "@CropID", 0, FarmingDataSet.cropDataAdapter);
         }
 
         private void addCropButton_Click(object sender, EventArgs e)
@@ -110,33 +56,17 @@ namespace farmingprogram
             FarmingDataSet.addCrop(crop);
             FarmingDataSet.initializeCropSet();
         }
+
+        private void cropRowEdited(object sender, DataGridViewCellEventArgs e)
+        {
+            updateRow(cropBindingSource, FarmingDataSet.cropDataAdapter, FarmingDataSet.cropDataTable);
+        }
         #endregion
 
         #region Fertilizer tab
         private void removeFertilizer_Click(object sender, EventArgs e)
         {
-            Boolean notifyDelete = false;
-            if (fertilizerGridView.SelectedRows.Count > 0)
-            {
-                int toDelete = cropGridView.SelectedRows.Count;
-                while (toDelete-- > 0)
-                {
-                    int indexToDelete = cropGridView.SelectedRows[toDelete].Index;
-                    //if (FarmingDataSet.deleteCrop((int)fertilizerGridView.Rows[indexToDelete].Cells["FertilizerID"].Value) == 1)
-                    //{
-                        this.cropGridView.Rows.Remove(fertilizerGridView.Rows[indexToDelete]);
-                        notifyDelete = true;
-                   // }
-                }
-                if (notifyDelete)
-                {
-                    MessageBox.Show("The data was deleted sucessfully.");
-                }
-            }
-            else
-            {
-                MessageBox.Show("You have nothing selected to delete");
-            }
+            removeRow(fertilizerGridView, "@FertilizerID", 0, FarmingDataSet.fertilizerAdapter);
         }
 
         private void addFertilizer_Click(object sender, EventArgs e)
@@ -149,48 +79,14 @@ namespace farmingprogram
             FarmingDataSet.addFertilizer(fertilizer);
             FarmingDataSet.initializeFertilizerSet();
         }
-        #endregion
 
-        public Boolean handleNullOrWhitespace(TextBox box)
-        {
-            if (String.IsNullOrWhiteSpace(box.Text))
-            {
-                MessageBox.Show(box.Name + " cannot be empty.");
-                return true;
-            }
-            return false;
-        }
-
-        private void cropRowEdited(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                SqlConnector.getConnection().Open();
-                Validate();
-                cropBindingSource.EndEdit();
-                FarmingDataSet.cropDataAdapter.Update(FarmingDataSet.cropDataTable);
-                SqlConnector.getConnection().Close();
-            }
-            catch (Exception ignore)
-            {
-            }
-        }
-        
         private void fertilizerRowEdited(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                SqlConnector.getConnection().Open();
-                Validate();
-                fertilizerBindingSource.EndEdit();
-                FarmingDataSet.fertilizerAdapter.Update(FarmingDataSet.fertilizerDataTable);
-                SqlConnector.getConnection().Close();
-            }
-            catch (Exception ignore)
-            {
-            }
+            updateRow(fertilizerBindingSource, FarmingDataSet.fertilizerAdapter, FarmingDataSet.fertilizerDataTable);
         }
+        #endregion
 
+        #region Field Tab
         private void addFieldButton_Click(object sender, EventArgs e)
         {
             if (handleNullOrWhitespace(fieldNameBox) || handleNullOrWhitespace(fieldStatusBox))
@@ -202,7 +98,64 @@ namespace farmingprogram
             FarmingDataSet.initializeFieldSet();
         }
 
-        private static void removeRow(DataGridView dgv, String idCellName, SqlDataAdapter adapter)
+        private void removeFieldButton_Click(object sender, EventArgs e)
+        {
+            removeRow(fieldGridView, "@FieldID", 0, FarmingDataSet.fieldAdapter);
+        }
+
+        private void fieldRowEdited(object sender, DataGridViewCellEventArgs e)
+        {
+            updateRow(fieldBindingSource, FarmingDataSet.fieldAdapter, FarmingDataSet.fieldDataTable);
+        }
+        #endregion
+        
+        #region Container tab
+        private void addContainerButton_Click(object sender, EventArgs e)
+        {
+            if (handleNullOrWhitespace(containerNameBox) || handleNullOrWhitespace(containerSizeBox) || handleNullOrWhitespace(containerTypeBox))
+            {
+                return;
+            }
+            int containerSize;
+            Boolean isInteger = int.TryParse(containerSizeBox.Text, out containerSize);
+            
+            if(!isInteger) {
+                MessageBox.Show("The container size field should be an integer.");
+                return;
+            }
+                
+            Container container = new Container(0, containerNameBox.Text, containerTypeBox.Text, containerSize);
+            FarmingDataSet.addContainer(container);
+            FarmingDataSet.initializeContainerSet();
+        }
+
+        private void removeContainerButton_Click(object sender, EventArgs e)
+        {
+            removeRow(containerGridView, "@ContainerID", 0, FarmingDataSet.cropDataAdapter);
+        }
+
+        private void containerRowEdited(object sender, DataGridViewCellEventArgs e)
+        {
+            updateRow(containerBindingSource, FarmingDataSet.containerAdapter, FarmingDataSet.containerDataTable);)
+        }
+        #endregion
+
+        private void updateRow(BindingSource bindingSource, SqlDataAdapter adapter, DataTable table)
+        {
+            try
+            {
+                SqlConnector.getConnection().Open();
+                Validate();
+                bindingSource.EndEdit();
+                adapter.Update(table);
+                SqlConnector.getConnection().Close();
+            }
+            catch (Exception ignore)
+            {
+            }
+        }
+
+        private static void removeRow(DataGridView dgv, String idParam, int idCell, SqlDataAdapter adapter)
         {
             Boolean notifyDelete = false;
             if (dgv.SelectedRows.Count > 0)
@@ -211,7 +164,7 @@ namespace farmingprogram
                 while (toDelete-- > 0)
                 {
                     int indexToDelete = dgv.SelectedRows[toDelete].Index;
-                    if (FarmingDataSet.deleteFromTable(adapter, "@FertilizerID", (int)dgv.Rows[indexToDelete].Cells[idCellName].Value) == 1)
+                    if (FarmingDataSet.deleteFromTable(adapter, idParam, (int)dgv.Rows[indexToDelete].Cells[idCell].Value) == 1)
                     {
                         dgv.Rows.Remove(dgv.Rows[indexToDelete]);
                         notifyDelete = true;
@@ -227,5 +180,16 @@ namespace farmingprogram
                 MessageBox.Show("You have nothing selected to delete");
             }
         }
+
+        public Boolean handleNullOrWhitespace(TextBox box)
+        {
+            if (String.IsNullOrWhiteSpace(box.Text))
+            {
+                MessageBox.Show(box.Name + " cannot be empty.");
+                return true;
+            }
+            return false;
+        }
+
     }
 }
