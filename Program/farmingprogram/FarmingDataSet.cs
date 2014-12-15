@@ -18,6 +18,7 @@ namespace farmingprogram
         public static SqlDataAdapter staffAdapter;
         public static SqlDataAdapter harvestAdapter;
         public static SqlDataAdapter vehicleAdapter;
+        public static SqlDataAdapter storageAdapter;
 
         public static DataTable cropDataTable;
         public static DataTable fertilizerDataTable;
@@ -26,6 +27,7 @@ namespace farmingprogram
         public static DataTable staffDataTable;
         public static DataTable harvestDataTable;
         public static DataTable vehicleDataTable;
+        public static DataTable storageDataTable;
 
 
         public static void initializeCropSet()
@@ -311,7 +313,7 @@ namespace farmingprogram
             harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@ContainerID", harvest.containerID));
             harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropID", harvest.cropID));
             harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldID", harvest.fieldID));
-            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@VehicleID", harvest.vehicle));
+            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@VehicleID", harvest.vehicle));//This should be the vehicle id of the vehicle assigned to the harvest.
             try
             {
                 SqlConnector.getConnection().Open();
@@ -357,6 +359,32 @@ namespace farmingprogram
                 containerAdapter.InsertCommand.Parameters.Clear();
                 SqlConnector.getConnection().Close();
             }
+        }
+
+        public static void initializeVehicleSet()
+        {
+            SqlConnector.getConnection().Open();
+            vehicleAdapter = new SqlDataAdapter();
+            vehicleAdapter.SelectCommand = new SqlCommand(Constants.VEHICLE_SELECTALL_QUERY, SqlConnector.getConnection());
+            vehicleAdapter.DeleteCommand = new SqlCommand(Constants.VEHICLE_DELETE_QUERY, SqlConnector.getConnection());
+            vehicleAdapter.InsertCommand = new SqlCommand(Constants.VEHICLE_INSERT_QUERY, SqlConnector.getConnection());
+            vehicleDataTable = new DataTable();
+            vehicleAdapter.Fill(staffDataTable);
+            MainProgram.getSingleton().vehicleBindingSource.DataSource = vehicleDataTable;
+            SqlConnector.getConnection().Close();
+        }
+
+        public static void initializeStorageSet()
+        {
+            SqlConnector.getConnection().Open();
+            storageAdapter = new SqlDataAdapter();
+            storageAdapter.SelectCommand = new SqlCommand(Constants.STORAGE_SELECTALL_QUERY, SqlConnector.getConnection());
+            storageAdapter.DeleteCommand = new SqlCommand(Constants.STORAGE_DELETE_QUERY, SqlConnector.getConnection());
+            storageAdapter.InsertCommand = new SqlCommand(Constants.STORAGE_INSERT_QUERY, SqlConnector.getConnection());
+            storageDataTable = new DataTable();
+            storageAdapter.Fill(staffDataTable);
+            MainProgram.getSingleton().storageBindingSource.DataSource = storageDataTable;
+            SqlConnector.getConnection().Close();
         }
 
     }

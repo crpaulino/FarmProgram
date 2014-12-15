@@ -25,9 +25,9 @@ SELECT CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, Fertilize
         public static String STORAGE_SELECTALL_QUERY = "SELECT * FROM Storage";
 
         //Vehicles
-        public static String VEHCILES_DELETE_QUERY = "DELETE FROM Vehicle WHERE VehicleID = @VehicleID";
-        public static String VEHCILES_INSERT_QUERY = "INSERT INTO Vehicle (Type, Make, Model, Description, Capacity) VALUES (@Type, @Make, @Model, @Description, @Capacity)";
-        public static String VEHCILES_SELECTALL_QUERY = "SELECT * FROM Vehicles";
+        public static String VEHICLE_DELETE_QUERY = "DELETE FROM Vehicle WHERE VehicleID = @VehicleID";
+        public static String VEHICLE_INSERT_QUERY = "INSERT INTO Vehicle (Type, Make, Model, Description, Capacity) VALUES (@Type, @Make, @Model, @Description, @Capacity)";
+        public static String VEHICLE_SELECTALL_QUERY = "SELECT * FROM Vehicle";
 
         //Staff
         public static String STAFF_DELETE_QUERY = "DELETE FROM Staff WHERE StaffID = @StaffID";

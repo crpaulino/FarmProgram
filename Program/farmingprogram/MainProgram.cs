@@ -39,6 +39,8 @@ namespace farmingprogram
                 FarmingDataSet.initializeContainerSet();
                 FarmingDataSet.initializeHarvestSet();
                 FarmingDataSet.initializeCropSet();
+                FarmingDataSet.initializeVehicleSet();
+                FarmingDataSet.initializeStorageSet();
             }
             catch (Exception er)
             {
