@@ -136,7 +136,7 @@ namespace farmingprogram
 
         private void containerRowEdited(object sender, DataGridViewCellEventArgs e)
         {
-            updateRow(containerBindingSource, FarmingDataSet.containerAdapter, FarmingDataSet.containerDataTable);)
+            updateRow(containerBindingSource, FarmingDataSet.containerAdapter, FarmingDataSet.containerDataTable);
         }
         #endregion
 
