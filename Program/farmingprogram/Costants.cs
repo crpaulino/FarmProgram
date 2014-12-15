@@ -10,6 +10,8 @@ namespace farmingprogram
     //Integrated by: 1333187
     class Constants
     {
+        public static Boolean TESTING_MODE = true;
+
         //SQL Statements for the Tables
         //Crops
         public static String CROP_DELETE_QUERY = "DELETE FROM Crop WHERE CropID = @CropId";
@@ -36,11 +38,15 @@ SELECT CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, Fertilize
         public static String CONTAINER_DELETE_QUERY = "DELETE FROM Container WHERE ContainerID = @ContainerID";
         public static String CONTAINER_INSERT_QUERY = "INSERT INTO Container (contName, contType, contSize) VALUES (@contName, @contType, @contSize)";
         public static String CONTAINER_SELECTALL_QUERY = "SELECT * FROM Container";
+        public static String CONTAINER_UPDATE_QUERY = @"UPDATE [dbo].[Container] SET [contName] = @contName, [contType] = @contType, [contSize] = @contSize WHERE (([ContainerID] = @Original_ContainerID) AND ([contName] = @Original_contName) AND ([contType] = @Original_contType) AND ([contSize] = @Original_contSize));
+SELECT ContainerID, contName, contType, contSize FROM Container WHERE (ContainerID = @ContainerID)";
 
         //Harvest
         public static String HARVEST_DELETE_QUERY = "DELETE FROM Harvest WHERE HarvestID = @HarvestID)";
-        public static String HARVEST_INSERT_QUERY = "INSERT INTO Harvest (HarvestStartDate, HarvestEndDate, StaffRequired, ContainerID, CropID, FieldID, StaffID, VehicleID, StorageID) VALUES (@HarvestStartDate, @HarvestEndDate, @StaffRequired, @ContainerID, @CropID, @FieldID, @StaffID, @VehicleID, @StorageID)";
+        public static String HARVEST_INSERT_QUERY = "INSERT INTO Harvest (HarvestStartDate, HarvestEndDate, StaffRequired, ContainerID, CropID, FieldID, VehicleID) VALUES (@HarvestStartDate, @HarvestEndDate, @StaffRequired, @ContainerID, @CropID, @FieldID, @VehicleID)";
         public static String HARVEST_SELECTALL_QUERY = "SELECT * FROM Harvest";
+        public static String HARVEST_UPDATE_QUERY = @"UPDATE [dbo].[Harvest] SET [HarvestStartDate] = @HarvestStartDate, [HarvestEndDate] = @HarvestEndDate, [StaffRequired] = @StaffRequired, [ContainerID] = @ContainerID, [CropID] = @CropID, [FieldID] = @FieldID, [VehicleID] = @VehicleID WHERE (([HarvestID] = @Original_HarvestID) AND ([HarvestStartDate] = @Original_HarvestStartDate) AND ([HarvestEndDate] = @Original_HarvestEndDate) AND ([StaffRequired] = @Original_StaffRequired) AND ([ContainerID] = @Original_ContainerID) AND ([CropID] = @Original_CropID) AND ([FieldID] = @Original_FieldID) AND ([VehicleID] = @Original_VehicleID));
+SELECT HarvestID, HarvestStartDate, HarvestEndDate, StaffRequired, ContainerID, CropID, FieldID, VehicleID FROM Harvest WHERE (HarvestID = @HarvestID)";
 
         //Fertilizer
         public static String FERTILIZER_DELETE_QUERY = "DELETE FROM Fertilizer WHERE FertilizerID = @FertilizerID";
@@ -53,7 +59,7 @@ SELECT FertilizerID, fertName, fertDose, fertNote FROM Fertilizer WHERE (Fertili
         public static String FIELD_DELETE_QUERY = "DELETE FROM Field WHERE FieldID = @FieldID";
         public static String FIELD_INSERT_QUERY = "INSERT INTO Field (FieldName, FieldStatus, FieldNotes) VALUES (@FieldName, @FieldStatus, @FieldNotes)";
         public static String FIELD_SELECTALL_QUERY = "SELECT * FROM Field";
-        public static String FIELD_UPDATE_QUERY = @"UPDATE [dbo].[Harvest] SET [HarvestStartDate] = @HarvestStartDate, [HarvestEndDate] = @HarvestEndDate, [StaffRequired] = @StaffRequired, [ContainerID] = @ContainerID, [CropID] = @CropID, [FieldID] = @FieldID, [StaffID] = @StaffID, [VehicleID] = @VehicleID, [StorageID] = @StorageID WHERE (([HarvestID] = @Original_HarvestID) AND ([HarvestStartDate] = @Original_HarvestStartDate) AND ([HarvestEndDate] = @Original_HarvestEndDate) AND ([StaffRequired] = @Original_StaffRequired) AND ([ContainerID] = @Original_ContainerID) AND ([CropID] = @Original_CropID) AND ([FieldID] = @Original_FieldID) AND ([StaffID] = @Original_StaffID) AND ([VehicleID] = @Original_VehicleID) AND ([StorageID] = @Original_StorageID));
+        public static String FIELD_UPDATE_QUERY = @"UPDATE [dbo].[Harvest] SET [HarvestStartDate] = @HarvestStartDate, [HarvestEndDate] = @HarvestEndDate, [StaffRequired] = @StaffRequired, [ContainerID] = @ContainerID, [CropID] = @CropID, [FieldID] = @FieldID, [VehicleID] = @VehicleID WHERE (([HarvestID] = @Original_HarvestID) AND ([HarvestStartDate] = @Original_HarvestStartDate) AND ([HarvestEndDate] = @Original_HarvestEndDate) AND ([StaffRequired] = @Original_StaffRequired) AND ([ContainerID] = @Original_ContainerID) AND ([CropID] = @Original_CropID) AND ([FieldID] = @Original_FieldID) AND ([StaffID] = @Original_StaffID) AND ([VehicleID] = @Original_VehicleID) AND ([StorageID] = @Original_StorageID));
 SELECT HarvestID, HarvestStartDate, HarvestEndDate, StaffRequired, ContainerID, CropID, FieldID, StaffID, VehicleID, StorageID FROM Harvest WHERE (HarvestID = @HarvestID)";
     }
 }

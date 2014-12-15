@@ -31,11 +31,19 @@ namespace farmingprogram
 
         private void MainProgram_Load(object sender, EventArgs e)
         {
-            FarmingDataSet.initializeFieldSet();
-            FarmingDataSet.initializeStaffSet();
-            FarmingDataSet.initializeFertilizerSet();
-            FarmingDataSet.initializeContainerSet();
-            FarmingDataSet.initializeCropSet();
+            try
+            {
+                FarmingDataSet.initializeFieldSet();
+                FarmingDataSet.initializeStaffSet();
+                FarmingDataSet.initializeFertilizerSet();
+                FarmingDataSet.initializeContainerSet();
+                FarmingDataSet.initializeHarvestSet();
+                FarmingDataSet.initializeCropSet();
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show(er.ToString());
+            }
             this.Refresh();
         }
 
@@ -139,6 +147,24 @@ namespace farmingprogram
         }
         #endregion
 
+        #region Harvest tab
+        private void addHarvestButton_Click(object sender, EventArgs e)
+        {
+            Harvest harvest = new Harvest(0, startDateBox.Value, endDateBox.Value, (int)staffOperatorComboBox.SelectedValue, (int)containerComboBox.SelectedValue, (int)cropComboBox.SelectedValue, (int)fieldComboBox.SelectedValue, (int)vehicleComboBox.SelectedValue);
+            FarmingDataSet.addHarvest(harvest);
+            FarmingDataSet.initializeHarvestSet();
+        }
+        private void harvestRowEdited(object sender, DataGridViewCellEventArgs e)
+        {
+            updateRow(harvestBindingSource, FarmingDataSet.harvestAdapter, FarmingDataSet.harvestDataTable);
+        }
+
+        private void removeHarvestButton_Click(object sender, EventArgs e)
+        {
+            removeRow(harvestGridView, "@HarvestID", 0, FarmingDataSet.harvestAdapter);
+        }
+        #endregion
+
         private void updateRow(BindingSource bindingSource, SqlDataAdapter adapter, DataTable table)
         {
             try
@@ -189,6 +215,5 @@ namespace farmingprogram
             }
             return false;
         }
-
     }
 }

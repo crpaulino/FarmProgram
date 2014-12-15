@@ -19,7 +19,15 @@ namespace farmingprogram
             Application.SetCompatibleTextRenderingDefault(false);
 
             SqlConnector.startConnection();
-            Application.Run(new LoginInterface());
+            if (!Constants.TESTING_MODE)
+            {
+                Application.Run(new LoginInterface());
+            }
+            else
+            {
+                loginDetail = new LoginDetail("admin", "admin", 1);
+                SqlConnector.getConnection().Close();
+            }
             if (loginDetail != null)
             {
                 Application.Run(new MainProgram());

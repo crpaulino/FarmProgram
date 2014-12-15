@@ -10,26 +10,24 @@ namespace farmingprogram
     {
         //Attributes         
         private DateTime HarvestStartDate, HarvestEndDate;
-        private int harvestID, StaffRequired, ContainerID, CropID, FieldID, StaffID, VehicleID, StorageID;
+        private int harvestID, StaffRequired, ContainerID, CropID, FieldID, VehicleID;
         //Constructors
-        public Harvest (int HarvestID, DateTime HarvestStartDate, DateTime HarvestEndDate, int StaffRequired, int ContainerID, int CropID, int FieldID, int StaffID, int VehicleID, int StorageID)
+        public Harvest(int HarvestID, DateTime HarvestStartDate, DateTime HarvestEndDate, int StaffRequired, int ContainerID, int CropID, int FieldID, int VehicleID)
         {
             this.harvestID = HarvestID;
-            this.HarvestStartDate = HarvestStartDate; 
-            this.HarvestEndDate = HarvestEndDate; 
-			this.StaffRequired = StaffRequired; 
-            this.ContainerID = ContainerID; 
+            this.HarvestStartDate = HarvestStartDate;
+            this.HarvestEndDate = HarvestEndDate;
+            this.StaffRequired = StaffRequired;
+            this.ContainerID = ContainerID;
             this.CropID = CropID;
             this.FieldID = FieldID;
-            this.StaffID = StaffID;
             this.VehicleID = VehicleID;
-            this.StorageID = StorageID;          
         }
 
         //Properties
         public DateTime harvestStartDate
         {
-            get { return HarvestStartDate;} 
+            get { return HarvestStartDate; }
             set { HarvestStartDate = value; }
         }
 
@@ -42,7 +40,7 @@ namespace farmingprogram
         public int staffRequired//How many of the Staff will be required for the harvest.
         {
             get { return StaffRequired; }
-            set { StaffRequired= value; }
+            set { StaffRequired = value; }
         }
 
         public int containerID
@@ -69,22 +67,10 @@ namespace farmingprogram
             set { FieldID = value; }
         }
 
-        public int staffID
-        {
-            get { return StaffID; }
-            set { StaffID = value; }
-        }
-
         public int vehicle
         {
             get { return VehicleID; }
             set { VehicleID = value; }
-        }
-
-        public int storageID
-        {
-            get { return StorageID; }
-            set { StorageID = value; }
         }
     }
 }
