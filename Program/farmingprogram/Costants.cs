@@ -19,7 +19,8 @@ namespace farmingprogram
         public static String CROP_SELECTALL_QUERY = "SELECT * FROM Crop";
         public static String CROP_UPDATE_QUERY = @"UPDATE [dbo].[Crop] SET [CropName] = @CropName, [DatePlanted] = @DatePlanted, [EstimatedHarvestDate] = @EstimatedHarvestDate, [CropNotes] = @CropNotes, [FertilizerID] = @FertilizerID, [CropStatus] = @CropStatus, [LastDose] = @LastDose, [NextDose] = @NextDose, [DosedByStaff] = @DosedByStaff, [CropStorageType] = @CropStorageType, [CropMinMax] = @CropMinMax, [FieldID] = @FieldID WHERE (([CropID] = @Original_CropID) AND ([CropName] = @Original_CropName) AND ([DatePlanted] = @Original_DatePlanted) AND ([EstimatedHarvestDate] = @Original_EstimatedHarvestDate) AND ((@IsNull_CropNotes = 1 AND [CropNotes] IS NULL) OR ([CropNotes] = @Original_CropNotes)) AND ((@IsNull_FertilizerID = 1 AND [FertilizerID] IS NULL) OR ([FertilizerID] = @Original_FertilizerID)) AND ([CropStatus] = @Original_CropStatus) AND ((@IsNull_LastDose = 1 AND [LastDose] IS NULL) OR ([LastDose] = @Original_LastDose)) AND ((@IsNull_NextDose = 1 AND [NextDose] IS NULL) OR ([NextDose] = @Original_NextDose)) AND ((@IsNull_DosedByStaff = 1 AND [DosedByStaff] IS NULL) OR ([DosedByStaff] = @Original_DosedByStaff)) AND ([CropStorageType] = @Original_CropStorageType) AND ([CropMinMax] = @Original_CropMinMax) AND ([FieldID] = @Original_FieldID));
 SELECT CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, FertilizerID, CropStatus, LastDose, NextDose, DosedByStaff, CropStorageType, CropMinMax, FieldID FROM Crop WHERE (CropID = @CropID)";
-        //Storage
+        
+        //Storage (Don't need same as container)
         public static String STORAGE_DELETE_QUERY = "DELETE FROM Storage WHERE StorageID = @StorageID";
         public static String STORAGE_INSERT_QUERY = "INSERT INTO Storage (StorageName, StorageCapacity, StorageAvailable, StorageNote) VALUES (@StorageName, @StorageCapacity, @StorageAvailable, @StorageNote)";
         public static String STORAGE_SELECTALL_QUERY = "SELECT * FROM Storage";
@@ -28,6 +29,8 @@ SELECT CropID, CropName, DatePlanted, EstimatedHarvestDate, CropNotes, Fertilize
         public static String VEHICLE_DELETE_QUERY = "DELETE FROM Vehicle WHERE VehicleID = @VehicleID";
         public static String VEHICLE_INSERT_QUERY = "INSERT INTO Vehicle (Type, Make, Model, Description, Capacity) VALUES (@Type, @Make, @Model, @Description, @Capacity)";
         public static String VEHICLE_SELECTALL_QUERY = "SELECT * FROM Vehicle";
+        public static String VEHICLE_UPDATE_QUERY = @"UPDATE [dbo].[Vehicle] SET [Type] = @Type, [Make] = @Make, [Model] = @Model, [Description] = @Description, [Capacity] = @Capacity WHERE (([VehicleID] = @Original_VehicleID) AND ([Type] = @Original_Type) AND ([Make] = @Original_Make) AND ([Model] = @Original_Model) AND ((@IsNull_Description = 1 AND [Description] IS NULL) OR ([Description] = @Original_Description)) AND ([Capacity] = @Original_Capacity));
+SELECT VehicleID, Type, Make, Model, Description, Capacity FROM Vehicle WHERE (VehicleID = @VehicleID)";
 
         //Staff
         public static String STAFF_DELETE_QUERY = "DELETE FROM Staff WHERE StaffID = @StaffID";

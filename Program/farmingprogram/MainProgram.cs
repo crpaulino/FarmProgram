@@ -35,13 +35,13 @@ namespace farmingprogram
             try
             {
                 //All datasets initialized
+                FarmingDataSet.initializeVehicleSet();
                 FarmingDataSet.initializeFieldSet();
                 FarmingDataSet.initializeStaffSet();
                 FarmingDataSet.initializeFertilizerSet();
                 FarmingDataSet.initializeContainerSet();
                 FarmingDataSet.initializeHarvestSet();
                 FarmingDataSet.initializeCropSet();
-                FarmingDataSet.initializeVehicleSet();
             }
             catch (Exception er) //If not show error
             {
@@ -173,6 +173,50 @@ namespace farmingprogram
         {
             removeRow(harvestGridView, "@HarvestID", 0, FarmingDataSet.harvestAdapter); //Removes harvest based on ID
         }
+        #endregion
+
+        #region Vehicle tab
+        //Adds a vehicle
+        private void addVehicleButton_Click(object sender, EventArgs e)
+        {
+            //Cannot be null variables in database
+            if (handleNullOrWhitespace(this.vehicleTypeBox) || handleNullOrWhitespace(this.vehicleMakeBox) || handleNullOrWhitespace(this.vehicleModelBox) || handleNullOrWhitespace(this.vehicleCapacityBox))
+            {
+                return;
+            }
+
+            string type = vehicleTypeBox.Text;
+            string make = vehicleMakeBox.Text;
+            string model = vehicleModelBox.Text;
+            string capacityText = vehicleCapacityBox.Text;
+
+            //Check to see if capacity is a number
+            Boolean isInt = false;
+            int capacity;
+            isInt = int.TryParse(capacityText, out capacity);
+
+            if (!isInt) //If capacity is not a number
+            {
+                MessageBox.Show("The capacity has to be a number. Try again.");
+                return;
+            }
+            Vehicle vehicle = new Vehicle(0, type, make, model, vehicleDescBox.Text, capacity);
+            FarmingDataSet.addVehicle(vehicle); //Adds vehicle to dataset
+            FarmingDataSet.initializeVehicleSet(); //Initializes vehicle again
+        }
+
+        //Removes a vehicle
+        private void removeVechicleButton_Click(object sender, EventArgs e)
+        {
+            removeRow(vehicleGridView, "@VehicleID", 0, FarmingDataSet.vehicleAdapter); //Removes vehicle from database
+        }
+        
+        //Editing vehicle Row
+        private void vehicleRowEdited(object sender, DataGridViewCellEventArgs e) //Edit the vehicle row
+        {
+            updateRow(vehicleBindingSource, FarmingDataSet.vehicleAdapter, FarmingDataSet.vehicleDataTable); //Updates changes to database
+        }
+
         #endregion
 
         //Updates via database any modifications to existing data

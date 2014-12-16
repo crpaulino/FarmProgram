@@ -155,16 +155,17 @@ namespace farmingprogram
             harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@VehicleID", harvest.vehicle));//This should be the vehicle id of the vehicle assigned to the harvest.
             try
             {
-                SqlConnector.getConnection().Open();
-                fertilizerAdapter.InsertCommand.ExecuteNonQuery();
+                SqlConnector.getConnection().Open(); //Open sql connection
+                fertilizerAdapter.InsertCommand.ExecuteNonQuery(); //Execute query
             }
             finally
             {
-                fertilizerAdapter.InsertCommand.Parameters.Clear();
-                SqlConnector.getConnection().Close();
+                fertilizerAdapter.InsertCommand.Parameters.Clear(); //Clear params to avoid error
+                SqlConnector.getConnection().Close(); //Close connection
             }
         }
 
+        //Sets update params so when row is edited there is no need to input hardcoded values
         public static void setHarvestUpdateParams()
         {
             harvestAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
@@ -191,7 +192,130 @@ namespace farmingprogram
         }
         #endregion
 
-        
+        #region Fertilizer set
+        public static void initializeFertilizerSet() //Initializes the fertilizer dataset
+        {
+            SqlConnector.getConnection().Open(); //Open connection
+            fertilizerAdapter = new SqlDataAdapter(); //Create a new adapter for fertilizer
+
+            //Insert queries into adapter
+            fertilizerAdapter.SelectCommand = new SqlCommand(Constants.FERTILIZER_SELECTALL_QUERY, SqlConnector.getConnection());
+            fertilizerAdapter.DeleteCommand = new SqlCommand(Constants.FERTILIZER_DELETE_QUERY, SqlConnector.getConnection());
+            fertilizerAdapter.InsertCommand = new SqlCommand(Constants.FERTILIZER_INSERT_QUERY, SqlConnector.getConnection());
+
+            //Update command
+            if (fertilizerAdapter.UpdateCommand == null)
+            {
+                fertilizerAdapter.UpdateCommand = new SqlCommand(Constants.FERTILIZER_UPDATE_QUERY, SqlConnector.getConnection()); //Add the update command
+                setFertilizerUpdateParams(); //Set the update command params
+            }
+            fertilizerDataTable = new DataTable(); //New data table for fertilizer
+            fertilizerAdapter.Fill(fertilizerDataTable); //populate data table
+            MainProgram.getSingleton().fertilizerBindingSource.DataSource = fertilizerDataTable; //Display data table on the grid
+            SqlConnector.getConnection().Close();
+        }
+
+        public static void addFertilizer(Fertilizer fertilizer)
+        {
+            fertilizerAdapter.InsertCommand.Parameters.Add(new SqlParameter("@fertName", fertilizer.fertName));
+            fertilizerAdapter.InsertCommand.Parameters.Add(new SqlParameter("@fertDose", fertilizer.fertDose));
+            fertilizerAdapter.InsertCommand.Parameters.Add(new SqlParameter("@fertNote", fertilizer.fertNote));
+            try
+            {
+                SqlConnector.getConnection().Open();
+                fertilizerAdapter.InsertCommand.ExecuteNonQuery();
+            }
+            finally
+            {
+                fertilizerAdapter.InsertCommand.Parameters.Clear();
+                SqlConnector.getConnection().Close();
+            }
+        }
+
+        //Sets update params so when row is edited there is no need to input hardcoded values
+        private static void setFertilizerUpdateParams()
+        {
+            fertilizerAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fertName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fertDose", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertDose", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fertNote", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertNote", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_fertName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_fertDose", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertDose", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_fertNote", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertNote", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FertilizerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        #endregion
+
+        #region Vehicle set
+        //Initializes vehicle set
+        public static void initializeVehicleSet()
+        {
+            SqlConnector.getConnection().Open(); //Opens connection
+            vehicleAdapter = new SqlDataAdapter(); //Binds vehicleAdapter to a new data adapter
+
+            //Sets adapter commands
+            vehicleAdapter.SelectCommand = new SqlCommand(Constants.VEHICLE_SELECTALL_QUERY, SqlConnector.getConnection());
+            vehicleAdapter.DeleteCommand = new SqlCommand(Constants.VEHICLE_DELETE_QUERY, SqlConnector.getConnection());
+            vehicleAdapter.InsertCommand = new SqlCommand(Constants.VEHICLE_INSERT_QUERY, SqlConnector.getConnection());
+
+            //Sets update command and parameters
+            if (vehicleAdapter.UpdateCommand != null)
+            {
+                vehicleAdapter.UpdateCommand = new SqlCommand(Constants.VEHICLE_UPDATE_QUERY, SqlConnector.getConnection());
+                setVehicleUpdateParams();
+            }
+
+            //populates table with database data
+            vehicleDataTable = new DataTable();
+            vehicleAdapter.Fill(vehicleDataTable);
+
+            //View the data on a grid
+            MainProgram.getSingleton().vehicleBindingSource.DataSource = vehicleDataTable;
+            SqlConnector.getConnection().Close(); //Close connection
+        }
+
+        //Add a new vehicle
+        public static void addVehicle(Vehicle vehicle)
+        {
+            //Parameters which are set when query is execute
+            vehicleAdapter.InsertCommand.Parameters.Add(new SqlParameter("@Type", vehicle.type));
+            vehicleAdapter.InsertCommand.Parameters.Add(new SqlParameter("@Make", vehicle.make));
+            vehicleAdapter.InsertCommand.Parameters.Add(new SqlParameter("@Model", vehicle.model));
+            vehicleAdapter.InsertCommand.Parameters.Add(new SqlParameter("@Description", vehicle.description));
+            vehicleAdapter.InsertCommand.Parameters.Add(new SqlParameter("@Capacity", vehicle.capacity));
+
+            try
+            {
+                SqlConnector.getConnection().Open(); //Open connection
+                vehicleAdapter.InsertCommand.ExecuteNonQuery(); //Execute query
+            }
+            finally
+            {
+                vehicleAdapter.InsertCommand.Parameters.Clear(); //Clear params to avoid error
+                SqlConnector.getConnection().Close(); //Close connection
+            }
+        }
+
+        //Adds variable parameters to update command
+        static void setVehicleUpdateParams()
+        {
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Make", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Make", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Model", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Model", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Capacity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VehicleID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VehicleID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Type", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Make", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Make", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Model", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Model", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Description", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Description", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Description", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Capacity", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Capacity", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VehicleID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "VehicleID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        #endregion
+
         public static int deleteFromTable(SqlDataAdapter adapter, String idParam, int id)
         {
             int returnCode = 0;
@@ -213,38 +337,11 @@ namespace farmingprogram
             return returnCode;
         }
 
-        public static void initializeFertilizerSet()
-        {
-            SqlConnector.getConnection().Open();
-            fertilizerAdapter = new SqlDataAdapter();
-            fertilizerAdapter.SelectCommand = new SqlCommand(Constants.FERTILIZER_SELECTALL_QUERY, SqlConnector.getConnection());
-            fertilizerAdapter.DeleteCommand = new SqlCommand(Constants.FERTILIZER_DELETE_QUERY, SqlConnector.getConnection());
-            fertilizerAdapter.InsertCommand = new SqlCommand(Constants.FERTILIZER_INSERT_QUERY, SqlConnector.getConnection());
-            if (fertilizerAdapter.UpdateCommand == null)
-            {
-                fertilizerAdapter.UpdateCommand = new SqlCommand(Constants.FERTILIZER_UPDATE_QUERY, SqlConnector.getConnection());
-                setFertilizerUpdateParams();
-            }
-            fertilizerDataTable = new DataTable();
-            fertilizerAdapter.Fill(fertilizerDataTable);
-            MainProgram.getSingleton().fertilizerBindingSource.DataSource = fertilizerDataTable;
-            SqlConnector.getConnection().Close();
-        }
+        
 
-        private static void setFertilizerUpdateParams()
-        {
-            fertilizerAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fertName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fertDose", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertDose", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@fertNote", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertNote", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FertilizerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_fertName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_fertDose", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertDose", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_fertNote", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "fertNote", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FertilizerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
+       
 
-
+        //Sets update params so when row is edited there is no need to input hardcoded values
         private static void setFieldUpdateParams()
         {
             fieldAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
@@ -279,6 +376,7 @@ namespace farmingprogram
             SqlConnector.getConnection().Close();
         }
 
+        //Sets update params so when row is edited there is no need to input hardcoded values
         private static void setContainerUpdateParams()
         {
             containerAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
@@ -304,23 +402,6 @@ namespace farmingprogram
             staffAdapter.Fill(staffDataTable);
             MainProgram.getSingleton().staffBindingSource.DataSource = staffDataTable;
             SqlConnector.getConnection().Close();
-        }
-
-        public static void addFertilizer(Fertilizer fertilizer)
-        {
-            fertilizerAdapter.InsertCommand.Parameters.Add(new SqlParameter("@fertName", fertilizer.fertName));
-            fertilizerAdapter.InsertCommand.Parameters.Add(new SqlParameter("@fertDose", fertilizer.fertDose));
-            fertilizerAdapter.InsertCommand.Parameters.Add(new SqlParameter("@fertNote", fertilizer.fertNote));
-            try
-            {
-                SqlConnector.getConnection().Open();
-                fertilizerAdapter.InsertCommand.ExecuteNonQuery();
-            }
-            finally
-            {
-                fertilizerAdapter.InsertCommand.Parameters.Clear();
-                SqlConnector.getConnection().Close();
-            }
         }
 
         public static void initializeFieldSet()
@@ -375,22 +456,7 @@ namespace farmingprogram
                 containerAdapter.InsertCommand.Parameters.Clear();
                 SqlConnector.getConnection().Close();
             }
-        }
-
-        public static void initializeVehicleSet()
-        {
-            SqlConnector.getConnection().Open();
-            vehicleAdapter = new SqlDataAdapter();
-            vehicleAdapter.SelectCommand = new SqlCommand(Constants.VEHICLE_SELECTALL_QUERY, SqlConnector.getConnection());
-            vehicleAdapter.DeleteCommand = new SqlCommand(Constants.VEHICLE_DELETE_QUERY, SqlConnector.getConnection());
-            vehicleAdapter.InsertCommand = new SqlCommand(Constants.VEHICLE_INSERT_QUERY, SqlConnector.getConnection());
-            vehicleDataTable = new DataTable();
-            vehicleAdapter.Fill(staffDataTable);
-            MainProgram.getSingleton().vehicleBindingSource.DataSource = vehicleDataTable;
-            SqlConnector.getConnection().Close();
-        }
-
-       
+        }       
 
     }
 }

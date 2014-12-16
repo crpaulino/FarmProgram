@@ -10,7 +10,7 @@ namespace farmingprogram
     class Vehicle
     {
         //Attributes
-        private int vehicleID, Capacity;
+        private int VehicleID, Capacity;
         private string Type, Make, Model, Description;
         
         //Constructor
@@ -21,7 +21,7 @@ namespace farmingprogram
             this.Model = model; //Model constructor
             this.Description = description; //Description constructor
             this.Capacity = capacity; //Capacity constructor
-            this.vehicleID = vehicleID;
+            this.VehicleID = vehicleID;
         }
 
         //Properties
@@ -55,7 +55,7 @@ namespace farmingprogram
             set { Capacity = value; } 
         }
 
-        public int VehicleID { //Vehicle Properties
+        public int vehicleID { //Vehicle Properties
             get { return vehicleID; }
             set { vehicleID = value; }
         }
