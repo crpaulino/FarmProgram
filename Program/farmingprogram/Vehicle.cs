@@ -55,7 +55,7 @@ namespace farmingprogram
             set { Capacity = value; } 
         }
 
-        public int VehicleID {
+        public int VehicleID { //Vehicle Properties
             get { return vehicleID; }
             set { vehicleID = value; }
         }

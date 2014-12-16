@@ -23,6 +23,7 @@ namespace farmingprogram
             this.containerType = containerType;
             this.containerSize = containerSize;
         }
+
         //properties
         public string contName
         {

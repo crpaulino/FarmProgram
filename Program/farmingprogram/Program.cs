@@ -19,29 +19,29 @@ namespace farmingprogram
             Application.SetCompatibleTextRenderingDefault(false);
 
             SqlConnector.startConnection();
-            if (!Constants.TESTING_MODE)
+            if (!Constants.TESTING_MODE) //If not testing then prompt login
             {
-                Application.Run(new LoginInterface());
+                Application.Run(new LoginInterface()); //Prompts login
             }
-            else
+            else //If testing
             {
-                loginDetail = new LoginDetail("admin", "admin", 1);
-                SqlConnector.getConnection().Close();
+                loginDetail = new LoginDetail("admin", "admin", 1); //Default user and password = admin, admin
+                SqlConnector.getConnection().Close(); //Close connection left open for login
             }
-            if (loginDetail != null)
+            if (loginDetail != null) //If login detail is not null then run the program
             {
-                Application.Run(new MainProgram());
+                Application.Run(new MainProgram()); //Run main program
             }
         }
 
-        private static LoginDetail loginDetail;
+        private static LoginDetail loginDetail; //Login detail field
 
-        public static void setLogin(LoginDetail ld)
+        public static void setLogin(LoginDetail ld) //Login detail setter
         {
             loginDetail = ld;
         }
 
-        public static LoginDetail getLoginDetail()
+        public static LoginDetail getLoginDetail() //Login detail getter
         {
             return loginDetail;
         }

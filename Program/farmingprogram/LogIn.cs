@@ -6,12 +6,16 @@ using System.Threading.Tasks;
 
 namespace farmingprogram
 {
-    //CREATED BY: SP1062 pls add SID
+    //CREATED BY: SP1062
+    //LoginDetail represents a class with the username and password and rights.
     class LoginDetail
     {
+        //Login username and password
         private string username, password;
+        //Rights 0=Normal 1=Manager
         private int rights;
 
+        //Constructor
         public LoginDetail(string username, string password, int rights)
         {
             this.username = username;
@@ -19,6 +23,7 @@ namespace farmingprogram
             this.rights = rights;
         }
 
+        //Properties
         public int getRights()
         {
             return rights;

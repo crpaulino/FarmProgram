@@ -11,15 +11,16 @@ namespace farmingprogram
 {
     class FarmingDataSet
     {
-        public static SqlDataAdapter cropDataAdapter;
+        //Sql adapters which hold different update,insert,delete and select queries
+        public static SqlDataAdapter cropDataAdapter; 
         public static SqlDataAdapter fertilizerAdapter;
         public static SqlDataAdapter fieldAdapter;
         public static SqlDataAdapter containerAdapter;
         public static SqlDataAdapter staffAdapter;
         public static SqlDataAdapter harvestAdapter;
         public static SqlDataAdapter vehicleAdapter;
-        public static SqlDataAdapter storageAdapter;
 
+        //Data tables when the select query is read they are saved on these tables
         public static DataTable cropDataTable;
         public static DataTable fertilizerDataTable;
         public static DataTable fieldDataTable;
@@ -27,73 +28,60 @@ namespace farmingprogram
         public static DataTable staffDataTable;
         public static DataTable harvestDataTable;
         public static DataTable vehicleDataTable;
-        public static DataTable storageDataTable;
 
-
-        public static void initializeCropSet()
+        #region Crop Set
+        public static void initializeCropSet() //Initializes the crop data set
         {
 
-            SqlConnector.getConnection().Open();
-            cropDataAdapter = new SqlDataAdapter();
-            cropDataAdapter.SelectCommand = new SqlCommand(Constants.CROP_SELECTALL_QUERY, SqlConnector.getConnection());
+            SqlConnector.getConnection().Open(); //Open connection
+            cropDataAdapter = new SqlDataAdapter(); //Attach adapter to cropDataAdapter
+
+            //Declare Adapter queries
+            cropDataAdapter.SelectCommand = new SqlCommand(Constants.CROP_SELECTALL_QUERY, SqlConnector.getConnection()); 
             cropDataAdapter.DeleteCommand = new SqlCommand(Constants.CROP_DELETE_QUERY, SqlConnector.getConnection());
             cropDataAdapter.InsertCommand = new SqlCommand(Constants.CROP_INSERT_QUERY, SqlConnector.getConnection());
+
+            //If the update command is just being added
             if (cropDataAdapter.UpdateCommand == null)
             {
-                cropDataAdapter.UpdateCommand = new SqlCommand(Constants.CROP_UPDATE_QUERY, SqlConnector.getConnection());
-                setCropUpdateParams();
+                cropDataAdapter.UpdateCommand = new SqlCommand(Constants.CROP_UPDATE_QUERY, SqlConnector.getConnection()); //Add the update query
+                setCropUpdateParams(); //Add the parameters for the update query
             }
-            cropDataTable = new DataTable();
-            cropDataAdapter.Fill(cropDataTable);
-            MainProgram.getSingleton().cropBindingSource.DataSource = cropDataTable;
-            SqlConnector.getConnection().Close();
+            cropDataTable = new DataTable(); //Create a new crop data table
+            cropDataAdapter.Fill(cropDataTable); //Populate the data table
+            MainProgram.getSingleton().cropBindingSource.DataSource = cropDataTable; //Send the cropGridView to view the crop data table
+            SqlConnector.getConnection().Close(); //Close connection
         }
 
-
-
-        public static void initializeHarvestSet()
+        public static void addCrop(Crop crop) //Add a crop
         {
-            SqlConnector.getConnection().Open();
-            harvestAdapter = new SqlDataAdapter();
-            harvestAdapter.SelectCommand = new SqlCommand(Constants.HARVEST_SELECTALL_QUERY, SqlConnector.getConnection());
-            harvestAdapter.DeleteCommand = new SqlCommand(Constants.HARVEST_DELETE_QUERY, SqlConnector.getConnection());
-            harvestAdapter.InsertCommand = new SqlCommand(Constants.HARVEST_INSERT_QUERY, SqlConnector.getConnection());
-            if (harvestAdapter.UpdateCommand == null)
+            //Parameters which are set when query is execute "@varName", value
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropName", crop.cropName)); 
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@DatePlanted", crop.datePlanted));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@EstimatedHarvestDate", crop.estimatedHarvestDate));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropNotes", crop.cropNotes));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FertilizerID", crop.fertilizerID));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropStatus", crop.cropStatus));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@LastDose", crop.lastDose));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@NextDose", crop.nextDose));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@DosedByStaff", crop.dosedByStaff));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropStorageType", crop.cropStorageType));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropMinMax", crop.cropMinMax));
+            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldID", crop.fieldID));
+
+            try
             {
-                harvestAdapter.UpdateCommand = new SqlCommand(Constants.HARVEST_UPDATE_QUERY, SqlConnector.getConnection());
-                setHarvestUpdateParams();
+                SqlConnector.getConnection().Open(); //Open connection
+                cropDataAdapter.InsertCommand.ExecuteNonQuery(); //Execute query
             }
-            harvestDataTable = new DataTable();
-            harvestAdapter.Fill(harvestDataTable);
-            MainProgram.getSingleton().harvestBindingSource.DataSource = harvestDataTable;
-            SqlConnector.getConnection().Close();
+            finally
+            {
+                cropDataAdapter.InsertCommand.Parameters.Clear(); //Clear params to avoid error
+                SqlConnector.getConnection().Close(); //Close connection
+            }
         }
 
-        public static void setHarvestUpdateParams()
-        {
-            harvestAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HarvestStartDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestStartDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HarvestEndDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestEndDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StaffRequired", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffRequired", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContainerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StaffID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VehicleID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VehicleID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StorageID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StorageID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HarvestID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HarvestStartDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestStartDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HarvestEndDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestEndDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StaffRequired", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffRequired", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContainerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StaffID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VehicleID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VehicleID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StorageID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StorageID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HarvestID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-
+        //Sets update params so when row is edited there is no need to input hardcoded values
         public static void setCropUpdateParams()
         {
             cropDataAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -128,6 +116,81 @@ namespace farmingprogram
             cropDataAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             cropDataAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
+        #endregion
+
+
+        #region Harvest set
+
+        public static void initializeHarvestSet()  //Initializes the harvest data set
+        {
+            SqlConnector.getConnection().Open(); //Open connection
+            harvestAdapter = new SqlDataAdapter(); //Attach adapter to harvestAdapter
+
+            //Declare Adapter queries
+            harvestAdapter.SelectCommand = new SqlCommand(Constants.HARVEST_SELECTALL_QUERY, SqlConnector.getConnection());
+            harvestAdapter.DeleteCommand = new SqlCommand(Constants.HARVEST_DELETE_QUERY, SqlConnector.getConnection());
+            harvestAdapter.InsertCommand = new SqlCommand(Constants.HARVEST_INSERT_QUERY, SqlConnector.getConnection());
+
+            //If the update command is just being added
+            if (harvestAdapter.UpdateCommand == null)
+            {
+                harvestAdapter.UpdateCommand = new SqlCommand(Constants.HARVEST_UPDATE_QUERY, SqlConnector.getConnection()); //Add the update query
+                setHarvestUpdateParams(); //Add the parameters for the update query
+            }
+            harvestDataTable = new DataTable(); //Create a new datatable
+            harvestAdapter.Fill(harvestDataTable); //File harvest data table
+            MainProgram.getSingleton().harvestBindingSource.DataSource = harvestDataTable; //The harvestGridView will now display the datatable
+            SqlConnector.getConnection().Close(); //Close connection
+        }
+
+        public static void addHarvest(Harvest harvest) //Adding a harvest
+        {
+            //@HarvestStartDate, @HarvestEndDate, @StaffRequired, @ContainerID, @CropID, @FieldID, @StaffID, @VehicleID, @StorageID
+            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@HarvestStartDate", harvest.harvestStartDate));
+            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@HarvestEndDate", harvest.harvestEndDate));
+            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@StaffRequired", harvest.staffRequired));
+            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@ContainerID", harvest.containerID));
+            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropID", harvest.cropID));
+            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldID", harvest.fieldID));
+            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@VehicleID", harvest.vehicle));//This should be the vehicle id of the vehicle assigned to the harvest.
+            try
+            {
+                SqlConnector.getConnection().Open();
+                fertilizerAdapter.InsertCommand.ExecuteNonQuery();
+            }
+            finally
+            {
+                fertilizerAdapter.InsertCommand.Parameters.Clear();
+                SqlConnector.getConnection().Close();
+            }
+        }
+
+        public static void setHarvestUpdateParams()
+        {
+            harvestAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HarvestStartDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestStartDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HarvestEndDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestEndDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StaffRequired", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffRequired", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContainerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CropID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StaffID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VehicleID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VehicleID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@StorageID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StorageID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HarvestID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HarvestStartDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestStartDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_HarvestEndDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestEndDate", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StaffRequired", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffRequired", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContainerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_CropID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CropID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StaffID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StaffID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_VehicleID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "VehicleID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_StorageID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "StorageID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            harvestAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@HarvestID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "HarvestID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        #endregion
+
         
         public static int deleteFromTable(SqlDataAdapter adapter, String idParam, int id)
         {
@@ -148,32 +211,6 @@ namespace farmingprogram
                 SqlConnector.getConnection().Close();
             }
             return returnCode;
-        }
-
-        public static void addCrop(Crop crop)
-        {
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropName", crop.cropName));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@DatePlanted", crop.datePlanted));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@EstimatedHarvestDate", crop.estimatedHarvestDate));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropNotes", crop.cropNotes));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FertilizerID", crop.fertilizerID));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropStatus", crop.cropStatus));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@LastDose", crop.lastDose));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@NextDose", crop.nextDose));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@DosedByStaff", crop.dosedByStaff));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropStorageType", crop.cropStorageType));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropMinMax", crop.cropMinMax));
-            cropDataAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldID", crop.fieldID));
-            try
-            {
-                SqlConnector.getConnection().Open();
-                cropDataAdapter.InsertCommand.ExecuteNonQuery();
-            }
-            finally
-            {
-                cropDataAdapter.InsertCommand.Parameters.Clear();
-                SqlConnector.getConnection().Close();
-            }
         }
 
         public static void initializeFertilizerSet()
@@ -207,24 +244,6 @@ namespace farmingprogram
             fertilizerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FertilizerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FertilizerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
 
-        public static void initializeFieldSet()
-        {
-            SqlConnector.getConnection().Open();
-            fieldAdapter = new SqlDataAdapter();
-            fieldAdapter.SelectCommand = new SqlCommand(Constants.FIELD_SELECTALL_QUERY, SqlConnector.getConnection());
-            fieldAdapter.DeleteCommand = new SqlCommand(Constants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
-            fieldAdapter.InsertCommand = new SqlCommand(Constants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
-
-            if (fieldAdapter.UpdateCommand == null)
-            {
-                fieldAdapter.UpdateCommand = new SqlCommand(Constants.FIELD_UPDATE_QUERY, SqlConnector.getConnection());
-                setFieldUpdateParams();
-            }
-            fieldDataTable = new DataTable();
-            fieldAdapter.Fill(fieldDataTable);
-            MainProgram.getSingleton().fieldBindingSource.DataSource = fieldDataTable;
-            SqlConnector.getConnection().Close();
-        }
 
         private static void setFieldUpdateParams()
         {
@@ -304,26 +323,23 @@ namespace farmingprogram
             }
         }
 
-        public static void addHarvest(Harvest harvest)
+        public static void initializeFieldSet()
         {
-            //@HarvestStartDate, @HarvestEndDate, @StaffRequired, @ContainerID, @CropID, @FieldID, @StaffID, @VehicleID, @StorageID
-            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@HarvestStartDate", harvest.harvestStartDate));
-            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@HarvestEndDate", harvest.harvestEndDate));
-            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@StaffRequired", harvest.staffRequired));
-            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@ContainerID", harvest.containerID));
-            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@CropID", harvest.cropID));
-            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldID", harvest.fieldID));
-            harvestAdapter.InsertCommand.Parameters.Add(new SqlParameter("@VehicleID", harvest.vehicle));//This should be the vehicle id of the vehicle assigned to the harvest.
-            try
+            SqlConnector.getConnection().Open();
+            fieldAdapter = new SqlDataAdapter();
+            fieldAdapter.SelectCommand = new SqlCommand(Constants.FIELD_SELECTALL_QUERY, SqlConnector.getConnection());
+            fieldAdapter.DeleteCommand = new SqlCommand(Constants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
+            fieldAdapter.InsertCommand = new SqlCommand(Constants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
+
+            if (fieldAdapter.UpdateCommand == null)
             {
-                SqlConnector.getConnection().Open();
-                fertilizerAdapter.InsertCommand.ExecuteNonQuery();
+                fieldAdapter.UpdateCommand = new SqlCommand(Constants.FIELD_UPDATE_QUERY, SqlConnector.getConnection());
+                setFieldUpdateParams();
             }
-            finally
-            {
-                fertilizerAdapter.InsertCommand.Parameters.Clear();
-                SqlConnector.getConnection().Close();
-            }
+            fieldDataTable = new DataTable();
+            fieldAdapter.Fill(fieldDataTable);
+            MainProgram.getSingleton().fieldBindingSource.DataSource = fieldDataTable;
+            SqlConnector.getConnection().Close();
         }
 
         public static void addField(Field field)
@@ -374,18 +390,7 @@ namespace farmingprogram
             SqlConnector.getConnection().Close();
         }
 
-        public static void initializeStorageSet()
-        {
-            SqlConnector.getConnection().Open();
-            storageAdapter = new SqlDataAdapter();
-            storageAdapter.SelectCommand = new SqlCommand(Constants.STORAGE_SELECTALL_QUERY, SqlConnector.getConnection());
-            storageAdapter.DeleteCommand = new SqlCommand(Constants.STORAGE_DELETE_QUERY, SqlConnector.getConnection());
-            storageAdapter.InsertCommand = new SqlCommand(Constants.STORAGE_INSERT_QUERY, SqlConnector.getConnection());
-            storageDataTable = new DataTable();
-            storageAdapter.Fill(staffDataTable);
-            MainProgram.getSingleton().storageBindingSource.DataSource = storageDataTable;
-            SqlConnector.getConnection().Close();
-        }
+       
 
     }
 }

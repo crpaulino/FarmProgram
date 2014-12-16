@@ -100,7 +100,7 @@ namespace farmingprogram
             set { CropStorageType = value; }
         }
 
-        public string cropMinMax    //Temperature
+        public string cropMinMax
         {
             get { return CropMinMax; }
             set { CropMinMax = value; }

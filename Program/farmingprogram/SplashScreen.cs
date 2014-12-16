@@ -14,12 +14,12 @@ namespace farmingprogram
     //Created by 1333187
     public partial class SplashScreen : Form
     {        
-        public const int SPLASH_SCREEN_TIMEOUT = 5000;
-        public static SplashScreen splash;
+        public const int SPLASH_SCREEN_TIMEOUT = 5000; //This form will only display for 5 seconds
+        public static SplashScreen splash; //Instance of SplashScreen
 
         public SplashScreen()
         {
-            CenterToScreen();
+            CenterToScreen(); //Center splash screen
             InitializeComponent();
         }
 
@@ -29,10 +29,11 @@ namespace farmingprogram
         }
 
 
+        //Starts the splash screen
         public static void startSplashScreen()
         {
-            splash = new SplashScreen();
-            Application.Run(splash);
+            splash = new SplashScreen(); //Instance is set
+            Application.Run(splash); //Application will display the screen
         }
     }
 }

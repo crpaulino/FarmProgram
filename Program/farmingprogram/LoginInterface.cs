@@ -16,12 +16,12 @@ namespace farmingprogram
     {
         public LoginInterface()
         {
-            Thread timeoutThread = new Thread(new ThreadStart(SplashScreen.startSplashScreen));
-            timeoutThread.Start();
-            Thread.Sleep(SplashScreen.SPLASH_SCREEN_TIMEOUT);
-            CenterToScreen();
+            Thread timeoutThread = new Thread(new ThreadStart(SplashScreen.startSplashScreen)); //Thread which displays splash screen
+            timeoutThread.Start(); //Start thread
+            Thread.Sleep(SplashScreen.SPLASH_SCREEN_TIMEOUT); //Thread will be delayed by SPLASH_SCREEN_TIMEOUT milliseconds
+            CenterToScreen(); //Place the form in the center
             InitializeComponent();
-            timeoutThread.Abort();
+            timeoutThread.Abort(); //Close thread
         }
 
         private void passwordBox_TextChanged(object sender, EventArgs e)
@@ -31,11 +31,11 @@ namespace farmingprogram
 
         private void loginBox_Click(object sender, EventArgs e)
         {
-            String name = usernameBox.Text;
-            String password = passwordBox.Text;
-            if (SqlConnector.validPassword(name, password))
+            String name = usernameBox.Text; //Username from text box
+            String password = passwordBox.Text; //Password from text box
+            if (SqlConnector.validPassword(name, password)) //If valid password
             {
-                this.Close();
+                this.Close(); //Close sql connection
             }
         }
     }

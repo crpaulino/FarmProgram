@@ -11,10 +11,13 @@ namespace farmingprogram
 {
     class PasswordEncryption
     {
+
+        //Properties of password encryption
         const string HASH = "SECORQWP$(OS";
         const string SALT = "R£$%F%£E";
         const string VI = "@1AFLVJEIQERJFCOO";
 
+        //Encryption method used 'http://www.goprogrammers.com/2013/10/understanding-encryption-and-decryption.html'
         public static string Encrypt(string plainText)
         {
             byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
@@ -39,6 +42,8 @@ namespace farmingprogram
             return Convert.ToBase64String(cipherTextBytes);
         }
 
+
+        //Decryption method used 'http://www.goprogrammers.com/2013/10/understanding-encryption-and-decryption.html'
         public static string Decrypt(string encryptedText)
         {
             byte[] cipherTextBytes = Convert.FromBase64String(encryptedText);
