@@ -300,6 +300,7 @@ namespace farmingprogram
         //Adds variable parameters to update command
         static void setVehicleUpdateParams()
         {
+            vehicleAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Type", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Type", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Make", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Make", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             vehicleAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Model", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Model", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -316,20 +317,21 @@ namespace farmingprogram
         }
         #endregion
 
-        public static int deleteFromTable(SqlDataAdapter adapter, String idParam, int id)
+        //Deletes from the actual database where ID is the primary key and id param is the param string
+        public static int deleteFromTable(SqlDataAdapter adapter, String idParam, int id) 
         {
-            int returnCode = 0;
+            int returnCode = 0; //Return code for how many rows deleted
             try
             {
-                SqlConnector.getConnection().Open();
-                adapter.DeleteCommand.Parameters.Add(new SqlParameter(idParam, SqlDbType.Int)).Value = id;
-                returnCode = adapter.DeleteCommand.ExecuteNonQuery();
+                SqlConnector.getConnection().Open(); //Open connection
+                adapter.DeleteCommand.Parameters.Add(new SqlParameter(idParam, SqlDbType.Int)).Value = id; //Add the Param Value
+                returnCode = adapter.DeleteCommand.ExecuteNonQuery(); //execute the query and set return code
             }
-            catch (Exception exception)
+            catch (Exception exception) //exceptions in foreign keys hence we handle then.
             {
                 System.Windows.Forms.MessageBox.Show("Cannot delete the data, it is used on another table. Please delete this data first.");
             } 
-            finally
+            finally //Clear params and close connection
             {
                 adapter.DeleteCommand.Parameters.Clear();
                 SqlConnector.getConnection().Close();
@@ -337,10 +339,10 @@ namespace farmingprogram
             return returnCode;
         }
 
-        
 
-       
 
+
+        #region Field set
         //Sets update params so when row is edited there is no need to input hardcoded values
         private static void setFieldUpdateParams()
         {
@@ -355,7 +357,50 @@ namespace farmingprogram
             fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_FieldNotes", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "FieldNotes", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             fieldAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FieldID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "FieldID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
+        public static void initializeFieldSet()
+        {
+            SqlConnector.getConnection().Open();
+            fieldAdapter = new SqlDataAdapter();
+            fieldAdapter.SelectCommand = new SqlCommand(Constants.FIELD_SELECTALL_QUERY, SqlConnector.getConnection());
+            fieldAdapter.DeleteCommand = new SqlCommand(Constants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
+            fieldAdapter.InsertCommand = new SqlCommand(Constants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
 
+            if (fieldAdapter.UpdateCommand == null)
+            {
+                fieldAdapter.UpdateCommand = new SqlCommand(Constants.FIELD_UPDATE_QUERY, SqlConnector.getConnection());
+                setFieldUpdateParams();
+            }
+            fieldDataTable = new DataTable();
+            fieldAdapter.Fill(fieldDataTable);
+            MainProgram.getSingleton().fieldBindingSource.DataSource = fieldDataTable;
+            SqlConnector.getConnection().Close();
+        }
+
+        public static void addField(Field field) //Add a field
+        {
+            //Set the param values for the query
+            fieldAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldName", field.fieldName)); 
+            fieldAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldStatus", field.fieldStatus));
+            fieldAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldNotes", field.fieldNotes));
+
+            try
+            {
+                //Open a connection then execute the query
+                SqlConnector.getConnection().Open();
+                fieldAdapter.InsertCommand.ExecuteNonQuery();
+            }
+            finally
+            {
+
+                //Clear params and close connection
+                fieldAdapter.InsertCommand.Parameters.Clear();
+                SqlConnector.getConnection().Close();
+            }
+        }
+        #endregion
+
+
+        #region Container set
         public static void initializeContainerSet()
         {
             SqlConnector.getConnection().Open();
@@ -376,71 +421,6 @@ namespace farmingprogram
             SqlConnector.getConnection().Close();
         }
 
-        //Sets update params so when row is edited there is no need to input hardcoded values
-        private static void setContainerUpdateParams()
-        {
-            containerAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContainerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContainerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-        }
-
-
-        public static void initializeStaffSet()
-        {
-            SqlConnector.getConnection().Open();
-            staffAdapter = new SqlDataAdapter();
-            staffAdapter.SelectCommand = new SqlCommand(Constants.STAFF_SELECTALL_QUERY, SqlConnector.getConnection());
-            staffAdapter.DeleteCommand = new SqlCommand(Constants.STAFF_DELETE_QUERY, SqlConnector.getConnection());
-            staffAdapter.InsertCommand = new SqlCommand(Constants.STAFF_INSERT_QUERY, SqlConnector.getConnection());
-            staffDataTable = new DataTable();
-            staffAdapter.Fill(staffDataTable);
-            MainProgram.getSingleton().staffBindingSource.DataSource = staffDataTable;
-            SqlConnector.getConnection().Close();
-        }
-
-        public static void initializeFieldSet()
-        {
-            SqlConnector.getConnection().Open();
-            fieldAdapter = new SqlDataAdapter();
-            fieldAdapter.SelectCommand = new SqlCommand(Constants.FIELD_SELECTALL_QUERY, SqlConnector.getConnection());
-            fieldAdapter.DeleteCommand = new SqlCommand(Constants.FIELD_DELETE_QUERY, SqlConnector.getConnection());
-            fieldAdapter.InsertCommand = new SqlCommand(Constants.FIELD_INSERT_QUERY, SqlConnector.getConnection());
-
-            if (fieldAdapter.UpdateCommand == null)
-            {
-                fieldAdapter.UpdateCommand = new SqlCommand(Constants.FIELD_UPDATE_QUERY, SqlConnector.getConnection());
-                setFieldUpdateParams();
-            }
-            fieldDataTable = new DataTable();
-            fieldAdapter.Fill(fieldDataTable);
-            MainProgram.getSingleton().fieldBindingSource.DataSource = fieldDataTable;
-            SqlConnector.getConnection().Close();
-        }
-
-        public static void addField(Field field)
-        {
-            fieldAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldName", field.fieldName));
-            fieldAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldStatus", field.fieldStatus));
-            fieldAdapter.InsertCommand.Parameters.Add(new SqlParameter("@FieldNotes", field.fieldNotes));
-            try
-            {
-                SqlConnector.getConnection().Open();
-                fieldAdapter.InsertCommand.ExecuteNonQuery();
-            }
-            finally
-            {
-                fieldAdapter.InsertCommand.Parameters.Clear();
-                SqlConnector.getConnection().Close();
-            }
-        }
-
-
         public static void addContainer(Container container)
         {
             containerAdapter.InsertCommand.Parameters.Add(new SqlParameter("@contName", container.contName));
@@ -456,7 +436,36 @@ namespace farmingprogram
                 containerAdapter.InsertCommand.Parameters.Clear();
                 SqlConnector.getConnection().Close();
             }
-        }       
+        }  
+
+        //Sets update params so when row is edited there is no need to input hardcoded values
+        private static void setContainerUpdateParams()
+        {
+            containerAdapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_ContainerID", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contName", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contName", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contType", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contType", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_contSize", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "contSize", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            containerAdapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ContainerID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ContainerID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        #endregion
+
+        public static void initializeStaffSet()
+        {
+            SqlConnector.getConnection().Open();
+            staffAdapter = new SqlDataAdapter();
+            staffAdapter.SelectCommand = new SqlCommand(Constants.STAFF_SELECTALL_QUERY, SqlConnector.getConnection());
+            staffAdapter.DeleteCommand = new SqlCommand(Constants.STAFF_DELETE_QUERY, SqlConnector.getConnection());
+            staffAdapter.InsertCommand = new SqlCommand(Constants.STAFF_INSERT_QUERY, SqlConnector.getConnection());
+            staffDataTable = new DataTable();
+            staffAdapter.Fill(staffDataTable);
+            MainProgram.getSingleton().staffBindingSource.DataSource = staffDataTable;
+            SqlConnector.getConnection().Close();
+        }
+     
 
     }
 }
