@@ -156,11 +156,11 @@ namespace farmingprogram
             try
             {
                 SqlConnector.getConnection().Open(); //Open sql connection
-                fertilizerAdapter.InsertCommand.ExecuteNonQuery(); //Execute query
+                harvestAdapter.InsertCommand.ExecuteNonQuery(); //Execute query
             }
             finally
             {
-                fertilizerAdapter.InsertCommand.Parameters.Clear(); //Clear params to avoid error
+                harvestAdapter.InsertCommand.Parameters.Clear(); //Clear params to avoid error
                 SqlConnector.getConnection().Close(); //Close connection
             }
         }

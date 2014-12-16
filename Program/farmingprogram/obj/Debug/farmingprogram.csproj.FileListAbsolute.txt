@@ -37,3 +37,16 @@ C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farming
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb
 C:\Users\J\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csprojResolveAssemblyReference.cache
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe.config
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.exe
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.pdb
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csprojResolveAssemblyReference.cache
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.LoginInterface.resources
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.MainProgram.resources
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.SplashScreen.resources
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.Properties.Resources.resources
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\obj\Debug\farmingprogram.csproj.GenerateResource.Cache
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\database\DbFarmProgram.mdf
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\database\DbFarmProgram_log.ldf
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.exe
+C:\Users\mr705\Documents\GitHub\FarmProgram\Program\farmingprogram\bin\Debug\farmingprogram.pdb

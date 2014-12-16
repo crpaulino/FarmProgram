@@ -38,8 +38,6 @@
             this.vehicleBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.harvestBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.storageBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1 = new farmingprogram.DataSet1();
-            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.StaffPage = new System.Windows.Forms.TabPage();
             this.staffGridView = new System.Windows.Forms.DataGridView();
             this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -186,8 +184,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.vehicleBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.harvestBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.storageBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             this.StaffPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.staffGridView)).BeginInit();
             this.tabPage2.SuspendLayout();
@@ -237,16 +233,7 @@
             // storageBindingSource
             // 
             this.storageBindingSource.DataSource = typeof(farmingprogram.Storage);
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // dataSet1BindingSource
-            // 
-            this.dataSet1BindingSource.DataSource = this.dataSet1;
-            this.dataSet1BindingSource.Position = 0;
+            
             // 
             // StaffPage
             // 
@@ -1593,8 +1580,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.vehicleBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.harvestBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.storageBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             this.StaffPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.staffGridView)).EndInit();
             this.tabPage2.ResumeLayout(false);
@@ -1632,7 +1617,6 @@
         public System.Windows.Forms.BindingSource harvestBindingSource;
         private System.Windows.Forms.DataGridViewComboBoxColumn staffIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewComboBoxColumn storageIDDataGridViewTextBoxColumn;
-        private DataSet1 dataSet1;
         private System.Windows.Forms.BindingSource dataSet1BindingSource;
         public System.Windows.Forms.BindingSource storageBindingSource;
         private System.Windows.Forms.TabPage StaffPage;

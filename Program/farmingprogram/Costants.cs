@@ -10,7 +10,7 @@ namespace farmingprogram
     //Integrated by: 1333187
     class Constants
     {
-        public static Boolean TESTING_MODE = true;
+        public static Boolean TESTING_MODE = false;
 
         //SQL Statements for the Tables
         //Crops
